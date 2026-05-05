@@ -20,6 +20,12 @@ func pause_show():
 		n.hide()
 	for n in nodes_grp2:
 		n.show()
+		n.modulate.a = 0.0
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(color_rect, "modulate:a", 1.0, 0.25)
+	tween.tween_property(pause_options, "modulate:a", 1.0, 0.25).set_delay(0.05)
 
 
 func pause_hide():
@@ -42,6 +48,11 @@ func _unhandled_input(event):
 
 
 func resume():
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(color_rect, "modulate:a", 0.0, 0.2)
+	tween.tween_property(pause_options, "modulate:a", 0.0, 0.15)
+	await tween.finished
 	get_tree().paused = false
 	pause_hide()
 

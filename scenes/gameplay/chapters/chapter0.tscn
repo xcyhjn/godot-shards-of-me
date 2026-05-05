@@ -70,12 +70,10 @@ position = Vector2(578, 503)
 scale = Vector2(0.140299, 0.140299)
 
 [node name="OuyangYe" type="Sprite2D" parent="CharacterBody2D" index="0"]
-scale = Vector2(1, 1)
 texture = ExtResource("7_ca0r5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" index="1"]
 position = Vector2(-42.7658, 42.7652)
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_ca0r5")
 
 [node name="Area2D" type="Area2D" parent="CharacterBody2D" index="2"]

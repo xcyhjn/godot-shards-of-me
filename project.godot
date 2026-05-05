@@ -31,8 +31,7 @@ property_name=1
 [dialogic]
 
 directories/dch_directory={
-"ouyang_ye": "res://dialogs/ouyang_ye.dch",
-"unit_test_character": "res://scenes/gameplay/dialog_test/resources/unit_test_character.dch"
+"ouyang_ye": "res://dialogs/ouyang_ye.dch"
 }
 directories/dtl_directory={
 "test": "res://dialogs/test.dtl"
