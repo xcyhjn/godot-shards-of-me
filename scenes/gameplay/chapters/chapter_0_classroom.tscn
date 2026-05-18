@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://lktep1nmuw34"]
+
+[ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_n7xi8"]
+[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_w5jnu"]
+[ext_resource type="Texture2D" uid="uid://dpp4r7wjcpjox" path="res://assets/images/tilesets/bg_floor_1_extend.png" id="3_n7xi8"]
+[ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/desk.tscn" id="4_desk"]
+
+[node name="Gameplay" instance=ExtResource("1_n7xi8")]
+
+[node name="WallFront" type="ColorRect" parent="Background" index="4"]
+offset_left = 228.0
+offset_top = 4.0
+offset_right = 1209.0
+offset_bottom = 456.0
+color = Color(0.729412, 0.721569, 0.772549, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="Background" index="5"]
+color = Color(0.729412, 0.721569, 0.772549, 1)
+polygon = PackedVector2Array(3, 649, 228, 452, 228, -40, 228, -181, 0, -54)
+
+[node name="BgFloor1Extend" type="Sprite2D" parent="." index="3"]
+position = Vector2(489, 297)
+scale = Vector2(1, 1.47856)
+texture = ExtResource("3_n7xi8")
+
+[node name="Sortables" type="Node2D" parent="." index="4"]
+y_sort_enabled = true
+
+[node name="Player" parent="Sortables" index="0" instance=ExtResource("2_w5jnu")]
+y_sort_enabled = true
+position = Vector2(195, 489)
+
+[node name="Desk" type="Node2D" parent="Sortables" index="1"]
+y_sort_enabled = true
+
+[node name="Desk01" parent="Sortables/Desk" index="0" instance=ExtResource("4_desk")]
+y_sort_enabled = true
+position = Vector2(556, 539)
+
+[node name="Desk02" parent="Sortables/Desk" index="1" instance=ExtResource("4_desk")]
+position = Vector2(838, 659)
+
+[node name="Desk06" parent="Sortables/Desk" index="2" instance=ExtResource("4_desk")]
+position = Vector2(345, 537)
+
+[node name="Desk07" parent="Sortables/Desk" index="3" instance=ExtResource("4_desk")]
+position = Vector2(629, 660)
+
+[node name="Desk11" parent="Sortables/Desk" index="4" instance=ExtResource("4_desk")]
+position = Vector2(208, 663)
+
+[node name="Desk12" parent="Sortables/Desk" index="5" instance=ExtResource("4_desk")]
+position = Vector2(419, 662)
+
+[node name="Desk13" parent="Sortables/Desk" index="6" instance=ExtResource("4_desk")]
+position = Vector2(757, 541)
+
+[node name="Desk14" parent="Sortables/Desk" index="7" instance=ExtResource("4_desk")]
+position = Vector2(963, 540)

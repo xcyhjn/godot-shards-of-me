@@ -1,8 +1,8 @@
 class_name Room
 extends Node
 
-@onready var Player : CharacterBody2D = $Player
-@onready var main_camera: Camera2D = $Player/Camera2D 
+@onready var Player : CharacterBody2D = _find_player()
+@onready var main_camera: Camera2D = _find_player_camera()
 var can_change_scene : bool = false
 var next_scene : String = ""
 
@@ -32,6 +32,33 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	change_scene()
+
+
+func _find_player() -> CharacterBody2D:
+	var direct_player := get_node_or_null("Player")
+	if direct_player is CharacterBody2D:
+		return direct_player as CharacterBody2D
+
+	var sortable_player := get_node_or_null("Sortables/Player")
+	if sortable_player is CharacterBody2D:
+		return sortable_player as CharacterBody2D
+
+	for node in get_tree().get_nodes_in_group("Player"):
+		if node is CharacterBody2D and is_ancestor_of(node):
+			return node as CharacterBody2D
+
+	return null
+
+
+func _find_player_camera() -> Camera2D:
+	if not Player:
+		return null
+
+	var camera := Player.get_node_or_null("Camera2D")
+	if camera is Camera2D:
+		return camera as Camera2D
+
+	return null
 
 
 func _on_door_body_entered(body: Node2D) -> void:
