@@ -19,7 +19,7 @@ func set_clue(clue: Dictionary) -> void:
 	info.show()
 	action_menu.hide()
 	clue_image.texture = load(clue.get("texture_path", ""))
-	title_label.text = clue.get("title", "")
+	title_label.text = clue.get("name", "")
 	desc_label.text = clue.get("description", "")
 
 func set_empty() -> void:
