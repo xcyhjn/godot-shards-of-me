@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bont8u883w3b7"]
+[gd_scene load_steps=21 format=4 uid="uid://bont8u883w3b7"]
 
 [ext_resource type="Script" uid="uid://bankim6hkyhl3" path="res://scenes/ui/inventory/inventory.gd" id="1_8d5vf"]
 [ext_resource type="PackedScene" uid="uid://cwhohiysdcjqx" path="res://scenes/ui/inventory/slot.tscn" id="1_e5v8k"]
@@ -10,8 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_w3o6b"]
 [ext_resource type="Texture2D" uid="uid://d3m4nyephv25p" path="res://assets/images/tilesets/bg_floor_1.png" id="3_iunvb"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/door.tscn" id="4_iunvb"]
+[ext_resource type="Script" uid="uid://cq8ja2w4n044s" path="res://scenes/ui/inventory/slot.gd" id="5_t1nds"]
 [ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/props/item_prop_template.tscn" id="9_a7aty"]
 [ext_resource type="Texture2D" uid="uid://bor7oxd1135fu" path="res://assets/images/items/key.png" id="10_cka07"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="14_1na5l"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="15_5ie2o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iunvb"]
 texture = ExtResource("2_jy2c1")
@@ -55,10 +58,15 @@ sources/1 = SubResource("TileSetAtlasSource_e5v8k")
 [sub_resource type="CircleShape2D" id="CircleShape2D_cka07"]
 radius = 32.0
 
+[sub_resource type="Resource" id="Resource_1na5l"]
+script = ExtResource("15_5ie2o")
+duration = 1.0
+transition = 0
+ease = 2
+
 [node name="testfield" type="Node2D"]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UI" type="Control" parent="UILayer"]
 layout_mode = 3
@@ -132,14 +140,17 @@ script = ExtResource("2_4xyme")
 
 [node name="PassiveSlot" parent="UILayer/UI/Character" instance=ExtResource("2_k1qje")]
 layout_mode = 2
+script = ExtResource("5_t1nds")
 slot_type = 1
 
 [node name="PassiveSlot2" parent="UILayer/UI/Character" instance=ExtResource("2_k1qje")]
 layout_mode = 2
+script = ExtResource("5_t1nds")
 slot_type = 2
 
 [node name="PassiveSlot3" parent="UILayer/UI/Character" instance=ExtResource("2_k1qje")]
 layout_mode = 2
+script = ExtResource("5_t1nds")
 slot_type = 3
 
 [node name="ATK" type="Label" parent="UILayer/UI"]
@@ -184,6 +195,22 @@ shape = SubResource("CircleShape2D_cka07")
 position = Vector2(-28, -9)
 
 [node name="Player" parent="." instance=ExtResource("2_w3o6b")]
-position = Vector2(309, 0)
+position = Vector2(309, -9)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(309, -9)
+
+[node name="PhantomCamera2D" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(309, -9)
+script = ExtResource("14_1na5l")
+follow_mode = 2
+follow_target = NodePath("../../Player")
+zoom = Vector2(2, 2)
+tween_resource = SubResource("Resource_1na5l")
+tween_on_load = false
+follow_damping = true
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [editable path="Background/ItemProp"]

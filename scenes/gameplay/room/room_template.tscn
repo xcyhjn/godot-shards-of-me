@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt8a1pyy0anck"]
+[gd_scene load_steps=8 format=3 uid="uid://bt8a1pyy0anck"]
 
 [ext_resource type="Script" uid="uid://b83omkj4aqsph" path="res://scenes/gameplay/start.gd" id="1_3j2p0"]
 [ext_resource type="PackedScene" uid="uid://barl4q1kugrmm" path="res://scenes/gameplay/pause-layer/pause-layer.tscn" id="2_qmd80"]
 [ext_resource type="Script" uid="uid://pvcyl8rk2ier" path="res://scenes/gameplay/start_ui.gd" id="3_3j2p0"]
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_dusiu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrrqo"]
+bg_color = Color(0.284861, 0.602192, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrrqo"]
 size = Vector2(29, 651)
@@ -18,6 +21,14 @@ script = ExtResource("1_3j2p0")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 script = ExtResource("3_3j2p0")
+
+[node name="Label" type="Label" parent="UILayer"]
+offset_left = 15.0
+offset_right = 115.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrrqo")
+text = "SAN: 100"
 
 [node name="Background" type="StaticBody2D" parent="."]
 

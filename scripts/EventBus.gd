@@ -27,5 +27,6 @@ signal clue_add_item(clue: Dictionary)
 signal clue_update_book()
 
 # 章节管理信号
-signal enter_chapter(chapter_id: String, chapter_name: String,
+signal chapter_enter(chapter_id: String, chapter_name: String,
  data: Dictionary, is_ending: bool)
+signal san_update(val : int)

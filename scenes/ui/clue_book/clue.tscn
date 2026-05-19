@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dx51sjxiso1n2"]
 
-[ext_resource type="Script" path="res://scenes/ui/clue_book/clue.gd" id="1_q0kcj"]
+[ext_resource type="Script" uid="uid://bj1cmf7bfvi4b" path="res://scenes/ui/clue_book/clue.gd" id="1_q0kcj"]
 [ext_resource type="Texture2D" uid="uid://deaecgnbfic8d" path="res://assets/images/ui/clue_book/clues.png" id="2_q0kcj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvqry"]

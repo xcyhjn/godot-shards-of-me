@@ -16,7 +16,10 @@ var current_chapter_definition: Dictionary = {}
 var current_chapter_id: String = "prologue"
 ## 当前章节的运行时数据（基于current_chapter_definition的data内容初始化），可以在章节流程中修改并保存到持久化数据中
 var active_chapter_data: Dictionary = {}
-var san: int = 100
+var san: int = 100:
+	set(value):
+		san = value
+		EventBus.san_update.emit(san)
 
 func _ready():
 	add_to_group("Persist") # 加入持久化分组，GameManager会调用DataManager加载运行时数据
@@ -36,7 +39,7 @@ func new_game() -> void:
 		current_chapter_definition = chapter_definition[current_chapter_id]
 		active_chapter_data = current_chapter_definition["data"].duplicate(true) # 深拷贝
 		
-		EventBus.enter_chapter.emit(current_chapter_id, 
+		EventBus.chapter_enter.emit(current_chapter_id, 
 		 current_chapter_definition["name"], active_chapter_data, false)
 	else:
 		push_error("章节数据缺失: ", current_chapter_id)
@@ -75,7 +78,7 @@ func advance_to_next_chapter() -> void:
 				if "data" in current_chapter_definition:
 					active_chapter_data = current_chapter_definition["data"].duplicate(true) # 深拷贝
 				
-				EventBus.enter_chapter.emit(current_chapter_id, 
+				EventBus.chapter_enter.emit(current_chapter_id, 
 				 current_chapter_definition["name"], 
 				 active_chapter_data,
 				 not current_chapter_definition.has("next"))

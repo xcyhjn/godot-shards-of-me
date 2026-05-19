@@ -10,6 +10,7 @@ var next_scene : String = ""
 ## scene_name相对于res://scenes/gameplay定位
 func change_scene() -> void:
 	if can_change_scene == true and Input.is_action_pressed("互动"):
+			Chapter.san -= 10
 			GGT.change_scene("res://scenes/gameplay/" + next_scene + ".tscn")
 			# 防止玩家一直按E
 			can_change_scene = false
