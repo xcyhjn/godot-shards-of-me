@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://ducfept6pmkkm"]
 
-[ext_resource type="FontFile" uid="uid://gx6101bkasjf" path="res://assets/fonts/LXGWWenKai-Regular.ttf" id="1_hm15c"]
+[ext_resource type="FontFile" uid="uid://cj7ntfjwc0y02" path="res://assets/fonts/纳米点宋.ttf" id="1_i3yxg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hm15c"]
 
 [resource]
-default_font = ExtResource("1_hm15c")
+default_font = ExtResource("1_i3yxg")
 default_font_size = 20
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
