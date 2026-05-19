@@ -1,16 +1,13 @@
-[gd_scene load_steps=21 format=4 uid="uid://bont8u883w3b7"]
+[gd_scene load_steps=18 format=4 uid="uid://bont8u883w3b7"]
 
 [ext_resource type="Script" uid="uid://bankim6hkyhl3" path="res://scenes/ui/inventory/inventory.gd" id="1_8d5vf"]
 [ext_resource type="PackedScene" uid="uid://cwhohiysdcjqx" path="res://scenes/ui/inventory/slot.tscn" id="1_e5v8k"]
 [ext_resource type="PackedScene" uid="uid://b1d5o0v0ws3f3" path="res://scenes/ui/clue_book/clue_book.tscn" id="1_iucpc"]
 [ext_resource type="TileSet" uid="uid://cfuw6cof4j2d5" path="res://assets/tilesets/left_walls.tres" id="1_w3o6b"]
-[ext_resource type="Script" uid="uid://kyhg4hcyjxff" path="res://scenes/ui/inventory/character.gd" id="2_4xyme"]
 [ext_resource type="Texture2D" uid="uid://brkwb3pw80ss2" path="res://assets/images/tilesets/bg_floors.png" id="2_jy2c1"]
-[ext_resource type="PackedScene" uid="uid://2q8jebnn6vc3" path="res://scenes/ui/inventory/passive_slot.tscn" id="2_k1qje"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_w3o6b"]
 [ext_resource type="Texture2D" uid="uid://d3m4nyephv25p" path="res://assets/images/tilesets/bg_floor_1.png" id="3_iunvb"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/door.tscn" id="4_iunvb"]
-[ext_resource type="Script" uid="uid://cq8ja2w4n044s" path="res://scenes/ui/inventory/slot.gd" id="5_t1nds"]
 [ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/props/item_prop_template.tscn" id="9_a7aty"]
 [ext_resource type="Texture2D" uid="uid://bor7oxd1135fu" path="res://assets/images/items/key.png" id="10_cka07"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="14_1na5l"]
@@ -73,95 +70,45 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -18.0
+offset_right = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="Inventory" type="GridContainer" parent="UILayer/UI"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = -50.0
-offset_top = 50.0
-offset_right = -50.0
-offset_bottom = 224.0
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -112.0
+offset_right = -20.0
+offset_bottom = 112.0
 grow_horizontal = 0
+grow_vertical = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
-columns = 4
 script = ExtResource("1_8d5vf")
 
 [node name="Slot" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
 layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
 
 [node name="Slot2" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
 layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
 
 [node name="Slot3" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
 layout_mode = 2
-
-[node name="Slot4" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot5" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot6" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot7" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot8" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot9" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot10" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot11" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Slot12" parent="UILayer/UI/Inventory" instance=ExtResource("1_e5v8k")]
-layout_mode = 2
-
-[node name="Character" type="VBoxContainer" parent="UILayer/UI"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 64.0
-offset_bottom = 224.0
-theme_override_constants/separation = 16
-script = ExtResource("2_4xyme")
-
-[node name="PassiveSlot" parent="UILayer/UI/Character" instance=ExtResource("2_k1qje")]
-layout_mode = 2
-script = ExtResource("5_t1nds")
-slot_type = 1
-
-[node name="PassiveSlot2" parent="UILayer/UI/Character" instance=ExtResource("2_k1qje")]
-layout_mode = 2
-script = ExtResource("5_t1nds")
-slot_type = 2
-
-[node name="PassiveSlot3" parent="UILayer/UI/Character" instance=ExtResource("2_k1qje")]
-layout_mode = 2
-script = ExtResource("5_t1nds")
-slot_type = 3
-
-[node name="ATK" type="Label" parent="UILayer/UI"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 28.0
-text = "ATK: 0"
+mouse_filter = 0
+mouse_default_cursor_shape = 0
 
 [node name="ClueBook" parent="." instance=ExtResource("1_iucpc")]
-visible = false
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -180,15 +127,15 @@ tile_set = SubResource("TileSet_e5v8k")
 position = Vector2(315, -121)
 texture = ExtResource("3_iunvb")
 
-[node name="ItemProp" parent="Background" instance=ExtResource("9_a7aty")]
+[node name="KeyProp" parent="." instance=ExtResource("9_a7aty")]
 position = Vector2(474, 39)
 
-[node name="Sprite2D" parent="Background/ItemProp" index="1"]
+[node name="Sprite2D" parent="KeyProp" index="1"]
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("10_cka07")
 
-[node name="CollisionShape2D" parent="Background/ItemProp/Detection" index="0"]
+[node name="CollisionShape2D" parent="KeyProp/Detection" index="0"]
 shape = SubResource("CircleShape2D_cka07")
 
 [node name="Door" parent="." instance=ExtResource("4_iunvb")]
@@ -213,4 +160,4 @@ follow_damping = true
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[editable path="Background/ItemProp"]
+[editable path="KeyProp"]

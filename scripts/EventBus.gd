@@ -17,6 +17,9 @@ extends Node
 ## 视觉特效播放完成
 signal game_vfx_over(effect_name : String)
 
+# 快捷栏信号
+signal slot_add_item(id : String)
+
 # 储存信号
 signal storage_load_data(data: Dictionary)
 signal storage_save_data(data: Dictionary)

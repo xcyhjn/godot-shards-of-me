@@ -1,18 +1,26 @@
 extends CanvasLayer
 
 const CLUES_PER_PAGE: int = 4
-var cur_page=0;
+var cur_page: int = 0
 
-@onready var slots: Array[PanelContainer] = [
-	$ClueBook/Clues/Clue1,
-	$ClueBook/Clues/Clue2,
-	$ClueBook/Clues/Clue3,
-	$ClueBook/Clues/Clue4
-]
+@onready var slots: Array[Panel] = [
+		$ClueBook/Clues/Clue1,
+		$ClueBook/Clues/Clue2,
+		$ClueBook/Clues/Clue3,
+		$ClueBook/Clues/Clue4
+	]
 
 @onready var prev_button: Button = $ClueBook/PrevPageBtn
 @onready var next_button: Button = $ClueBook/NextPageBtn
 @onready var page_label: Label = $ClueBook/PageLabel
+
+func _ready() -> void:
+	EventBus.clue_add_item.connect(on_clue_add_item)
+	EventBus.clue_update_book.connect(on_clue_update_book)
+	print(slots)
+	hide()
+	prev_button.hide()
+	next_button.hide()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("打开线索"):
@@ -23,12 +31,6 @@ func _unhandled_input(event):
 		if visible:
 			hide()
 			get_viewport().set_input_as_handled()
-
-func _ready() -> void:
-	EventBus.clue_add_item.connect(on_clue_add_item)
-	EventBus.clue_update_book.connect(on_clue_update_book)
-	prev_button.hide()
-	next_button.hide()
 
 func on_clue_add_item(_clue)->void:
 	return
@@ -94,7 +96,11 @@ func _on_button_pressed() -> void:
 	# 添加clue时模板如下
 	ClueManager.add_clue({
 			"id": "test_clue_" + str(Time.get_ticks_msec()), # 内部id
+			"item_id": "3", # 关联到 ItemData 的物品 id（如 "3" 是可消耗的药）
 			"title": "测试线索", # 小标题
 			"description": "这是一条测试用线索，用来检查线索书是否能正常新增和翻页。", # 下方描述
-			"image": null # 图片地址
+			"texture_path": "" # 图片资源路径，留空则不显示
 		})
+
+func _on_debug_pressed() -> void:
+	ClueManager.clear_clues()

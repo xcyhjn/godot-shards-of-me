@@ -2,7 +2,12 @@ extends Node
 
 var collected_clues : Array[Dictionary] = []
 
-func add_clue(clue : Dictionary)->void:
+func clear_clues() -> void:
+	print("已清除！")
+	collected_clues.clear()
+	EventBus.clue_update_book.emit()
+
+func add_clue(clue : Dictionary) -> void:
 	print("尝试添加线索")
 	# 防止重复添加
 	var new_id : String = clue.get("id", "")

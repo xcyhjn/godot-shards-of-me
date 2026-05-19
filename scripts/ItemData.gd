@@ -1,18 +1,52 @@
 extends Node
-var content : Dictionary
 
-func _ready():
-	var file = FileAccess.open("res://items/database.json",FileAccess.READ)
-	
-	content = JSON.parse_string(file.get_as_text())
-	
-	file.close()
+static var content: Dictionary
 
-func get_texture(ID = "0"):
-	return content[ID]["texture"]
+enum ItemType {
+	ITEM,        # 道具
+	CLUE,        # 线索
+	CONSUMABLE,  # 消耗品
+}
 
-func get_ATK(ID = "0"):
-	return content[ID]["ATK"]
+static func _static_init():
+	_load_database()
 
-func get_slot_type(ID = "0"):
-	return content[ID]["slot_type"]
+static func _load_database():
+	var file = FileAccess.open("res://items/database.json", FileAccess.READ)
+	if file:
+		content = JSON.parse_string(file.get_as_text())
+		file.close()
+	else:
+		push_error("ItemData: 无法打开数据库文件 items/database.json")
+		content = {}
+
+## 获取物品完整信息，返回 Dictionary
+static func get_item_info(id: String = "0") -> Dictionary:
+	if not content.has(id):
+		push_warning("ItemData: 物品 ID '%s' 不存在" % id)
+		return {}
+
+	var data = content[id]
+	var type_name = ItemType.keys()[data["type"]] if data["type"] < ItemType.size() else "UNKNOWN"
+
+	return {
+		"id": id,
+		"name": data.get("name", ""),
+		"type": data.get("type", 0),
+		# "type_name": type_name,
+		"description": data.get("description", ""),
+		"texture": data.get("texture", ""),
+		"texture_path": "res://assets/images/items/" + data.get("texture", "")
+	}
+
+static func get_texture(id: String = "0") -> String:
+	return content.get(id, {}).get("texture", "")
+
+static func get_item_name(id: String = "0") -> String:
+	return content.get(id, {}).get("name", "")
+
+static func get_desc(id: String = "0") -> String:
+	return content.get(id, {}).get("description", "")
+
+static func get_item_type(id: String = "0") -> int:
+	return content.get(id, {}).get("type", 0)

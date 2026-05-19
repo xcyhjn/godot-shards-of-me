@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c33qmydbdmhad"]
+[gd_scene load_steps=13 format=3 uid="uid://c33qmydbdmhad"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_ydj0d"]
 [ext_resource type="PackedScene" uid="uid://ct4kg7pxbq8yi" path="res://scenes/ui/key_hint.tscn" id="2_u07r6"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="3_0i5y8"]
 [ext_resource type="Texture2D" uid="uid://bddvp4ybiqv6s" path="res://assets/images/backgrounds/secondary_bedroom.png" id="4_realo"]
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="6_mg068"]
-[ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/door.tscn" id="6_ydj0d"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_0i5y8"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_realo"]
 
@@ -61,11 +60,7 @@ shape = SubResource("RectangleShape2D_m5wmc")
 position = Vector2(564, 568)
 scale = Vector2(2, 2)
 
-[node name="StaticBody2D" parent="." index="4" instance=ExtResource("6_ydj0d")]
-position = Vector2(53, 472)
-scale = Vector2(3, 3)
-
-[node name="Cameras" type="Node2D" parent="." index="5"]
+[node name="Cameras" type="Node2D" parent="." index="4"]
 
 [node name="Pcam_start" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true

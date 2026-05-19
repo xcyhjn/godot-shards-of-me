@@ -1,20 +1,53 @@
-extends PanelContainer
+# clue.gd
+extends Panel
 
-@onready var content_root: Control = $Messages
-@onready var clue_image: TextureRect = $Messages/ClueImage
-@onready var title_label: Label = $Messages/Title
-@onready var desc_label: Label = $Messages/Description
+@onready var clue_image: TextureRect = $ClueImage
+@onready var info: Control = $Info
+@onready var title_label: Label = $Info/Title
+@onready var desc_label: Label = $Info/Description
+@onready var action_menu: VBoxContainer = $ActionMenu
+@onready var inspect_btn: Button = $ActionMenu/InspectBtn
+@onready var slot_btn: Button = $ActionMenu/SlotBtn
 
-func set_clue(clue:Dictionary)-> void:
-	content_root.visible=true
-	
-	clue_image.texture=clue.get("image",null)
+var clue_data: Dictionary = {}
+
+func _ready() -> void:
+	action_menu.hide()
+
+func set_clue(clue: Dictionary) -> void:
+	clue_data = clue.duplicate()
+	info.show()
+	action_menu.hide()
+	clue_image.texture = load(clue.get("texture_path", ""))
 	title_label.text = clue.get("title", "")
 	desc_label.text = clue.get("description", "")
 
 func set_empty() -> void:
-	content_root.visible = false
-
-	clue_image.texture = null
+	clue_data = {}
 	title_label.text = ""
 	desc_label.text = ""
+	clue_image.texture = null
+	action_menu.hide()
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if clue_data.is_empty():
+			return
+		if action_menu.visible:
+			action_menu.hide()
+			info.show()
+		else:
+			action_menu.show()
+			info.hide()
+
+func _on_inspect_btn_pressed() -> void:
+	print("仔细查看: ", clue_data)
+
+func _on_slot_btn_pressed() -> void:
+	print("拿到手上: ", clue_data)
+	var item_id: String = clue_data.get("id", "")
+	if item_id != "":
+		set_empty()
+		EventBus.slot_add_item.emit(item_id)
+	else:
+		push_warning("Clue: 该线索未关联 id，无法放入快捷栏")

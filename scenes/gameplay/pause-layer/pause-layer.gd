@@ -59,6 +59,7 @@ func resume():
 
 func pause_game():
 	resume_option.grab_focus()
+	GameManager.
 	get_tree().paused = true
 	pause_show()
 

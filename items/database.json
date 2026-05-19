@@ -1,27 +1,26 @@
 {
-	"0" : {
-		"texture" : "key.png",
-		"slot_type" : 2,
-		"ATK" : 3
+	"0": {
+		"texture": "key.png",
+		"name": "钥匙",
+		"type": 0,
+		"description": "一把平平无奇的钥匙"
 	},
-	"1" : {
-		"texture" : "tip.png",
-		"slot_type" : 1,
-		"ATK" : 2
+	"1": {
+		"texture": "tip.png",
+		"name": "提示",
+		"type": 0,
+		"description": "哈基米哦南北路多"
 	},
-	"2" : {
-		"texture" : "tip.png",
-		"slot_type" : 3,
-		"ATK" : 1
+	"2": {
+		"texture": "mirror.png",
+		"name": "镜子",
+		"type": 1,
+		"description": "这么强"
 	},
-	"3" : {
-		"texture" : "tip.png",
-		"slot_type" : 4,
-		"ATK" : 2
-	},
-	"4" : {
-		"texture" : "tip.png",
-		"slot_type" : 4,
-		"ATK" : 6
+	"3": {
+		"texture": "pill.png",
+		"name": "药",
+		"type": 2,
+		"description": "好想欧弟"
 	}
 }
