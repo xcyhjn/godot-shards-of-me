@@ -2,7 +2,6 @@ extends PanelContainer
 class_name Slot
 
 @onready var texture_rect = $TextureRect
-@onready var debug = %debug
 
 ## 格子是否被填满（有物品）
 var filled: bool = false
@@ -31,13 +30,11 @@ func _ready():
 func set_item(data: Dictionary):
 	item_info = data.duplicate()
 	texture_rect.texture = data.get("TEXTURE", null)
-	debug.text = data.get("name", "")
 	filled = true
 
 func clear_item():
 	item_info = {}
 	texture_rect.texture = null
-	debug.text = ""
 	filled = false
 
 func _on_mouse_entered() -> void:
@@ -45,13 +42,6 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	panel_style.border_color = Color(0.6, 0.5, 0.9, 0)
-
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if filled and not item_info.is_empty():
-			print("选中物品: ", item_info)
-			if item_info.get("type", -1) == ItemData.ItemType.CONSUMABLE:
-				_use_consumable()
 
 func _use_consumable() -> void:
 	print("使用消耗品: ", item_info.get("name", ""))

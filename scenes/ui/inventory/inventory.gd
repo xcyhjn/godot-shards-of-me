@@ -17,7 +17,8 @@ func add_item(id: String = "0"):
 
 	item_info["TEXTURE"] = item_texture
 
-	for slot in get_children():
+	for container in get_children():
+		var slot = container.get_node("Slot")
 		if slot is Slot and not slot.filled:
 			slot.set_item(item_info)
 			break

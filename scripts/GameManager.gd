@@ -1,6 +1,8 @@
 """单例-游戏顶层系统"""
 extends Node2D
 
+const ItemFilePath : String = "res://resources/items.json"
+const ItemTexurePath : String = "res://assets/images/items/"
 const ChapterFilePath : String = "res://resources/chapters.json"
 const PersistentDataPath : String = "user:/" # 少一个/，因为DataManager里会加上
 const PersistentDataFileName : String = "persistent_data.json"

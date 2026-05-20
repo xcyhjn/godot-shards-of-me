@@ -54,3 +54,4 @@ func _on_slot_btn_pressed() -> void:
 		EventBus.slot_add_item.emit(item_id)
 	else:
 		push_warning("Clue: 该线索未关联 id，无法放入快捷栏")
+		

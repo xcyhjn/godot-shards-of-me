@@ -12,12 +12,12 @@ static func _static_init():
 	_load_database()
 
 static func _load_database():
-	var file = FileAccess.open("res://items/database.json", FileAccess.READ)
+	var file = FileAccess.open(GameManager.ItemFilePath, FileAccess.READ)
 	if file:
 		content = JSON.parse_string(file.get_as_text())
 		file.close()
 	else:
-		push_error("ItemData: 无法打开数据库文件 items/database.json")
+		push_error("ItemData: 无法打开数据库文件")
 		content = {}
 
 ## 获取物品完整信息，返回 Dictionary
@@ -36,11 +36,15 @@ static func get_item_info(id: String = "0") -> Dictionary:
 		# "type_name": type_name,
 		"description": data.get("description", ""),
 		"texture": data.get("texture", ""),
-		"texture_path": "res://assets/images/items/" + data.get("texture", "")
+		"texture_path": GameManager.ItemTexurePath + data.get("texture", "")
 	}
 
 static func get_texture(id: String = "0") -> String:
-	return content.get(id, {}).get("texture", "")
+	var res : String = content.get(id, {}).get("texture", "")
+	if res.is_empty():
+		return ""
+	else:
+		return GameManager.ItemTexurePath + res
 
 static func get_item_name(id: String = "0") -> String:
 	return content.get(id, {}).get("name", "")
