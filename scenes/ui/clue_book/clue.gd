@@ -27,8 +27,7 @@ func set_empty() -> void:
 	title_label.text = ""
 	desc_label.text = ""
 	clue_image.texture = null
-	action_menu.hide()
-
+	
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if clue_data.is_empty():
@@ -42,11 +41,15 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_inspect_btn_pressed() -> void:
 	print("仔细查看: ", clue_data)
+	action_menu.hide()
+	info.show()
+	EventBus.clue_inspect_item.emit(clue_data.get("id", ""))
+	
 
 func _on_slot_btn_pressed() -> void:
-	print("拿到手上: ", clue_data)
 	var item_id: String = clue_data.get("id", "")
 	if item_id != "":
+		action_menu.hide()
 		set_empty()
 		EventBus.slot_add_item.emit(item_id)
 	else:

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://barl4q1kugrmm"]
 
-[ext_resource type="Script" uid="uid://do7kkb4ijqk5p" path="res://scenes/gameplay/pause-layer/pause-layer.gd" id="2"]
+[ext_resource type="Script" uid="uid://do7kkb4ijqk5p" path="res://scenes/ui/pause-layer/pause_layer.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://uwyewuxfvwll" path="res://scenes/ui/layer_mask.tscn" id="2_p6wo1"]
 [ext_resource type="Theme" uid="uid://ducfept6pmkkm" path="res://resources/theme/theme-main.tres" id="3"]
-[ext_resource type="Texture2D" uid="uid://byniue2cdd2yv" path="res://scenes/gameplay/pause-layer/pause_button.png" id="4"]
-[ext_resource type="FontFile" uid="uid://gx6101bkasjf" path="res://assets/fonts/LXGWWenKai-Regular.ttf" id="5_cnfont"]
+[ext_resource type="Texture2D" uid="uid://byniue2cdd2yv" path="res://scenes/ui/pause-layer/pause_button.png" id="4"]
+[ext_resource type="FontFile" uid="uid://cj7ntfjwc0y02" path="res://assets/fonts/纳米点宋.ttf" id="5_cnfont"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
 bg_color = Color(0.25, 0.2, 0.4, 0.85)
@@ -44,7 +44,6 @@ process_mode = 3
 script = ExtResource("2")
 
 [node name="ColorRect" parent="." instance=ExtResource("2_p6wo1")]
-color = Color(0.0784314, 0.0509804, 0.14902, 0.25098)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

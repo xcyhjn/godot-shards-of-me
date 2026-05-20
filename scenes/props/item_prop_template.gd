@@ -11,8 +11,5 @@ func handle_interact():
 	}
 	"""
 	ClueManager.add_clue(ItemData.get_item_info("0"))
-	ClueManager.add_clue(ItemData.get_item_info("1"))
-	ClueManager.add_clue(ItemData.get_item_info("2"))
-	#EventBus.slot_add_item.emit("0")
 	queue_free()
 		

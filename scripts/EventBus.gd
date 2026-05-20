@@ -28,6 +28,7 @@ signal storage_clear_data(data: Dictionary)
 # 线索信号
 signal clue_add_item(clue: Dictionary)
 signal clue_update_book()
+signal clue_inspect_item(id : String)
 
 # 章节管理信号
 signal chapter_enter(chapter_id: String, chapter_name: String,

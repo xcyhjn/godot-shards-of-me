@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://baeum3fhwwyt"]
+
+[ext_resource type="PackedScene" uid="uid://uwyewuxfvwll" path="res://scenes/ui/layer_mask.tscn" id="1_nq2xs"]
+[ext_resource type="Texture2D" uid="uid://bor7oxd1135fu" path="res://assets/images/items/key.png" id="2_1d30m"]
+[ext_resource type="Script" uid="uid://b3rkhh52qjwqi" path="res://scenes/ui/item_layer/item_layer.gd" id="2_script"]
+[ext_resource type="Theme" uid="uid://ducfept6pmkkm" path="res://resources/theme/theme-main.tres" id="3_theme"]
+
+[node name="ItemLayer" type="CanvasLayer"]
+script = ExtResource("2_script")
+
+[node name="ColorRect" parent="." instance=ExtResource("1_nq2xs")]
+color = Color(0.0784314, 0.0509804, 0.14902, 0.501961)
+
+[node name="Content" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -225.0
+offset_right = 400.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Image" type="TextureRect" parent="Content"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_1d30m")
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="Content"]
+custom_minimum_size = Vector2(280, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Content/Info"]
+layout_mode = 2
+theme = ExtResource("3_theme")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "物品名"
+
+[node name="Separator" type="HSeparator" parent="Content/Info"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="Content/Info"]
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。这里是物品的详细描述文字，会自动换行展示。"
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[node name="ExitBtn" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme = ExtResource("3_theme")
+text = "关闭"
+
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
