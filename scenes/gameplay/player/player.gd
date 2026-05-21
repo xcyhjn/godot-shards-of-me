@@ -1,22 +1,34 @@
 extends CharacterBody2D
+class_name PlayerCharacter
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 
-@onready var Sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var Sprite: AnimatedSprite2D = $AnimatedSprite2D
 var can_move: bool = true
 
 func _ready() -> void:
 	add_to_group("Player")
 
+func lock_control() -> void:
+	set_control_locked(true)
+
+func unlock_control() -> void:
+	set_control_locked(false)
+
+func set_control_locked(locked: bool) -> void:
+	can_move = not locked
+	if locked:
+		velocity = Vector2.ZERO
+		Sprite.play("idle")
+
 func _physics_process(delta: float) -> void:
-	#用于锁定输入播放动画的状态
 	if not can_move:
 		Sprite.play("idle")
-		velocity = Vector2.ZERO # 确保不滑动
+		velocity = Vector2.ZERO
 		move_and_slide()
 		return
-	# Add the gravity.
+
 	if not is_on_floor():
 		pass
 
@@ -30,4 +42,3 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
 
 	move_and_slide()
-	
