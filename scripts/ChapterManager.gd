@@ -26,7 +26,11 @@ func _ready():
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("chapter_debug_next_chapter"):
-		advance_to_next_chapter()
+		# add password_lock to UILayer node
+		var password_lock = preload("res://scenes/ui/password_lock/password_lock.tscn").instantiate()
+		var ui_layer = get_tree().get_root().get_node("Gameplay").get_node("UILayer")
+		ui_layer.add_child(password_lock)
+		password_lock.connect("unlocked", Callable(self, "advance_to_next_chapter"))
 
 ## 三元运算符的表达式函数版本，供章节流程表达式调用
 static func next(flag: bool, true_chapter: String, false_chapter: String) -> String:
