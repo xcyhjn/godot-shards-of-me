@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8dsm6bgluj20"]
+[gd_scene load_steps=20 format=3 uid="uid://c8dsm6bgluj20"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_ryq6h"]
 [ext_resource type="Texture2D" uid="uid://c4xt58kjxyid5" path="res://assets/images/backgrounds/secondary_bedroom_in.png" id="2_8djcj"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_m5geq"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_3o3hw"]
 [ext_resource type="Script" uid="uid://bmuc4vr8o1xgx" path="res://scenes/gameplay/chapters/chapter0_cutscene_director.gd" id="10_3o3hw"]
+[ext_resource type="PackedScene" uid="uid://b2ev5qny3udrg" path="res://scenes/ui/screen_crack/mirror_shattered.tscn" id="11_gdk8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e7b5c"]
 size = Vector2(444, 14)
@@ -136,6 +137,8 @@ metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 script = ExtResource("10_3o3hw")
 pcam_start = NodePath("../Cameras/PCam_Start")
 pcam_player = NodePath("../Cameras/PCam_Player")
+
+[node name="mirror_shattered" parent="." index="8" instance=ExtResource("11_gdk8v")]
 
 [connection signal="body_entered" from="Background/Door" to="." method="_on_door_body_entered"]
 [connection signal="body_entered" from="Background/Door" to="UILayer" method="_on_door_body_entered"]
