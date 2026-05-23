@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://lktep1nmuw34"]
+[gd_scene load_steps=12 format=3 uid="uid://c11aeo68c0pr3"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_n7xi8"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_w5jnu"]
 [ext_resource type="Texture2D" uid="uid://dpp4r7wjcpjox" path="res://assets/images/tilesets/bg_floor_1_extend.png" id="3_n7xi8"]
-[ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/desk.tscn" id="4_desk"]
+[ext_resource type="PackedScene" path="res://scenes/props/desk.tscn" id="4_desk"]
 [ext_resource type="Texture2D" uid="uid://bq5ktpimfjos8" path="res://assets/images/standing/ouyang_ye.png" id="5_45hu4"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_pcam"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_tween"]

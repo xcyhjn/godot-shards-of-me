@@ -2,7 +2,7 @@
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
 &"_translation_id": "",
-&"color": Color(1, 1, 1, 1),
+&"color": Color(1, 0, 0, 1),
 &"custom_info": {
 "prefix": "",
 "sound_mood_default": "",
@@ -12,14 +12,14 @@
 },
 &"default_portrait": "stand",
 &"description": "",
-&"display_name": "欧阳夜",
+&"display_name": "夜离",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),
 &"portraits": {
 "stand": {
 "export_overrides": {
-"image": "\"res://assets/images/standing/ouyang_ye.png\""
+"image": "\"res://assets/images/standing/reimu.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

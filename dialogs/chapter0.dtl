@@ -1,0 +1,19 @@
+label test
+if {chapter0.cutin_played} == false:
+	join ouyang_ye center [animation="Bounce In"]
+	ouyang_ye: 你好
+	ouyang_ye: 你叫什么名字
+	[text_input text="输入名字" var="chapter0.test_str" placeholder="baka"]
+	ouyang_ye: 好的{chapter0.test_str}
+	set {chapter0.cutin_played} = true
+label diag1
+join ouyang_ye left [animation="Bounce In"]
+ouyang_ye: 还好么？
+join li right [animation="Bounce In"]
+li: *叹气*
+li: 有点想吐
+ouyang_ye: 缓缓
+li: 嗯……
+[wait time="1.0"]
+li: ……去趟厕所
+ouyang_ye: 好，等你

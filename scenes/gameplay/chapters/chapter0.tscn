@@ -47,7 +47,9 @@ ease = 2
 script = ExtResource("2_n0ouh")
 metadata/_edit_horizontal_guides_ = [648.0]
 
-[node name="DoorHint" parent="UILayer" index="0" instance=ExtResource("5_f20ei")]
+[node name="mirror_shattered" parent="UILayer" index="0" instance=ExtResource("11_gdk8v")]
+
+[node name="DoorHint" parent="UILayer" index="1" instance=ExtResource("5_f20ei")]
 offset_left = 25.0
 offset_top = 435.0
 offset_right = 65.0
@@ -115,6 +117,7 @@ limit_bottom = 640
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="PCam_Player" type="Node2D" parent="Cameras" index="1" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+visible = false
 top_level = true
 position = Vector2(118, 572)
 script = ExtResource("8_m5geq")
@@ -138,10 +141,10 @@ script = ExtResource("10_3o3hw")
 pcam_start = NodePath("../Cameras/PCam_Start")
 pcam_player = NodePath("../Cameras/PCam_Player")
 
-[node name="mirror_shattered" parent="." index="8" instance=ExtResource("11_gdk8v")]
-
 [connection signal="body_entered" from="Background/Door" to="." method="_on_door_body_entered"]
 [connection signal="body_entered" from="Background/Door" to="UILayer" method="_on_door_body_entered"]
 [connection signal="body_exited" from="Background/Door" to="." method="_on_door_body_exited"]
 [connection signal="body_exited" from="Background/Door" to="UILayer" method="_on_door_body_exited"]
 [connection signal="body_entered" from="CharacterBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
+
+[editable path="UILayer/mirror_shattered"]
