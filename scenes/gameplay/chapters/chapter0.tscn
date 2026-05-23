@@ -47,6 +47,8 @@ ease = 2
 script = ExtResource("2_n0ouh")
 metadata/_edit_horizontal_guides_ = [648.0]
 
+[node name="mirror_shattered" parent="." index="0" instance=ExtResource("11_gdk8v")]
+
 [node name="DoorHint" parent="UILayer" index="0" instance=ExtResource("5_f20ei")]
 offset_left = 25.0
 offset_top = 435.0
@@ -78,11 +80,11 @@ shape = SubResource("RectangleShape2D_n0ouh")
 position = Vector2(41.37, 431.875)
 shape = SubResource("RectangleShape2D_ca0r5")
 
-[node name="Player" parent="." index="3" instance=ExtResource("4_e7b5c")]
+[node name="Player" parent="." index="4" instance=ExtResource("4_e7b5c")]
 position = Vector2(118, 572)
 scale = Vector2(2, 2)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." index="4"]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." index="5"]
 position = Vector2(900, 503)
 scale = Vector2(0.140299, 0.140299)
 
@@ -98,7 +100,7 @@ shape = SubResource("CapsuleShape2D_ca0r5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" index="0"]
 shape = SubResource("CircleShape2D_ca0r5")
 
-[node name="Cameras" type="Node2D" parent="." index="5"]
+[node name="Cameras" type="Node2D" parent="." index="6"]
 
 [node name="PCam_Start" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true
@@ -129,16 +131,14 @@ limit_right = 1152
 limit_bottom = 648
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="NPC" type="Node2D" parent="." index="6"]
+[node name="NPC" type="Node2D" parent="." index="7"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="NPC" index="0"]
 
-[node name="CutsceneDirector" type="Node" parent="." index="7" node_paths=PackedStringArray("pcam_start", "pcam_player")]
+[node name="CutsceneDirector" type="Node" parent="." index="8" node_paths=PackedStringArray("pcam_start", "pcam_player")]
 script = ExtResource("10_3o3hw")
 pcam_start = NodePath("../Cameras/PCam_Start")
 pcam_player = NodePath("../Cameras/PCam_Player")
-
-[node name="mirror_shattered" parent="." index="8" instance=ExtResource("11_gdk8v")]
 
 [connection signal="body_entered" from="Background/Door" to="." method="_on_door_body_entered"]
 [connection signal="body_entered" from="Background/Door" to="UILayer" method="_on_door_body_entered"]
