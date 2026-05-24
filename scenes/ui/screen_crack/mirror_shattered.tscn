@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2ev5qny3udrg"]
+[gd_scene load_steps=3 format=3 uid="uid://b2ev5qny3udrg"]
 
 [ext_resource type="Script" uid="uid://ctmd6egy1dcw4" path="res://scenes/ui/screen_crack/screen_crack_image_effect.gd" id="1_meutv"]
+[ext_resource type="AudioStream" uid="uid://bbcestklk1k0q" path="res://assets/audios/mirror_shattered.mp3" id="2_3vc4w"]
 
 [node name="mirror_shattered" type="CanvasLayer"]
 
@@ -10,7 +11,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 script = ExtResource("1_meutv")
+mirror_shattered_sfx = ExtResource("2_3vc4w")
 darkness_overlay_path = NodePath("../darkness_overlay")
 
 [node name="darkness_overlay" type="ColorRect" parent="."]
@@ -20,3 +23,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.152941, 0.152941, 0.152941, 0)
+
+[node name="Button" type="Button" parent="."]
+offset_right = 751.0
+offset_bottom = 465.0
+
+[connection signal="pressed" from="Button" to="mirror_shattered" method="_on_button_pressed"]

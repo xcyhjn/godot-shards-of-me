@@ -4,6 +4,11 @@ const CRACK_STAGE_2 := preload("res://assets/images/ui/mirror_shattered/crack_st
 const CRACK_STAGE_3 := preload("res://assets/images/ui/mirror_shattered/crack_stage_3.png")
 const CRACK_STAGE_4 := preload("res://assets/images/ui/mirror_shattered/crack_stage_4.png")
 const CRACK_ZERO := preload("res://assets/images/ui/mirror_shattered/crack_zero.png")
+
+#音效导入
+@export var mirror_shattered_sfx:AudioStream
+
+
 #黑暗遮罩变量导入
 @export var darkness_overlay_path: NodePath
 @export var darkness_color := Color(0.0, 0.0, 0.0, 1.0)
@@ -11,6 +16,8 @@ const CRACK_ZERO := preload("res://assets/images/ui/mirror_shattered/crack_zero.
 	set(value):
 		max_darkness_alpha = clampf(value, 0.0, 1.0)
 		_apply_crack_state()
+
+
 
 #裂纹状态变量
 @export_range(0, 4, 1) var crack_state := 1:
@@ -24,11 +31,16 @@ const CRACK_ZERO := preload("res://assets/images/ui/mirror_shattered/crack_zero.
 		overlay_alpha = clampf(value, 0.0, 1.0)
 		_apply_crack_state()
 
+var pre_stage:int
+
 func _ready() -> void:
 	EventBus.san_update.connect(_on_san_update)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	stretch_mode = TextureRect.STRETCH_SCALE
+	
+	pre_stage=_get_san_stage(Chapter.san)
+	_set_crack_state(pre_stage)
 	if material == null:
 		var additive_material := CanvasItemMaterial.new()
 		additive_material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
@@ -106,22 +118,29 @@ func _get_san_stage(val: int) -> int:
 		return 1
 
 func _on_san_stage_lower()->void:
-	
+	print("san阶段降低")
+	Audio._play_sfx(mirror_shattered_sfx)
 	return
 	
 func _on_san_stage_zero()->void:
-	
+	print("san值归零")
 	return
 	
-var pre_stage:=5
+func _on_san_stage_upper()->void:
+	print("san值恢复")
+	return
+
 func _on_san_update(val:int)->void:
 	var cur_stage=_get_san_stage(val)
 	_set_crack_state(cur_stage)
 	if(cur_stage==0):
 		_on_san_stage_zero()
-		return
-	if(cur_stage<pre_stage):
+	elif(cur_stage>pre_stage):
 		_on_san_stage_lower()
-		pre_stage=cur_stage
-		_set_crack_state(cur_stage)
-	return
+	elif(cur_stage<pre_stage):
+		_on_san_stage_upper()
+	pre_stage=cur_stage
+
+
+func _on_button_pressed() -> void:
+	Chapter.san-=25
