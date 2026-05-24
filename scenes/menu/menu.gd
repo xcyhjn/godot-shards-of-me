@@ -9,6 +9,8 @@ extends Control
 @onready var version_container = $MarginContainer/Control/Version
 @onready var credits_container = $MarginContainer/Control/Credits
 
+# BGM
+@export var menu_bgm : AudioStream
 
 func _ready():
 	# 等动画播完再启用按键
@@ -49,6 +51,9 @@ func _ready():
 		btn_play.disabled = false
 		btn_exit.disabled = false
 		btn_play.grab_focus()
+		# 最后始放bgm
+		Audio.set_volume(0, 0.1)
+		Audio.play_music(menu_bgm)
 	)
 
 	if OS.has_feature('web'):
@@ -86,6 +91,7 @@ func _on_PlayButton_pressed() -> void:
 			"val": 15
 		},
 	}
+	Audio.stop_music()
 	Chapter.new_game()
 	GGT.change_scene("res://scenes/gameplay/start.tscn", params)
 

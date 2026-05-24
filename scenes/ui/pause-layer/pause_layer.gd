@@ -72,5 +72,8 @@ func _on_PauseButton_pressed():
 
 
 func _on_main_menu_pressed():
-	Data.save_persistent_data()
+	Dialogic.end_timeline(true)
+	# Data.save_persistent_data() 内部会写入 Dialogic 的 "process" slot，
+	# 同时落盘自定义数据与 Dialogic 自身对话状态，无需再单独调用 Dialogic.Save.save()
+	await Data.save_persistent_data()
 	GGT.change_scene("res://scenes/menu/menu.tscn", {"show_progress_bar": false})

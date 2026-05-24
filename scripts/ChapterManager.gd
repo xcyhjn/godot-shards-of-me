@@ -18,7 +18,7 @@ var current_chapter_id: String = "prologue"
 var active_chapter_data: Dictionary = {}
 var san: int = 100:
 	set(value):
-		san = value
+		san = clampi(value, 0, 100)
 		EventBus.san_update.emit(san)
 
 func _ready():

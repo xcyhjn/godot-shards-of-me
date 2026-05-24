@@ -24,8 +24,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.152941, 0.152941, 0.152941, 0)
 
-[node name="Button" type="Button" parent="."]
-offset_right = 751.0
-offset_bottom = 465.0
+[node name="DebugBtns" type="HBoxContainer" parent="."]
+offset_left = 115.0
+offset_right = 231.0
+offset_bottom = 40.0
 
-[connection signal="pressed" from="Button" to="mirror_shattered" method="_on_button_pressed"]
+[node name="SanDecreaseBtn" type="Button" parent="DebugBtns"]
+layout_mode = 2
+text = "减SAN"
+
+[node name="SanIncreaseBtn" type="Button" parent="DebugBtns"]
+layout_mode = 2
+text = "加SAN"
+
+[connection signal="pressed" from="DebugBtns/SanDecreaseBtn" to="mirror_shattered" method="_on_san_decrease_btn_pressed"]
+[connection signal="pressed" from="DebugBtns/SanIncreaseBtn" to="mirror_shattered" method="_on_san_increase_btn_pressed"]

@@ -13,9 +13,8 @@
 """
 extends Node
 
-# 效果信号
-## 视觉特效播放完成
-signal game_vfx_over(effect_name : String)
+# 控制信号
+signal player_control_lock(stat : bool)
 
 # 快捷栏信号
 signal slot_add_item(id : String)

@@ -16,18 +16,22 @@
 - `Data` → `res://scripts/DataManager.gd`
 - `Chapter` → `res://scripts/ChapterManager.gd`
 - `GameManager` → `res://scripts/GameManager.gd`
+- `Dialogic` → `res://addons/dialogic/Core/DialogicGameHandler.gd`
 
 因此脚本里可以直接使用：
 
-- `Data.load_persistent_data(...)` / `Data.save_persistent_data()`
+- `Data.load_persistent_data()` / `Data.save_persistent_data()` / `Data.has_save()` / `Data.delete_save()`
 - `Chapter.load_chapter_data(...)` / `Chapter.new_game()` / `Chapter.advance_to_next_chapter()`
 
 启动时加载顺序在 `GameManager._ready()` 中已经固定：
 
-1. `Data.load_persistent_data("user:/", "persistent_data.json")`
+1. `await Data.load_persistent_data()`（内部会等待 `Dialogic` 自动加载就绪）
 2. `Chapter.load_chapter_data("res://resources/chapters.json")`
 
-> 注意：这里传入的是 `"user:/"`（少一个 `/`），因为 `DataManager` 内部会再拼一个 `/`，最终文件路径会变成 `user://persistent_data.json`。
+> 存档实际落盘位置是 Dialogic 的存档目录：`user://dialogic/saves/process/`。
+> - `state.txt`：Dialogic 自身对话状态（由 `Dialogic.Save` 写入）
+> - `game_data.json`：项目自定义的 `Persist` 节点数据（由 `DataManager` 写入）
+> - `info.txt` / `thumbnail.png`：Dialogic 顺带写入的 slot 元信息
 
 ---
 
@@ -35,7 +39,7 @@
 
 ### 1.1 核心协议（Persist 分组 + save/load）
 
-`DataManager` 的设计是：**把“需要持久化的节点”加入 Godot 的分组 `Persist`，并实现统一的数据协议**。
+`DataManager` 的设计是：**把"需要持久化的节点"加入 Godot 的分组 `Persist`，并实现统一的数据协议**。
 
 要被持久化的节点需要满足：
 
@@ -48,7 +52,7 @@
 
 - 遍历所有 `Persist` 分组的节点
 - 调用每个节点的 `save_data()`
-- 以 **节点的 `node.name`** 作为 key 写入一个大 JSON：
+- 以 **节点的 `node.name`** 作为 key 写入一个大字典，并通过 `Dialogic.Save.save_file()` 序列化成 `game_data.json`：
 
 ```json
 {
@@ -57,11 +61,15 @@
 }
 ```
 
+紧接着会调用 `Dialogic.Save.save("process")` 把 Dialogic 自身的对话进程也写入同一个 slot 目录下的 `state.txt`。
+
 `DataManager` 加载时会：
 
-- 读取 JSON
-- 遍历 `Persist` 分组节点
-- 用 `node.name` 去 JSON 里找对应数据，并调用 `load_data(对应字典)`
+- 调用 `Dialogic.Save.load("process")` 恢复 Dialogic 对话进程
+- 通过 `Dialogic.Save.load_file()` 读取 `game_data.json`
+- 遍历 `Persist` 分组节点，用 `node.name` 去字典里找对应数据，调用 `load_data(对应字典)`
+
+> 所有数据统一由 Dialogic 的 Save 子系统托管，**只使用一个固定的 slot：`"process"`**。无需也不应直接读写 `user://` 下的其他文件。
 
 ### 1.2 重要约定与坑位
 
@@ -69,9 +77,17 @@
    - Autoload 的名字就是节点名。例如 `Chapter="*res://scripts/ChapterManager.gd"`，因此 key 是 `"Chapter"`。
    - 如果你在 `project.godot` 里改了 Autoload 名称，历史存档里对应 key 会变，旧数据就不会被加载（当前实现会报错）。
 
-2. **`save_data()` 返回值必须可 JSON 序列化**
+2. **`save_data()` 返回值必须可序列化**
+   - Dialogic 使用 `FileAccess.store_var/get_var`，对内置类型支持良好。
    - 建议只使用：`bool/int/float/String/Array/Dictionary`（以及它们的嵌套）。
    - 不要直接塞 `Node`、`Resource`、`Callable` 之类对象。
+
+3. **加载/保存是异步的**
+   - `Data.load_persistent_data()` 与 `Data.save_persistent_data()` 内部需要等待 `Dialogic` 自动加载就绪。
+   - 调用时建议使用 `await Data.save_persistent_data()`，否则可能在 Dialogic 尚未初始化时就返回。
+
+4. **新游戏会覆盖旧存档**
+   - 如需"开始新游戏"清空旧进度，调用 `Data.delete_save()` 即可移除整个 `process` slot 目录。
 
 ### 1.3 最小接入示例
 
@@ -99,9 +115,9 @@ func load_data(data: Dictionary) -> void:
 
 然后在需要保存的时机调用：
 
-- `Data.save_persistent_data()`
+- `await Data.save_persistent_data()`
 
-项目里已有一个保存点例子：在暂停菜单回到主菜单时会调用保存（见 `scenes/gameplay/pause-layer/pause-layer.gd`）。
+项目里已有一个保存点例子：在暂停菜单回到主菜单时会调用保存（见 `scenes/ui/pause-layer/pause_layer.gd`）。
 
 ---
 
@@ -192,10 +208,10 @@ func load_data(data: Dictionary) -> void:
 
 启动时 `GameManager._ready()` 会先执行：
 
-- `Data.load_persistent_data(...)`（把存档分发给 `Persist` 节点，包括 `Chapter`）
+- `await Data.load_persistent_data()`（恢复 Dialogic 对话进程并把存档分发给 `Persist` 节点，包括 `Chapter`）
 - `Chapter.load_chapter_data(...)`（加载 `chapters.json` 并用 `current_chapter_id` 初始化当前定义）
 
-因此“继续游戏”不应再调用 `Chapter.new_game()`，否则会覆盖读档的 `current_chapter_id` / `active_chapter_data`。
+因此"继续游戏"不应再调用 `Chapter.new_game()`，否则会覆盖读档的 `current_chapter_id` / `active_chapter_data`。
 
 #### 在章节中推进条件并切章
 
@@ -206,8 +222,8 @@ func load_data(data: Dictionary) -> void:
 Chapter.active_chapter_data["chapter1_passed"] = true
 Chapter.advance_to_next_chapter()
 
-# 需要时立即存档
-Data.save_persistent_data()
+# 需要时立即存档（异步）
+await Data.save_persistent_data()
 ```
 
 ### 2.5 如何定义“结局章节”
@@ -268,4 +284,6 @@ func _on_enter_chapter(chapter_id: String, chapter_name: String, data: Dictionar
 - 当前章节是否有 `next.expression`
 - `next.args` 里列出的变量，是否都存在于 `Chapter.active_chapter_data`
 - 是否在“继续游戏”路径里误调用了 `Chapter.new_game()`
-- 是否在合适的时机调用了 `Data.save_persistent_data()`（否则退出即丢）
+- 是否在合适的时机调用了 `await Data.save_persistent_data()`（否则退出即丢）
+- Dialogic 是否已就绪（`Data` 内部已 `await Dialogic.ready`，但若你直接绕过 DataManager 写 slot，需要自己处理）
+- 检查 `user://dialogic/saves/process/` 目录下是否同时存在 `state.txt` 和 `game_data.json`

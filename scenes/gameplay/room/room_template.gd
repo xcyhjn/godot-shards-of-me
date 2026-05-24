@@ -3,6 +3,9 @@ extends Node
 
 @onready var Player : CharacterBody2D = _find_player()
 @onready var main_camera: Camera2D = _find_player_camera()
+
+@export var bgm : AudioStream
+
 var can_change_scene : bool = false
 var next_scene : String = ""
 
@@ -10,6 +13,7 @@ var next_scene : String = ""
 ## scene_name相对于res://scenes/gameplay定位
 func change_scene() -> void:
 	if can_change_scene == true and Input.is_action_pressed("互动"):
+			Audio.stop_music()
 			Chapter.san -= 10
 			GGT.change_scene("res://scenes/gameplay/" + next_scene + ".tscn")
 			# 防止玩家一直按E
@@ -29,6 +33,9 @@ func _ready() -> void:
 		await GGT.scene_transition_finished
 
 	print("GGT/Gameplay: scene transition animation finished")
+	if bgm:
+		Audio.set_volume(0, 0.1)
+		Audio.play_music(bgm)
 
 
 func _physics_process(delta: float) -> void:

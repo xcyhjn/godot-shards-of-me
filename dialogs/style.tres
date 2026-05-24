@@ -37,9 +37,9 @@ script = ExtResource("2_kj0u0")
 scene = ExtResource("6_r414c")
 overrides = {
 "name_label_custom_font_size": "18.0",
-"name_label_font": "\"res://assets/fonts/LXGWWenKai-Regular.ttf\"",
+"name_label_font": "\"res://assets/fonts/纳米点宋.ttf\"",
 "name_label_use_global_font_size": "false",
-"normal_font": "\"res://assets/fonts/LXGWWenKai-Regular.ttf\"",
+"normal_font": "\"res://assets/fonts/纳米点宋.ttf\"",
 "text_size": "24.0",
 "text_use_global_size": "false"
 }

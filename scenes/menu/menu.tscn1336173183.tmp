@@ -1,0 +1,238 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2gocuhw2o7py"]
+
+[ext_resource type="AudioStream" uid="uid://bpt0bsb0eyn5x" path="res://assets/audios/BGM00-StartScene.wav" id="2_r8yej"]
+[ext_resource type="Texture2D" uid="uid://b8igyqfgd5tn5" path="res://assets/images/backgrounds/classroom.png" id="2_y1o0p"]
+[ext_resource type="Script" uid="uid://dfnwymtygg1to" path="res://scenes/menu/game_version.gd" id="4_3hod2"]
+[ext_resource type="Script" uid="uid://cvc42inud8fxx" path="res://scenes/menu/menu.gd" id="5"]
+[ext_resource type="Script" uid="uid://baky6bgu7psf2" path="res://scenes/menu/godot_version.gd" id="5_fdyjp"]
+[ext_resource type="FontFile" uid="uid://cj7ntfjwc0y02" path="res://assets/fonts/纳米点宋.ttf" id="6_cnfont"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7uqf1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(576, 10, 1)
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 10, 0)
+scale_min = 4.0
+scale_max = 8.0
+color = Color(0.8, 0.85, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fgh4"]
+bg_color = Color(0.25, 0.2, 0.4, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.5, 0.9, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_9cde3"]
+bg_color = Color(0.25, 0.2, 0.4, 0.85)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ijkl"]
+bg_color = Color(0.35, 0.3, 0.5, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8abn2"]
+bg_color = Color(0.15, 0.12, 0.25, 0.7)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5")
+menu_bgm = ExtResource("2_r8yej")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_y1o0p")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.05, 0.15, 0.55)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(576, 0)
+amount = 80
+lifetime = 5.0
+preprocess = 5.0
+visibility_rect = Rect2(-576, 0, 1152, 648)
+process_material = SubResource("ParticleProcessMaterial_7uqf1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = -8.0
+offset_bottom = -339.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleVBox" type="VBoxContainer" parent="MarginContainer/Control/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="MarginContainer/Control/CenterContainer/TitleVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.830335, 0.830335, 0.830335, 1)
+theme_override_font_sizes/font_size = 90
+text = "镜中人"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MarginContainer/Control/CenterContainer/TitleVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.866667, 0.866667, 1)
+theme_override_font_sizes/font_size = 48
+text = "Shards of me"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -30.0
+offset_right = 96.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="MarginContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+theme_override_fonts/font = ExtResource("6_cnfont")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_0fgh4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_9cde3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ijkl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8abn2")
+text = "开始游戏"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+focus_neighbor_top = NodePath("../PlayButton")
+focus_previous = NodePath("../PlayButton")
+theme_override_fonts/font = ExtResource("6_cnfont")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_0fgh4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_9cde3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ijkl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8abn2")
+text = "退出游戏"
+
+[node name="Version" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 122.0
+grow_vertical = 0
+
+[node name="GameVersion" type="Label" parent="MarginContainer/Control/Version"]
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+text = "<x.y.z>"
+script = ExtResource("4_3hod2")
+
+[node name="GodotVersion" type="Label" parent="MarginContainer/Control/Version"]
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_color = Color(0.92549, 0.92549, 0.92549, 1)
+text = "<GodotVersion>"
+script = ExtResource("5_fdyjp")
+
+[node name="Credits" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MadeByLabel" type="Label" parent="MarginContainer/Control/Credits"]
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "made by: ..."
+
+[node name="Developer1" type="Label" parent="MarginContainer/Control/Credits"]
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_color = Color(0.92549, 0.92549, 0.92549, 1)
+
+[node name="Developer2" type="Label" parent="MarginContainer/Control/Credits"]
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_color = Color(0.886275, 0.87451, 0.87451, 1)
+text = "Developer 2"
+
+[node name="Developer3" type="Label" parent="MarginContainer/Control/Credits"]
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_color = Color(0.886275, 0.87451, 0.87451, 1)
+text = "Developer 3"
+
+[connection signal="pressed" from="MarginContainer/Control/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MarginContainer/Control/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

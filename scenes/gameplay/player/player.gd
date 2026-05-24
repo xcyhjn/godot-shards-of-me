@@ -9,6 +9,9 @@ var can_move: bool = true
 
 func _ready() -> void:
 	add_to_group("Player")
+	EventBus.player_control_lock.connect(func(stat : bool):
+		set_control_locked(stat)
+	)
 
 func lock_control() -> void:
 	set_control_locked(true)

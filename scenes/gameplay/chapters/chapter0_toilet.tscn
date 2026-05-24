@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=4 uid="uid://dnri35hdjjolw"]
+
+[ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_tre18"]
+[ext_resource type="Texture2D" uid="uid://dpp4r7wjcpjox" path="res://assets/images/tilesets/bg_floor_1_extend.png" id="2_2tt77"]
+[ext_resource type="Texture2D" uid="uid://byo2aa7iwt1ra" path="res://assets/images/tilesets/222 (2).png" id="3_gyqr8"]
+[ext_resource type="Texture2D" uid="uid://uhxgf5jhyvck" path="res://assets/images/backgrounds/20260519-172153.png" id="3_it60s"]
+[ext_resource type="Texture2D" uid="uid://dsnulxvj8d5aa" path="res://assets/images/tilesets/bg_floor_1.png" id="4_yjdll"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gyqr8"]
+texture = ExtResource("4_yjdll")
+texture_region_size = Vector2i(192, 40)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_m5qxq"]
+tile_shape = 2
+tile_size = Vector2i(125, 37)
+sources/0 = SubResource("TileSetAtlasSource_gyqr8")
+
+[node name="Gameplay" instance=ExtResource("1_tre18")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Background" index="3"]
+tile_map_data = PackedByteArray("AAAIAAwAAAAAAAAAAAAHAAwAAAAAAAAAAAAGAAwAAAAAAAAAAAAFAAwAAAAAAAAAAAAEAAwAAAAAAAAAAAADAAwAAAAAAAAAAAACAAwAAAAAAAAAAAABAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAABAA0AAAAAAAAAAAACAA0AAAAAAAAAAAADAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAGAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAJAAwAAAAAAAAAAAAIAA4AAAAAAAAAAAAHAA8AAAAAAAAAAAAGAA8AAAAAAAAAAAAFAA8AAAAAAAAAAAAGAA4AAAAAAAAAAAAHAA4AAAAAAAAAAAAFAA4AAAAAAAAAAAAEAA4AAAAAAAAAAAADAA4AAAAAAAAAAAACAA4AAAAAAAAAAAABAA4AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAAAAAABAA8AAAAAAAAAAAACAA8AAAAAAAAAAAADAA8AAAAAAAAAAAAEAA8AAAAAAAAAAAD//w8AAAAAAAAAAAAAABAAAAAAAAAAAAD//xAAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAAAAAAAAAADABAAAAAAAAAAAAAEABAAAAAAAAAAAAAFABAAAAAAAAAAAAAGABAAAAAAAAAAAAAHABAAAAAAAAAAAAAIABAAAAAAAAAAAAAIAA8AAAAAAAAAAAAJAA4AAAAAAAAAAAAJAA0AAAAAAAAAAAAKAAwAAAAAAAAAAAABAAsAAAAAAAAAAAACAAsAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAsAAAAAAAAAAAAKAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAGAAsAAAAAAAAAAAALAAoAAAAAAAAAAAAFAAsAAAAAAAAAAAAEAAoAAAAAAAAAAAADAAoAAAAAAAAAAAACAAoAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_m5qxq")
+
+[node name="222(1)" type="Sprite2D" parent="Background" index="4"]
+position = Vector2(71, 281)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_gyqr8")
+
+[node name="BgFloor1Extend" type="Sprite2D" parent="Background" index="6"]
+visible = false
+position = Vector2(489, 297)
+scale = Vector2(1, 1.47856)
+texture = ExtResource("2_2tt77")
+
+[node name="20260519-172153" type="Sprite2D" parent="Background" index="7"]
+position = Vector2(776, 110)
+scale = Vector2(0.344766, 0.344263)
+texture = ExtResource("3_it60s")

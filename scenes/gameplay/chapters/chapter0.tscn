@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_ryq6h"]
 [ext_resource type="Texture2D" uid="uid://c4xt58kjxyid5" path="res://assets/images/backgrounds/secondary_bedroom_in.png" id="2_8djcj"]
 [ext_resource type="Script" uid="uid://dl3bx7ff2043l" path="res://scenes/gameplay/chapters/chapter0.gd" id="2_n0ouh"]
+[ext_resource type="AudioStream" uid="uid://cd4nyocp2fumc" path="res://assets/audios/BGM02-The Interior.wav" id="3_3ld52"]
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="3_x65ym"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="4_e7b5c"]
 [ext_resource type="PackedScene" uid="uid://ct4kg7pxbq8yi" path="res://scenes/ui/key_hint.tscn" id="5_f20ei"]
@@ -10,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_m5geq"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_3o3hw"]
 [ext_resource type="Script" uid="uid://bmuc4vr8o1xgx" path="res://scenes/gameplay/chapters/chapter0_cutscene_director.gd" id="10_3o3hw"]
-[ext_resource type="PackedScene" uid="uid://b2ev5qny3udrg" path="res://scenes/ui/screen_crack/mirror_shattered.tscn" id="11_gdk8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e7b5c"]
 size = Vector2(444, 14)
@@ -45,11 +45,10 @@ ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_ryq6h")]
 script = ExtResource("2_n0ouh")
+bgm = ExtResource("3_3ld52")
 metadata/_edit_horizontal_guides_ = [648.0]
 
-[node name="mirror_shattered" parent="UILayer" index="0" instance=ExtResource("11_gdk8v")]
-
-[node name="DoorHint" parent="UILayer" index="1" instance=ExtResource("5_f20ei")]
+[node name="DoorHint" parent="UILayer" index="0" instance=ExtResource("5_f20ei")]
 offset_left = 25.0
 offset_top = 435.0
 offset_right = 65.0
@@ -80,11 +79,11 @@ shape = SubResource("RectangleShape2D_n0ouh")
 position = Vector2(41.37, 431.875)
 shape = SubResource("RectangleShape2D_ca0r5")
 
-[node name="Player" parent="." index="3" instance=ExtResource("4_e7b5c")]
+[node name="Player" parent="." index="2" instance=ExtResource("4_e7b5c")]
 position = Vector2(118, 572)
 scale = Vector2(2, 2)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." index="4"]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." index="3"]
 position = Vector2(900, 503)
 scale = Vector2(0.140299, 0.140299)
 
@@ -100,7 +99,7 @@ shape = SubResource("CapsuleShape2D_ca0r5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" index="0"]
 shape = SubResource("CircleShape2D_ca0r5")
 
-[node name="Cameras" type="Node2D" parent="." index="5"]
+[node name="Cameras" type="Node2D" parent="." index="4"]
 
 [node name="PCam_Start" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true
@@ -132,11 +131,11 @@ limit_right = 1152
 limit_bottom = 648
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="NPC" type="Node2D" parent="." index="6"]
+[node name="NPC" type="Node2D" parent="." index="5"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="NPC" index="0"]
 
-[node name="CutsceneDirector" type="Node" parent="." index="7" node_paths=PackedStringArray("pcam_start", "pcam_player")]
+[node name="CutsceneDirector" type="Node" parent="." index="6" node_paths=PackedStringArray("pcam_start", "pcam_player")]
 script = ExtResource("10_3o3hw")
 pcam_start = NodePath("../Cameras/PCam_Start")
 pcam_player = NodePath("../Cameras/PCam_Player")
@@ -146,5 +145,3 @@ pcam_player = NodePath("../Cameras/PCam_Player")
 [connection signal="body_exited" from="Background/Door" to="." method="_on_door_body_exited"]
 [connection signal="body_exited" from="Background/Door" to="UILayer" method="_on_door_body_exited"]
 [connection signal="body_entered" from="CharacterBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
-
-[editable path="UILayer/mirror_shattered"]

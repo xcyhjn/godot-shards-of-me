@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 const CLUES_PER_PAGE: int = 4
 var cur_page: int = 0

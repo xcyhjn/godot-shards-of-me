@@ -1,15 +1,15 @@
 extends TextureRect
-#资源加载
+# 资源加载
 const CRACK_STAGE_2 := preload("res://assets/images/ui/mirror_shattered/crack_stage_2.png")
 const CRACK_STAGE_3 := preload("res://assets/images/ui/mirror_shattered/crack_stage_3.png")
 const CRACK_STAGE_4 := preload("res://assets/images/ui/mirror_shattered/crack_stage_4.png")
 const CRACK_ZERO := preload("res://assets/images/ui/mirror_shattered/crack_zero.png")
 
-#音效导入
+# 音效导入
 @export var mirror_shattered_sfx:AudioStream
 
 
-#黑暗遮罩变量导入
+# 黑暗遮罩变量导入
 @export var darkness_overlay_path: NodePath
 @export var darkness_color := Color(0.0, 0.0, 0.0, 1.0)
 @export_range(0.0, 1.0, 0.01) var max_darkness_alpha := 0.55:
@@ -19,7 +19,7 @@ const CRACK_ZERO := preload("res://assets/images/ui/mirror_shattered/crack_zero.
 
 
 
-#裂纹状态变量
+# 裂纹状态变量
 @export_range(0, 4, 1) var crack_state := 1:
 	set(value):
 		crack_state = clampi(value, 0, 4)
@@ -119,7 +119,7 @@ func _get_san_stage(val: int) -> int:
 
 func _on_san_stage_lower()->void:
 	print("san阶段降低")
-	Audio._play_sfx(mirror_shattered_sfx)
+	Audio.play_sfx(mirror_shattered_sfx)
 	return
 	
 func _on_san_stage_zero()->void:
@@ -142,5 +142,8 @@ func _on_san_update(val:int)->void:
 	pre_stage=cur_stage
 
 
-func _on_button_pressed() -> void:
-	Chapter.san-=25
+func _on_san_decrease_btn_pressed() -> void:
+	Chapter.san -= 25
+
+func _on_san_increase_btn_pressed() -> void:
+	Chapter.san += 25
