@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://umgddmyexp0u"
-path="res://.godot/imported/wall_tile_01.png-8d9e6c3d0e3df701666a807031483ff2.ctex"
+uid="uid://1badfs58p611"
+path="res://.godot/imported/ouyang_ye_old.png-a90202159d4e7d15f34ecd86385c6069.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tilesets/wall_tile_01.png"
-dest_files=["res://.godot/imported/wall_tile_01.png-8d9e6c3d0e3df701666a807031483ff2.ctex"]
+source_file="res://assets/images/standing/ouyang_ye_old.png"
+dest_files=["res://.godot/imported/ouyang_ye_old.png-a90202159d4e7d15f34ecd86385c6069.ctex"]
 
 [params]
 

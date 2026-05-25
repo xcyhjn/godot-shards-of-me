@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsnulxvj8d5aa"
-path="res://.godot/imported/bg_floor_1.png-5dbf4a3b52354f6ff3d2e447d8464c90.ctex"
+uid="uid://foxk4i1buiyh"
+path="res://.godot/imported/ye_li.png-0647e04d190a105568b55605e576c73f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tilesets/bg_floor_1.png"
-dest_files=["res://.godot/imported/bg_floor_1.png-5dbf4a3b52354f6ff3d2e447d8464c90.ctex"]
+source_file="res://assets/images/standing/ye_li.png"
+dest_files=["res://.godot/imported/ye_li.png-0647e04d190a105568b55605e576c73f.ctex"]
 
 [params]
 

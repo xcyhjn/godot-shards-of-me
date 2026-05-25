@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpp4r7wjcpjox"
-path="res://.godot/imported/bg_floor_1_extend.png-b8c36cdfd9b664ec3499ee79c425c494.ctex"
+uid="uid://c1h6pshyh1lby"
+path="res://.godot/imported/wall_hallway_2.png-0d21b0d9d9005db39dafea7ab1047957.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tilesets/bg_floor_1_extend.png"
-dest_files=["res://.godot/imported/bg_floor_1_extend.png-b8c36cdfd9b664ec3499ee79c425c494.ctex"]
+source_file="res://assets/images/backgrounds/wall_hallway_2.png"
+dest_files=["res://.godot/imported/wall_hallway_2.png-0d21b0d9d9005db39dafea7ab1047957.ctex"]
 
 [params]
 

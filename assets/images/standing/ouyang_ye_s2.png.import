@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu34q2vrnuwkt"
-path="res://.godot/imported/222 (1).png-c5f505f1d70fff51640ff732cfc59fbf.ctex"
+uid="uid://r47tn1r6i7yh"
+path="res://.godot/imported/ouyang_ye_s2.png-3dbd545a7fedbe02acfe240a456ea2e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tilesets/222 (1).png"
-dest_files=["res://.godot/imported/222 (1).png-c5f505f1d70fff51640ff732cfc59fbf.ctex"]
+source_file="res://assets/images/standing/ouyang_ye_s2.png"
+dest_files=["res://.godot/imported/ouyang_ye_s2.png-3dbd545a7fedbe02acfe240a456ea2e7.ctex"]
 
 [params]
 

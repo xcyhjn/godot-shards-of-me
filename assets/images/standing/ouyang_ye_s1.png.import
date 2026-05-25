@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duo3tx1ycr5c4"
-path="res://.godot/imported/20260524-142934.png-cd5bf939dd2e44ecf08b82c09ea45ad2.ctex"
+uid="uid://ddk1o18qi0rw8"
+path="res://.godot/imported/ouyang_ye_s1.png-6a912ce5a111633797337ef8a4f63e52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/backgrounds/20260524-142934.png"
-dest_files=["res://.godot/imported/20260524-142934.png-cd5bf939dd2e44ecf08b82c09ea45ad2.ctex"]
+source_file="res://assets/images/standing/ouyang_ye_s1.png"
+dest_files=["res://.godot/imported/ouyang_ye_s1.png-6a912ce5a111633797337ef8a4f63e52.ctex"]
 
 [params]
 

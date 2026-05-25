@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvhf0b61oa8ia"
-path="res://.godot/imported/classroom_bg_tile_1.png-cb1c6f1de2a5b22f24a412595a36e154.ctex"
+uid="uid://ce0dgmgs6dgrv"
+path="res://.godot/imported/wall_toilet_1.png-69eb7d0206d9ff1a3603567e6a643e8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tilesets/classroom_bg_tile_1.png"
-dest_files=["res://.godot/imported/classroom_bg_tile_1.png-cb1c6f1de2a5b22f24a412595a36e154.ctex"]
+source_file="res://assets/images/backgrounds/wall_toilet_1.png"
+dest_files=["res://.godot/imported/wall_toilet_1.png-69eb7d0206d9ff1a3603567e6a643e8c.ctex"]
 
 [params]
 

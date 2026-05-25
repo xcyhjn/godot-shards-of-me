@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt8a1pyy0anck"]
+[gd_scene load_steps=9 format=4 uid="uid://bt8a1pyy0anck"]
 
 [ext_resource type="Script" uid="uid://b83omkj4aqsph" path="res://scenes/gameplay/start.gd" id="1_3j2p0"]
 [ext_resource type="PackedScene" uid="uid://cqeutlmjsnb1y" path="res://scenes/ui/ui_layer.tscn" id="2_ta6fi"]
+[ext_resource type="Texture2D" uid="uid://uhxgf5jhyvck" path="res://assets/images/backgrounds/20260519-172153.png" id="3_3j2p0"]
+[ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="4_lrrqo"]
+[ext_resource type="Texture2D" uid="uid://ce0dgmgs6dgrv" path="res://assets/images/backgrounds/wall_toilet_1.png" id="4_qmd80"]
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_dusiu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hv1rg"]
+size = Vector2(2000, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrrqo"]
 size = Vector2(29, 651)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q64rj"]
-size = Vector2(32, 652.5)
 
 [node name="Gameplay" type="Node"]
 script = ExtResource("1_3j2p0")
@@ -18,19 +21,30 @@ visible = false
 
 [node name="Background" type="StaticBody2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Background"]
-position = Vector2(2008, 1058)
-scale = Vector2(0.6, 0.6)
-centered = false
-offset = Vector2(-3346.67, -1763.33)
+[node name="WallBg" type="Sprite2D" parent="Background"]
+position = Vector2(776, 110)
+scale = Vector2(0.345, 0.345)
+texture = ExtResource("3_3j2p0")
 
-[node name="Wall" parent="Background" instance=ExtResource("5_dusiu")]
-position = Vector2(-0.5, 321.5)
+[node name="WallLeft" type="Sprite2D" parent="Background"]
+position = Vector2(71, 281)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_qmd80")
+
+[node name="FloorTile" type="TileMapLayer" parent="Background"]
+position = Vector2(0, -1)
+tile_map_data = PackedByteArray("AAAEAA4AAwAAAAMAAAADAA0AAwAAAAMAAAACAAwAAwAAAAMAAAABAAsAAwAAAAMAAAAAAAoAAwAAAAMAAAD//wkAAwAAAAMAAAD+/wgAAwAAAAMAAAD9/wcAAwAAAAMAAAD8/wcAAwAAAAMAAAD9/wgAAwAAAAMAAAD+/wkAAwAAAAMAAAD//woAAwAAAAMAAAAAAAsAAwAAAAMAAAABAAwAAwAAAAMAAAACAA0AAwAAAAMAAAADAA4AAwAAAAMAAAACAA4AAwAAAAMAAAABAA0AAwAAAAMAAAAAAAwAAwAAAAMAAAD//wsAAwAAAAMAAAD+/woAAwAAAAMAAAD9/wkAAwAAAAMAAAD8/wgAAwAAAAMAAAD7/wcAAwAAAAMAAAD6/wcAAwAAAAMAAAD7/wgAAwAAAAMAAAD8/wkAAwAAAAMAAAD9/woAAwAAAAMAAAD+/wsAAwAAAAMAAAD//wwAAwAAAAMAAAAAAA0AAwAAAAMAAAABAA4AAwAAAAMAAAAAAA4AAwAAAAMAAAD//w0AAwAAAAMAAAD+/wwAAwAAAAMAAAD9/wsAAwAAAAMAAAD8/woAAwAAAAMAAAD7/wkAAwAAAAMAAAD6/wgAAwAAAAMAAAD5/wcAAwAAAAMAAAD4/wcAAwAAAAMAAAD5/wgAAwAAAAMAAAD6/wkAAwAAAAMAAAD7/woAAwAAAAMAAAD8/wsAAwAAAAMAAAD9/wwAAwAAAAMAAAD+/w0AAwAAAAMAAAD//w4AAwAAAAMAAAD+/w4AAwAAAAMAAAD9/w0AAwAAAAMAAAD8/wwAAwAAAAMAAAD7/wsAAwAAAAMAAAD6/woAAwAAAAMAAAD5/wkAAwAAAAMAAAD4/wgAAwAAAAMAAAD3/wcAAwAAAAMAAAD//w8AAwAAAAMAAAAAAA8AAwAAAAMAAAABAA8AAwAAAAMAAAACAA8AAwAAAAMAAAADAA8AAwAAAAMAAAAEAA8AAwAAAAMAAAAFAA8AAwAAAAMAAAAGABAAAwAAAAMAAAAFABAAAwAAAAMAAAAEABAAAwAAAAMAAAADABAAAwAAAAMAAAACABAAAwAAAAMAAAABABAAAwAAAAMAAAAAABAAAwAAAAMAAAA=")
+tile_set = ExtResource("4_lrrqo")
+
+[node name="WallBgCollidor" parent="Background" instance=ExtResource("5_dusiu")]
+position = Vector2(1288, 236)
+shape = SubResource("RectangleShape2D_hv1rg")
+
+[node name="WallLeftCollidor" parent="Background" instance=ExtResource("5_dusiu")]
+position = Vector2(21, 398)
+rotation = 1.02974
 shape = SubResource("RectangleShape2D_lrrqo")
 
-[node name="Wall2" type="CollisionShape2D" parent="Background"]
-position = Vector2(1152, 323.25)
-shape = SubResource("RectangleShape2D_q64rj")
-
-[node name="Floor" parent="Background" instance=ExtResource("5_dusiu")]
-position = Vector2(575, 664)
+[node name="FloorCollidor" parent="Background" instance=ExtResource("5_dusiu")]
+position = Vector2(849, 658)
+shape = SubResource("RectangleShape2D_hv1rg")
