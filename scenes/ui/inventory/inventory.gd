@@ -1,8 +1,19 @@
 # inventory.gd
 extends GridContainer
 
+var slots : Array[Dictionary] = []
+
 func _ready() -> void:
+	add_to_group("Persist")
 	EventBus.slot_add_item.connect(func(id): add_item(id))
+
+func save_data() -> Dictionary:
+	return {
+		"slots": slots,
+	}
+	
+func load_data(data: Dictionary) -> void:
+	slots = data.get("slots", [])
 
 func add_item(id: String = "0"):
 	var item_info = ItemData.get_item_info(id)
@@ -16,6 +27,7 @@ func add_item(id: String = "0"):
 		return
 
 	item_info["TEXTURE"] = item_texture
+	slots.append(item_info)
 
 	for container in get_children():
 		var slot = container.get_node("Slot")

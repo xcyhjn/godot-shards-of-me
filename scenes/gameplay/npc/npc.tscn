@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx5v62wgfbtju"]
+
+[ext_resource type="Texture2D" uid="uid://bq5ktpimfjos8" path="res://assets/images/standing/ouyang_ye.png" id="1_22eyd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ca0r5"]
+radius = 292.233
+height = 1981.48
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ca0r5"]
+radius = 1981.6
+
+[node name="NPC" type="CharacterBody2D"]
+scale = Vector2(0.140299, 0.140299)
+
+[node name="OuyangYe" type="Sprite2D" parent="."]
+texture = ExtResource("1_22eyd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-42.7658, 42.7652)
+shape = SubResource("CapsuleShape2D_ca0r5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ca0r5")

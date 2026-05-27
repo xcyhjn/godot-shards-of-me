@@ -1,9 +1,6 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cfuw6cof4j2d5"]
-
-[ext_resource type="Texture2D" uid="uid://cemc8hqr86wkk" path="res://assets/images/tilesets/bg_walls_left.png" id="1_npakh"]
+[gd_resource type="TileSet" load_steps=2 format=3 uid="uid://cfuw6cof4j2d5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jy2c1"]
-texture = ExtResource("1_npakh")
 separation = Vector2i(2, 2)
 texture_region_size = Vector2i(172, 597)
 0:0/0 = 0

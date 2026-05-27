@@ -17,6 +17,24 @@
 &"nicknames": [""],
 &"offset": Vector2(0, 0),
 &"portraits": {
+"stage1": {
+"export_overrides": {
+"image": "\"res://assets/images/standing/ouyang_ye_s1.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"stage2": {
+"export_overrides": {
+"image": "\"res://assets/images/standing/ouyang_ye_s2.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
 "stand": {
 "export_overrides": {
 "image": "\"res://assets/images/standing/ouyang_ye.png\""

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqeutlmjsnb1y"]
+[gd_scene load_steps=8 format=3 uid="uid://cqeutlmjsnb1y"]
 
 [ext_resource type="PackedScene" uid="uid://barl4q1kugrmm" path="res://scenes/ui/pause-layer/pause_layer.tscn" id="1_d4ycy"]
 [ext_resource type="Script" uid="uid://cylibocnf58n3" path="res://scenes/ui/ui_layer.gd" id="1_jqcis"]
 [ext_resource type="PackedScene" uid="uid://baeum3fhwwyt" path="res://scenes/ui/item_layer/item_layer.tscn" id="2_jqcis"]
-[ext_resource type="Script" uid="uid://bankim6hkyhl3" path="res://scenes/ui/inventory/inventory.gd" id="3_3s0y6"]
 [ext_resource type="PackedScene" uid="uid://b2ev5qny3udrg" path="res://scenes/ui/screen_crack/mirror_shattered.tscn" id="4_3s0y6"]
-[ext_resource type="PackedScene" uid="uid://cwhohiysdcjqx" path="res://scenes/ui/inventory/slot.tscn" id="4_yg43r"]
+[ext_resource type="PackedScene" uid="uid://ch73mkuef18sa" path="res://scenes/ui/inventory/inventory.tscn" id="4_jqcis"]
 [ext_resource type="PackedScene" uid="uid://b1d5o0v0ws3f3" path="res://scenes/ui/clue_book/clue_book.tscn" id="5_42r3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4ycy"]
@@ -16,10 +15,6 @@ script = ExtResource("1_jqcis")
 
 [node name="PauseLayer" parent="." instance=ExtResource("1_d4ycy")]
 layer = 128
-visible = false
-
-[node name="ItemLayer" parent="." instance=ExtResource("2_jqcis")]
-visible = false
 
 [node name="mirror_shattered" parent="." instance=ExtResource("4_3s0y6")]
 
@@ -31,31 +26,11 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_d4ycy")
 text = "SAN: 100"
 
-[node name="Inventory" type="GridContainer" parent="."]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -102.0
-offset_top = -112.0
-offset_right = -38.0
-offset_bottom = 112.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-script = ExtResource("3_3s0y6")
-
-[node name="Slot" parent="Inventory" instance=ExtResource("4_yg43r")]
-layout_mode = 2
-
-[node name="Slot2" parent="Inventory" instance=ExtResource("4_yg43r")]
-layout_mode = 2
-
-[node name="Slot3" parent="Inventory" instance=ExtResource("4_yg43r")]
-layout_mode = 2
+[node name="Inventory" parent="." instance=ExtResource("4_jqcis")]
 
 [node name="ClueBook" parent="." instance=ExtResource("5_42r3o")]
+
+[node name="ItemLayer" parent="." instance=ExtResource("2_jqcis")]
+visible = false
 
 [editable path="mirror_shattered"]

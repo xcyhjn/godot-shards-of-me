@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dx51sjxiso1n2" path="res://scenes/ui/clue_book/clue.tscn" id="2_kwn8p"]
 [ext_resource type="Theme" uid="uid://ducfept6pmkkm" path="res://resources/theme/theme-main.tres" id="5_sehuf"]
 
-[node name="ClueBookLayer" type="Control"]
+[node name="ClueBookLayer" type="Control" groups=["Persist"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

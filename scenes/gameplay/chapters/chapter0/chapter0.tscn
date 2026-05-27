@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8dsm6bgluj20"]
+
+[ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_ryq6h"]
+[ext_resource type="Script" uid="uid://dl3bx7ff2043l" path="res://scenes/gameplay/chapters/chapter0/chapter0.gd" id="2_n0ouh"]
+[ext_resource type="AudioStream" uid="uid://cd4nyocp2fumc" path="res://assets/audios/BGM02-The Interior.wav" id="3_3ld52"]
+[ext_resource type="PackedScene" uid="uid://cx5v62wgfbtju" path="res://scenes/gameplay/npc/npc.tscn" id="6_m5geq"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_m5geq"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_3o3hw"]
+[ext_resource type="Script" uid="uid://bmuc4vr8o1xgx" path="res://scenes/gameplay/chapters/chapter0/chapter0_cutscene_director.gd" id="10_3o3hw"]
+
+[sub_resource type="Resource" id="Resource_gdk8v"]
+script = ExtResource("9_3o3hw")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="Resource" id="Resource_3ld52"]
+script = ExtResource("9_3o3hw")
+duration = 0.0
+transition = 0
+ease = 2
+
+[node name="Gameplay" instance=ExtResource("1_ryq6h")]
+script = ExtResource("2_n0ouh")
+bgm = ExtResource("3_3ld52")
+metadata/_edit_horizontal_guides_ = [648.0]
+
+[node name="NPC" parent="." index="2" instance=ExtResource("6_m5geq")]
+position = Vector2(275, 426)
+
+[node name="Cameras" type="Node2D" parent="." index="3"]
+
+[node name="PCam_Start" type="Node2D" parent="Cameras" index="0" groups=["Pcam"]]
+top_level = true
+position = Vector2(900, 503)
+script = ExtResource("8_m5geq")
+priority = 1
+follow_mode = 1
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_gdk8v")
+draw_limits = true
+limit_right = 1152
+limit_bottom = 640
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="PCam_Player" type="Node2D" parent="Cameras" index="1" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+visible = false
+top_level = true
+position = Vector2(422, 488)
+script = ExtResource("8_m5geq")
+follow_mode = 1
+follow_target = NodePath("../../Player")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_3ld52")
+draw_limits = true
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 648
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="CutsceneDirector" type="Node" parent="." index="4" node_paths=PackedStringArray("pcam_start", "pcam_player")]
+script = ExtResource("10_3o3hw")
+pcam_start = NodePath("../Cameras/PCam_Start")
+pcam_player = NodePath("../Cameras/PCam_Player")
+
+[editable path="KeyItem"]

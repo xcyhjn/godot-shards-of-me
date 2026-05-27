@@ -11,6 +11,7 @@ radius = 64.0
 script = ExtResource("1_cvxq6")
 
 [node name="Hint" parent="." instance=ExtResource("2_vo4tf")]
+visible = false
 offset_left = -10.0
 offset_top = -75.0
 offset_right = 30.0

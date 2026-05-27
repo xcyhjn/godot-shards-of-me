@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnri35hdjjolw"]
+
+[ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_3c76o"]
+[ext_resource type="Texture2D" uid="uid://dsv4wpr4uj3ac" path="res://assets/images/backgrounds/bg_toilet.png" id="2_tkyl2"]
+
+[node name="Gameplay" instance=ExtResource("1_3c76o")]
+
+[node name="WallBg" parent="Background" index="0"]
+texture = ExtResource("2_tkyl2")

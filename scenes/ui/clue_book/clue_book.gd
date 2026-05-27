@@ -14,10 +14,18 @@ var cur_page: int = 0
 @onready var next_button: Button = $ClueBook/NextPageBtn
 @onready var page_label: Label = $ClueBook/PageLabel
 
+func save_data() -> Dictionary:
+	return {
+		"cur_page": cur_page,
+	}
+	
+func load_data(data: Dictionary) -> void:
+	cur_page = data.get("cur_page", 0)
+
 func _ready() -> void:
+	add_to_group("Persist")
 	EventBus.clue_add_item.connect(on_clue_add_item)
 	EventBus.clue_update_book.connect(on_clue_update_book)
-	print(slots)
 	hide()
 	prev_button.hide()
 	next_button.hide()

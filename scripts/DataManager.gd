@@ -41,6 +41,7 @@ func load_persistent_data() -> bool:
 
 	# 加载项目自定义数据（game_data.txt）
 	var data_dict = Dialogic.Save.load_file(SLOT_NAME, DATA_FILE_NAME, {})
+	print(data_dict)
 	if typeof(data_dict) != TYPE_DICTIONARY:
 		push_error("[DataManager] 持久化数据格式无效，期望 Dictionary")
 		return false
@@ -55,7 +56,7 @@ func load_persistent_data() -> bool:
 		else:
 			push_error("[DataManager] 节点缺少 load_data 方法: ", node.name)
 
-	print("[DataManager] 持久化数据加载成功，slot: ", SLOT_NAME)
+	print("[DataManager] 对话数据加载成功，slot: ", SLOT_NAME)
 	return true
 
 

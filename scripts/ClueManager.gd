@@ -2,6 +2,17 @@ extends Node
 
 var collected_clues : Array[Dictionary] = []
 
+func _ready() -> void:
+	add_to_group("Persist")
+	
+func save_data() -> Dictionary:
+	return {
+		"collected_clues": collected_clues,
+	}
+	
+func load_data(data: Dictionary) -> void:
+	collected_clues = data.get("collected_clues", [])
+
 func clear_clues() -> void:
 	print("已清除！")
 	collected_clues.clear()
@@ -20,6 +31,10 @@ func add_clue(clue : Dictionary) -> void:
 	EventBus.clue_add_item.emit(clue)
 	EventBus.clue_update_book.emit()
 
+func remove_clue(clue : Dictionary) -> void:
+	print("尝试移除线索")
+	collected_clues.erase(clue)
+	EventBus.clue_update_book.emit()
 	
 func get_collected_clues() -> Array [Dictionary]:
 	return collected_clues

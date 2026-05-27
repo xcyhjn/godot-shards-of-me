@@ -5,6 +5,7 @@ extends Prop
 
 #func _ready() -> void:
 	#sprite.texture = load(ItemData.get_texture(item_id))
+	#sprite.scale = item_scale
 	#print(collision.shape)
 
 ## override 拾取物品

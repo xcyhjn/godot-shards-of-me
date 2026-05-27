@@ -83,16 +83,21 @@ func _fade_in(node: CanvasItem, duration: float) -> void:
 func _on_PlayButton_pressed() -> void:
 	var params = {
 		"show_progress_bar": true,
-		"a_number": 10,
-		"a_string": "Ciao!",
-		"an_array": [1, 2, 3, 4],
-		"a_dict": {
-			"name": "test",
-			"val": 15
-		},
+		#"a_number": 10,
+		#"a_string": "Ciao!",
+		#"an_array": [1, 2, 3, 4],
+		#"a_dict": {
+			#"name": "test",
+			#"val": 15
+		#},
 	}
 	Audio.stop_music()
 	Chapter.new_game()
+	# Data 内部会等待 Dialogic 就绪，所有持久化数据统一存放在 Dialogic 的 "process" slot
+	if await Data.load_persistent_data():
+		print("持久化数据加载成功！")
+	else:
+		print("持久化数据加载失败！")
 	GGT.change_scene("res://scenes/gameplay/start.tscn", params)
 
 

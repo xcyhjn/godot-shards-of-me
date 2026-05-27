@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch73mkuef18sa"]
+
+[ext_resource type="Script" uid="uid://bankim6hkyhl3" path="res://scenes/ui/inventory/inventory.gd" id="1_xce7s"]
+[ext_resource type="PackedScene" uid="uid://cwhohiysdcjqx" path="res://scenes/ui/inventory/slot.tscn" id="2_pefhr"]
+
+[node name="Inventory" type="GridContainer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -112.0
+offset_right = -38.0
+offset_bottom = 112.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+script = ExtResource("1_xce7s")
+
+[node name="Slot" parent="." instance=ExtResource("2_pefhr")]
+layout_mode = 2
+
+[node name="Slot2" parent="." instance=ExtResource("2_pefhr")]
+layout_mode = 2
+
+[node name="Slot3" parent="." instance=ExtResource("2_pefhr")]
+layout_mode = 2

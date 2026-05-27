@@ -1,21 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c33qmydbdmhad"]
+[gd_scene load_steps=6 format=3 uid="uid://c33qmydbdmhad"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_ydj0d"]
-[ext_resource type="PackedScene" uid="uid://ct4kg7pxbq8yi" path="res://scenes/ui/key_hint.tscn" id="2_u07r6"]
-[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="3_0i5y8"]
-[ext_resource type="Texture2D" uid="uid://bddvp4ybiqv6s" path="res://assets/images/backgrounds/secondary_bedroom.png" id="4_realo"]
-[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="6_mg068"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_0i5y8"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_realo"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lja2"]
-size = Vector2(444, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3adyw"]
-size = Vector2(605.5, 23)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrjrr"]
-size = Vector2(100.5, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5wmc"]
 size = Vector2(83.25, 432.25)
@@ -28,43 +15,15 @@ ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_ydj0d")]
 
-[node name="DoorHint" parent="UILayer" index="0" instance=ExtResource("2_u07r6")]
-offset_left = 1075.0
-offset_top = 369.0
-offset_right = 1115.0
-offset_bottom = 409.0
-
-[node name="Sprite2D" parent="Background" index="0"]
-texture = ExtResource("4_realo")
-
-[node name="BedFloor" parent="Background" index="4" instance=ExtResource("6_mg068")]
-position = Vector2(239, 454)
-shape = SubResource("RectangleShape2D_7lja2")
-
-[node name="FurnitureFloor" parent="Background" index="5" instance=ExtResource("6_mg068")]
-position = Vector2(763.25, 440)
-shape = SubResource("RectangleShape2D_3adyw")
-
-[node name="DoorFloor" parent="Background" index="6" instance=ExtResource("6_mg068")]
-position = Vector2(1119, 459)
-shape = SubResource("RectangleShape2D_mrjrr")
-
-[node name="Door" type="Area2D" parent="Background" index="7"]
-position = Vector2(-1, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Door" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Background/Door" index="0"]
 position = Vector2(1110.63, 431.875)
 shape = SubResource("RectangleShape2D_m5wmc")
 
-[node name="Player" parent="." index="3" instance=ExtResource("3_0i5y8")]
-position = Vector2(564, 568)
-scale = Vector2(2, 2)
-
-[node name="Cameras" type="Node2D" parent="." index="4"]
+[node name="Cameras" type="Node2D" parent="." index="3"]
 
 [node name="Pcam_start" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true
-position = Vector2(564, 568)
+position = Vector2(422, 488)
 script = ExtResource("7_0i5y8")
 priority = 1
 follow_mode = 1
@@ -78,7 +37,4 @@ limit_right = 1152
 limit_bottom = 648
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[connection signal="body_entered" from="Background/Door" to="." method="_on_door_body_entered"]
-[connection signal="body_entered" from="Background/Door" to="UILayer" method="_on_door_body_entered"]
-[connection signal="body_exited" from="Background/Door" to="." method="_on_door_body_exited"]
-[connection signal="body_exited" from="Background/Door" to="UILayer" method="_on_door_body_exited"]
+[editable path="KeyItem"]

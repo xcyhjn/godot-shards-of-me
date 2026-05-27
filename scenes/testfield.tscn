@@ -1,10 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://bont8u883w3b7"]
+[gd_scene load_steps=13 format=4 uid="uid://bont8u883w3b7"]
 
 [ext_resource type="PackedScene" uid="uid://cqeutlmjsnb1y" path="res://scenes/ui/ui_layer.tscn" id="1_iucpc"]
 [ext_resource type="TileSet" uid="uid://cfuw6cof4j2d5" path="res://assets/tilesets/left_walls.tres" id="1_w3o6b"]
-[ext_resource type="Texture2D" uid="uid://brkwb3pw80ss2" path="res://assets/images/tilesets/bg_floors.png" id="2_jy2c1"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_w3o6b"]
-[ext_resource type="Texture2D" uid="uid://d3m4nyephv25p" path="res://assets/images/tilesets/bg_floor_1.png" id="3_iunvb"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/door.tscn" id="4_iunvb"]
 [ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/props/item_template.tscn" id="9_a7aty"]
 [ext_resource type="Texture2D" uid="uid://bor7oxd1135fu" path="res://assets/images/items/key.png" id="10_cka07"]
@@ -12,7 +10,6 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="15_5ie2o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iunvb"]
-texture = ExtResource("2_jy2c1")
 texture_region_size = Vector2i(287, 199)
 0:0/0 = 0
 1:0/0 = 0
@@ -40,7 +37,6 @@ texture_region_size = Vector2i(287, 199)
 0:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e5v8k"]
-texture = ExtResource("3_iunvb")
 texture_region_size = Vector2i(1024, 168)
 0:2/0 = 0
 
@@ -75,7 +71,6 @@ tile_set = SubResource("TileSet_e5v8k")
 
 [node name="BgFloor1" type="Sprite2D" parent="Background"]
 position = Vector2(315, -121)
-texture = ExtResource("3_iunvb")
 
 [node name="Door" parent="." instance=ExtResource("4_iunvb")]
 position = Vector2(-28, -9)

@@ -2,14 +2,14 @@
 class_name Prop
 extends StaticBody2D
 
+## 在范围内是否能互动
+@export var can_interact : bool = false
+## 是否一次性互动
+@export var oneshot : bool = true
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var collision : CollisionShape2D = $CollisionShape2D
 @onready var detection : Area2D = $Detection
 @onready var hint : Panel = $Hint
-## 在范围内是否能互动
-var can_interact : bool = false
-## 是否一次性互动
-var oneshot : bool = true
 	
 ## 虚函数 [br]
 ## 定义物品互动行为
@@ -17,7 +17,10 @@ func handle_interact():
 	pass
 
 func _ready() -> void:
-	pass
+	if can_interact:
+		hint.show()
+	else:
+		hint.hide()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("互动") and can_interact:

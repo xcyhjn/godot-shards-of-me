@@ -8,6 +8,8 @@ size = Vector2(40, 80)
 
 [node name="Door" instance=ExtResource("1_5e0ln")]
 script = ExtResource("1_yepiq")
+can_interact = true
+oneshot = false
 
 [node name="Hint" parent="." index="0"]
 physics_interpolation_mode = 0
@@ -16,6 +18,7 @@ physics_interpolation_mode = 0
 rotation = -0.523599
 scale = Vector2(0.5, 1)
 skew = 0.523599
+texture = null
 
 [node name="CollisionShape2D" parent="." index="2"]
 rotation = -0.523599

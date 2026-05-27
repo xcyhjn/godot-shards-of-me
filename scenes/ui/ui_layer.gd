@@ -1,9 +1,11 @@
 extends CanvasLayer
 
-@onready var san_label : Label = $San
 @onready var pause_layer : CanvasLayer = $PauseLayer
+@onready var item_layer : CanvasLayer = $ItemLayer
+@onready var san_label : Label = $San
 
-func _rey() -> void:
+func _ready() -> void:
+	item_layer.hide()
 	pause_layer.show()
 	show()
 	san_label.text = "SAN:" + str(Chapter.san)

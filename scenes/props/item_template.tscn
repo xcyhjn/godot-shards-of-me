@@ -10,3 +10,5 @@ detection_range = 64
 
 [node name="Hint" parent="." index="0"]
 physics_interpolation_mode = 0
+visible = true
+scale = Vector2(1, 1)
