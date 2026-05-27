@@ -1,66 +1,62 @@
 label test
 if {chapter0.cutin_played} == false:
-	join ouyang_ye center [animation="Bounce In"]
+	join ouyang_ye center
 	ouyang_ye: 你好
 	do GameManager.lock_player_control(true)
 	ouyang_ye: 你叫什么名字
 	[text_input text="输入名字" var="chapter0.test_str" placeholder="baka"]
+	[wait_input]
 	ouyang_ye: 好的{chapter0.test_str}
+	leave ouyang_ye
 	do GameManager.lock_player_control(false)
 	set {chapter0.cutin_played} = true
+
+# 看向窗外
+label cut_in
+[background arg="res://assets/images/cg/cg_bird_1.png" fade="1.0" wait="true"]
+一只鸟飞过窗外
+[clear time="1.0" portraits="false" music="false" background="false" positions="false" style="false"]
+[background arg="res://assets/images/cg/cg_bird_2.png" fade="1.0" wait="true"]
+[background arg="res://assets/images/cg/cg_bird_3.png" fade="1.0" wait="true"]
+[background arg="res://assets/images/cg/cg_bird_1.png" fade="1.0" wait="true"]
+[wait_input]
+[background arg="res://assets/images/cg/bg_bird_4.png" fade="1.0"]
+[wait time="0.8"]
+audio "res://assets/audios/mirror_shattered.mp3"
+（进入里世界）
+
+
 label diag1
 join ouyang_ye left [animation="Bounce In"]
 ouyang_ye: 还好么？
 join ye_li right [animation="Bounce In"]
-li: *叹气*
-li: 有点想吐
+ye_li: *叹气*
+ye_li: 有点想吐
 ouyang_ye: 缓缓
-li: 嗯……
+ye_li: 嗯……
 [wait time="1.0"]
-li: ……去趟厕所
+ye_li: ……去趟厕所
 ouyang_ye: 好，等你
 
-# #以下是伪代码 待补充
-# #刚进入里世界（自动触发独白）
-# #li: 又是这里……世界彻底安静了。
-# #li: 必须快点找到“镜子”离开……
-# #
-# #拿到密码纸条时
-# #li: 是一张画着奇怪连线的密码纸条……先收起来吧。
-# #system_notice: 按下 'C' 键可随时打开线索书查看已收集的提示。
-# #
-# #幕间：回到表世界
-# #欧阳夜走过来
-# #ouyang_ye: 还好么？
-# #li: （轻轻摇头）……
-# #li: 叹气
-# #li: 有点想吐
-# #ouyang_ye: 缓缓
-# #li: 嗯……
-# #li: ……去趟厕所
-# #ouyang_ye: 好，等你
-# #
-# #第一章：厕所
-# #进入厕所（自动触发自言自语）
-# #li: 呼
-# #li: 操……
-# #li: （使劲地摇了摇头）又来……
-# #li: ……洗个脸吧。
-# #
-# #未洗脸时尝试离开厕所（出门判定）
-# #第一次：
-# #li: 是不是忘了什么……
-# #第二次：
-# #li: 想起来了，我该先洗个脸。
-# #第三次及以后：
-# #li: ……
-# #
-# #互动洗手台（洗脸）
-# #第一次（正式洗脸）：
-# #li: 拿东西回家吧…
-# #第二次互动：
-# #li: 没必要再来一次。
-# #第三次互动：
-# #li: 该走了。
-# #第四次及以后：
-# #li: ……
+label diag2
+ye_li: *呼*
+ye_li: 操
+ye_li: （使劲摇头）又来……
+ye_li: （抬头看向镜子）（停顿）【注意此时镜子里的形象是模糊的，实际上里面是 san 值对应的里世界差分】
+ye_li: 洗个脸吧
+
+label exit_toilet
+ouyang_ye: 是不是忘了什么
+ouyang_ye: 想起来了，我该先洗个脸
+ouyang_ye: ……
+
+label wash_face
+ouyang_ye: 拿东西回家吧
+# 解锁：和镜子互动
+
+label mirror
+# 和镜子互动会切换表里世界
+# 互动切换为：照镜子
+ouyang_ye: 没必要再来一次
+ouyang_ye: 该走了
+ouyang_ye: ……

@@ -1,158 +1,166 @@
-[gd_scene load_steps=12 format=4 uid="uid://c11aeo68c0pr3"]
+[gd_scene load_steps=19 format=4 uid="uid://c11aeo68c0pr3"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_n7xi8"]
-[ext_resource type="Texture2D" uid="uid://nk6168nayrp8" path="res://assets/images/backgrounds/wall_hallway_1.png" id="2_mr026"]
+[ext_resource type="Texture2D" uid="uid://bn0wy5ojpam33" path="res://assets/images/backgrounds/background_classroom.png" id="2_uuyw7"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_w5jnu"]
 [ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/prop_desk.tscn" id="4_desk"]
+[ext_resource type="Texture2D" uid="uid://c1yiew8064ds" path="res://assets/images/backgrounds/background_classroom_2.png" id="4_qver1"]
+[ext_resource type="Texture2D" uid="uid://kuyi2mw37yq8" path="res://assets/images/backgrounds/background_classroom_pillar.png" id="4_uuyw7"]
 [ext_resource type="Texture2D" uid="uid://bq5ktpimfjos8" path="res://assets/images/standing/ouyang_ye.png" id="5_45hu4"]
+[ext_resource type="Texture2D" uid="uid://bi4rkujoycfl0" path="res://assets/images/backgrounds/wall_classroom_1.png" id="5_883eu"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_pcam"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_tween"]
-[ext_resource type="Script" uid="uid://cyttub33ce57m" path="res://scenes/gameplay/chapters/chapter0/chapter0_classroom_cutscene_director.gd" id="7_director"]
+[ext_resource type="Texture2D" uid="uid://ypj8qx7hgw7n" path="res://assets/images/items/desk_2.png" id="7_883eu"]
+[ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="8_xttbp"]
+[ext_resource type="PackedScene" uid="uid://caikehdgduskc" path="res://scenes/props/prop_paper.tscn" id="10_umphd"]
+[ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/props/item_template.tscn" id="14_hcnid"]
+[ext_resource type="Texture2D" uid="uid://bor7oxd1135fu" path="res://assets/images/items/key.png" id="15_5sjpr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymh7"]
 size = Vector2(50, 80)
 
-[sub_resource type="Resource" id="Resource_pcam_soft"]
+[sub_resource type="Resource" id="Resource_fqp1u"]
 script = ExtResource("6_tween")
-duration = 0.6
+duration = 1.0
 transition = 0
 ease = 2
 
-[sub_resource type="Resource" id="Resource_pcam_instant"]
-script = ExtResource("6_tween")
-duration = 0.0
-transition = 0
-ease = 2
+[sub_resource type="Environment" id="Environment_umphd"]
 
-[node name="Gameplay2" instance=ExtResource("1_n7xi8")]
+[node name="Gameplay" instance=ExtResource("1_n7xi8")]
 
-[node name="WallLeft" parent="Background" index="1"]
-texture = ExtResource("2_mr026")
+[node name="FloorTile" parent="Background" index="0"]
+position = Vector2(2, -3)
+tile_map_data = PackedByteArray("AAAEAA4AAwAAAAQAAAADAA0AAwAAAAQAAAACAAwAAwAAAAQAAAABAAsAAwAAAAQAAAAAAAoAAwAAAAQAAAD//wkAAwAAAAQAAAD+/wgAAwAAAAQAAAD9/wcAAwAAAAQAAAD8/wcAAwAAAAQAAAD9/wgAAwAAAAQAAAD+/wkAAwAAAAQAAAD//woAAwAAAAQAAAAAAAsAAwAAAAQAAAABAAwAAwAAAAQAAAACAA0AAwAAAAQAAAADAA4AAwAAAAQAAAACAA4AAwAAAAQAAAABAA0AAwAAAAQAAAAAAAwAAwAAAAQAAAD//wsAAwAAAAQAAAD+/woAAwAAAAQAAAD9/wkAAwAAAAQAAAD8/wgAAwAAAAQAAAD7/wcAAwAAAAQAAAD6/wcAAwAAAAQAAAD7/wgAAwAAAAQAAAD8/wkAAwAAAAQAAAD9/woAAwAAAAQAAAD+/wsAAwAAAAQAAAD//wwAAwAAAAQAAAAAAA0AAwAAAAQAAAABAA4AAwAAAAQAAAAAAA4AAwAAAAQAAAD//w0AAwAAAAQAAAD+/wwAAwAAAAQAAAD9/wsAAwAAAAQAAAD8/woAAwAAAAQAAAD7/wkAAwAAAAQAAAD6/wgAAwAAAAQAAAD5/wcAAwAAAAQAAAD4/wcAAwAAAAQAAAD5/wgAAwAAAAQAAAD6/wkAAwAAAAQAAAD7/woAAwAAAAQAAAD8/wsAAwAAAAQAAAD9/wwAAwAAAAQAAAD+/w0AAwAAAAQAAAD//w4AAwAAAAQAAAD+/w4AAwAAAAQAAAD9/w0AAwAAAAQAAAD8/wwAAwAAAAQAAAD7/wsAAwAAAAQAAAD6/woAAwAAAAQAAAD5/wkAAwAAAAQAAAD4/wgAAwAAAAQAAAD3/wcAAwAAAAQAAAD//w8AAwAAAAQAAAAAAA8AAwAAAAQAAAABAA8AAwAAAAQAAAACAA8AAwAAAAQAAAADAA8AAwAAAAQAAAAEAA8AAwAAAAQAAAAFAA8AAwAAAAQAAAAGABAAAwAAAAQAAAAFABAAAwAAAAQAAAAEABAAAwAAAAQAAAADABAAAwAAAAQAAAACABAAAwAAAAQAAAABABAAAwAAAAQAAAAAABAAAwAAAAQAAAAGABEAAwAAAAQAAAAFABEAAwAAAAQAAAAEABEAAwAAAAQAAAADABEAAwAAAAQAAAACABEAAwAAAAQAAAABABEAAwAAAAQAAAAHABEAAwAAAAQAAAACABIAAwAAAAQAAAADABIAAwAAAAQAAAAEABIAAwAAAAQAAAAFABIAAwAAAAQAAAAGABIAAwAAAAQAAAAHABIAAwAAAAQAAAAIABIAAwAAAAQAAAD4/wYAAwAAAAQAAAD3/wYAAwAAAAQAAAD2/wYAAwAAAAQAAAA=")
 
-[node name="FloorTile" parent="Background" index="2"]
-tile_map_data = PackedByteArray("AAAEAA4AAwAAAAQAAAADAA0AAwAAAAQAAAACAAwAAwAAAAQAAAABAAsAAwAAAAQAAAAAAAoAAwAAAAQAAAD//wkAAwAAAAQAAAD+/wgAAwAAAAQAAAD9/wcAAwAAAAQAAAD8/wcAAwAAAAQAAAD9/wgAAwAAAAQAAAD+/wkAAwAAAAQAAAD//woAAwAAAAQAAAAAAAsAAwAAAAQAAAABAAwAAwAAAAQAAAACAA0AAwAAAAQAAAADAA4AAwAAAAQAAAACAA4AAwAAAAQAAAABAA0AAwAAAAQAAAAAAAwAAwAAAAQAAAD//wsAAwAAAAQAAAD+/woAAwAAAAQAAAD9/wkAAwAAAAQAAAD8/wgAAwAAAAQAAAD7/wcAAwAAAAQAAAD6/wcAAwAAAAQAAAD7/wgAAwAAAAQAAAD8/wkAAwAAAAQAAAD9/woAAwAAAAQAAAD+/wsAAwAAAAQAAAD//wwAAwAAAAQAAAAAAA0AAwAAAAQAAAABAA4AAwAAAAQAAAD9/wwAAwAAAAQAAAD+/w0AAwAAAAQAAAD//w4AAwAAAAQAAAACAA8AAwAAAAQAAAADAA8AAwAAAAQAAAAEAA8AAwAAAAQAAAAFAA8AAwAAAAQAAAAGABAAAwAAAAQAAAAFABAAAwAAAAQAAAAEABAAAwAAAAQAAAADABAAAwAAAAQAAAD3/wcAAwAAAAQAAAD4/wcAAwAAAAQAAAD5/wgAAwAAAAQAAAD6/wkAAwAAAAQAAAD7/woAAwAAAAQAAAD8/wsAAwAAAAQAAAD7/wsAAwAAAAQAAAD6/woAAwAAAAQAAAD5/wkAAwAAAAQAAAD4/wgAAwAAAAQAAAD5/wcAAwAAAAQAAAD6/wgAAwAAAAQAAAD7/wkAAwAAAAQAAAD8/woAAwAAAAQAAAD9/wsAAwAAAAQAAAD+/wwAAwAAAAQAAAD//w0AAwAAAAQAAAAAAA4AAwAAAAQAAAABAA8AAwAAAAQAAAACABAAAwAAAAQAAAABABAAAwAAAAQAAAAAAA8AAwAAAAQAAAD8/wwAAwAAAAQAAAD+/w4AAwAAAAQAAAD//w8AAwAAAAQAAAAAABAAAwAAAAQAAAD9/w0AAwAAAAQAAAD6/wYAAwAAAAQAAAA=")
+[node name="WallBg" parent="Background" index="1"]
+position = Vector2(560, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_uuyw7")
 
-[node name="BgFloor1Extend" type="Sprite2D" parent="Background" index="4"]
-position = Vector2(489, 297)
-scale = Vector2(1, 1.47856)
+[node name="WallBg2" type="Sprite2D" parent="Background" index="2"]
+position = Vector2(884, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_uuyw7")
+
+[node name="WallBg3" type="Sprite2D" parent="Background" index="3"]
+position = Vector2(1208, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_uuyw7")
+
+[node name="WallBg4" type="Sprite2D" parent="Background" index="4"]
+position = Vector2(1748, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_qver1")
+
+[node name="WallLeft" parent="Background" index="5"]
+position = Vector2(133, 323)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_883eu")
+
+[node name="WallLeft2" type="Sprite2D" parent="Background" index="6"]
+position = Vector2(-1, 400)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_883eu")
+
+[node name="WallLeftCollidor" parent="Background" index="8"]
+position = Vector2(21, 397)
 
 [node name="Sortables" type="Node2D" parent="." index="2"]
 y_sort_enabled = true
 
-[node name="Player" parent="Sortables" index="0" instance=ExtResource("2_w5jnu")]
+[node name="Desks" type="Node2D" parent="Sortables" index="0"]
 y_sort_enabled = true
-position = Vector2(519, 471)
+position = Vector2(132, -29)
 
-[node name="Desk" type="Node2D" parent="Sortables" index="1"]
-y_sort_enabled = true
-
-[node name="Desk01" parent="Sortables/Desk" index="0" instance=ExtResource("4_desk")]
+[node name="Desk01" parent="Sortables/Desks" index="0" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(556, 539)
 
-[node name="Desk02" parent="Sortables/Desk" index="1" instance=ExtResource("4_desk")]
+[node name="Desk02" parent="Sortables/Desks" index="1" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(838, 659)
 
-[node name="Desk06" parent="Sortables/Desk" index="2" instance=ExtResource("4_desk")]
+[node name="Desk06" parent="Sortables/Desks" index="2" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(345, 537)
 
-[node name="Desk07" parent="Sortables/Desk" index="3" instance=ExtResource("4_desk")]
+[node name="Sprite2D" parent="Sortables/Desks/Desk06" index="0"]
+texture = ExtResource("7_883eu")
+
+[node name="Desk07" parent="Sortables/Desks" index="3" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(629, 660)
 
-[node name="Desk11" parent="Sortables/Desk" index="4" instance=ExtResource("4_desk")]
+[node name="Desk11" parent="Sortables/Desks" index="4" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(208, 663)
 
-[node name="Desk12" parent="Sortables/Desk" index="5" instance=ExtResource("4_desk")]
+[node name="Desk12" parent="Sortables/Desks" index="5" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(419, 662)
 
-[node name="Desk13" parent="Sortables/Desk" index="6" instance=ExtResource("4_desk")]
+[node name="Desk13" parent="Sortables/Desks" index="6" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(757, 541)
 
-[node name="Desk14" parent="Sortables/Desk" index="7" instance=ExtResource("4_desk")]
+[node name="Desk14" parent="Sortables/Desks" index="7" instance=ExtResource("4_desk")]
 y_sort_enabled = true
 position = Vector2(963, 540)
 
-[node name="npc1" type="CharacterBody2D" parent="Sortables" index="2"]
-position = Vector2(962, 478)
+[node name="Papers" type="Node2D" parent="Sortables" index="1"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Sortables/npc1" index="0"]
+[node name="PaperProp" parent="Sortables/Papers" index="0" instance=ExtResource("10_umphd")]
+position = Vector2(561, 421)
+
+[node name="PaperProp2" parent="Sortables/Papers" index="1" instance=ExtResource("10_umphd")]
+position = Vector2(178, 575)
+
+[node name="PaperProp3" parent="Sortables/Papers" index="2" instance=ExtResource("10_umphd")]
+position = Vector2(1330, 455)
+
+[node name="Player" parent="Sortables" index="2" instance=ExtResource("2_w5jnu")]
+position = Vector2(246, 476)
+scale = Vector2(1.5, 1.5)
+
+[node name="NPC1" type="CharacterBody2D" parent="Sortables" index="3"]
+position = Vector2(1244, 463)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sortables/NPC1" index="0"]
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("5_45hu4")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sortables/npc1" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sortables/NPC1" index="1"]
 shape = SubResource("RectangleShape2D_cymh7")
 metadata/_edit_lock_ = true
 
-[node name="CameraTargets" type="Node2D" parent="." index="3"]
+[node name="Door" parent="." index="3" instance=ExtResource("8_xttbp")]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(1155, 538)
 
-[node name="NPC1" type="Marker2D" parent="CameraTargets" index="0"]
-position = Vector2(963, 489)
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 
-[node name="PlayerReveal" type="Marker2D" parent="CameraTargets" index="1"]
-position = Vector2(517, 470)
-
-[node name="Cameras" type="Node2D" parent="." index="4"]
-
-[node name="PCam_Player" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["PCam", "Pcam"]]
+[node name="PhantomCamera2D" type="Node2D" parent="Camera2D" index="0" node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(519, 471)
+position = Vector2(246, 476)
 script = ExtResource("5_pcam")
-priority = 1
-follow_mode = 1
-follow_target = NodePath("../../Sortables/Player")
-zoom = Vector2(1.5, 1.5)
-tween_resource = SubResource("Resource_pcam_soft")
-draw_limits = true
-limit_left = 0
-limit_top = 0
-limit_right = 1152
-limit_bottom = 648
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="PCam_IntroPan" type="Node2D" parent="Cameras" index="1" node_paths=PackedStringArray("follow_target") groups=["PCam", "Pcam"]]
-top_level = true
-position = Vector2(963, 489)
-script = ExtResource("5_pcam")
-priority = 30
 follow_mode = 2
-follow_target = NodePath("../../CameraTargets/NPC1")
-zoom = Vector2(1.5, 1.5)
-tween_resource = SubResource("Resource_pcam_soft")
-draw_limits = true
-limit_left = 0
-limit_top = 0
-limit_right = 1152
-limit_bottom = 648
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="PCam_PlayerZoom" type="Node2D" parent="Cameras" index="2" node_paths=PackedStringArray("follow_target") groups=["PCam", "Pcam"]]
-top_level = true
-position = Vector2(519, 471)
-script = ExtResource("5_pcam")
-follow_mode = 1
 follow_target = NodePath("../../Sortables/Player")
-zoom = Vector2(1.5, 1.5)
-tween_resource = SubResource("Resource_pcam_instant")
+tween_resource = SubResource("Resource_fqp1u")
 draw_limits = true
-limit_left = 0
-limit_top = 0
-limit_right = 1152
-limit_bottom = 648
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="CutsceneDirector" type="Node" parent="." index="5" node_paths=PackedStringArray("pcam_player", "pcam_intro_pan", "pcam_player_zoom", "native_camera", "npc1", "player", "player_reveal_target")]
-script = ExtResource("7_director")
-pcam_player = NodePath("../Cameras/PCam_Player")
-pcam_intro_pan = NodePath("../Cameras/PCam_IntroPan")
-pcam_player_zoom = NodePath("../Cameras/PCam_PlayerZoom")
-native_camera = NodePath("../Sortables/Player/Camera2D")
-npc1 = NodePath("../CameraTargets/NPC1")
-player = NodePath("../Sortables/Player")
-player_reveal_target = NodePath("../CameraTargets/PlayerReveal")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="5"]
+environment = SubResource("Environment_umphd")
+
+[node name="ItemProp" parent="." index="6" instance=ExtResource("14_hcnid")]
+position = Vector2(590, 494)
+
+[node name="Sprite2D" parent="ItemProp" index="1"]
+rotation = -1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("15_5sjpr")
+
+[editable path="Sortables/Desks/Desk06"]
+[editable path="ItemProp"]

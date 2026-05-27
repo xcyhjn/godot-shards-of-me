@@ -1,4 +1,5 @@
 # clue.gd
+# 线索书里单个线索槽位 — 纯渲染层：拿到 id → 用 ItemData 查信息显示。
 extends Panel
 
 @onready var clue_image: TextureRect = $ClueImage
@@ -9,28 +10,38 @@ extends Panel
 @onready var inspect_btn: Button = $ActionMenu/InspectBtn
 @onready var slot_btn: Button = $ActionMenu/SlotBtn
 
-var clue_data: Dictionary = {}
+## 当前槽位绑定的物品 id（"" 表示空槽）
+var item_id : String = ""
 
 func _ready() -> void:
 	action_menu.hide()
 
-func set_clue(clue: Dictionary) -> void:
-	clue_data = clue.duplicate()
-	info.show()
+## 用 id 填充：从 ItemData 查信息
+func set_clue_id(id : String) -> void:
+	item_id = id
 	action_menu.hide()
-	clue_image.texture = load(clue.get("texture_path", ""))
-	title_label.text = clue.get("name", "")
-	desc_label.text = clue.get("description", "")
+	if id == "":
+		set_empty()
+		return
+	var info_dict : Dictionary = ItemData.get_item_info(id)
+	if info_dict.is_empty():
+		set_empty()
+		return
+	info.show()
+	var tex_path : String = info_dict.get("texture_path", "")
+	clue_image.texture = load(tex_path) if tex_path != "" else null
+	title_label.text = info_dict.get("name", "")
+	desc_label.text = info_dict.get("description", "")
 
 func set_empty() -> void:
-	clue_data = {}
+	item_id = ""
 	title_label.text = ""
 	desc_label.text = ""
 	clue_image.texture = null
-	
+
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if clue_data.is_empty():
+		if item_id == "":
 			return
 		if action_menu.visible:
 			action_menu.hide()
@@ -40,18 +51,16 @@ func _gui_input(event: InputEvent) -> void:
 			info.hide()
 
 func _on_inspect_btn_pressed() -> void:
-	print("仔细查看: ", clue_data)
+	print("仔细查看: ", item_id)
 	action_menu.hide()
 	info.show()
-	EventBus.clue_inspect_item.emit(clue_data.get("id", ""))
-	
+	EventBus.clue_inspect_item.emit(item_id)
 
+## "拿到手上"：把线索转移到物品栏
 func _on_slot_btn_pressed() -> void:
-	var item_id: String = clue_data.get("id", "")
-	if item_id != "":
-		action_menu.hide()
-		set_empty()
-		EventBus.slot_add_item.emit(item_id)
-	else:
-		push_warning("Clue: 该线索未关联 id，无法放入快捷栏")
-		
+	if item_id == "":
+		push_warning("Clue: 空槽位，无法转移")
+		return
+	action_menu.hide()
+	ClueManager.move_clues_to_inventory(item_id)
+	# 视图会通过 clue_update_book 信号自动刷新

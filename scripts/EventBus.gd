@@ -16,8 +16,9 @@ extends Node
 # 控制信号
 signal player_control_lock(stat : bool)
 
-# 快捷栏信号
+# 快捷栏 / 物品栏信号
 signal slot_add_item(id : String)
+signal inventory_update()
 
 # 储存信号
 signal storage_load_data(data: Dictionary)
@@ -25,7 +26,7 @@ signal storage_save_data(data: Dictionary)
 signal storage_clear_data(data: Dictionary)
 
 # 线索信号
-signal clue_add_item(clue: Dictionary)
+signal clue_add_item(item_id : String)
 signal clue_update_book()
 signal clue_inspect_item(id : String)
 

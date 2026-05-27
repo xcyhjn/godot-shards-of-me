@@ -3,13 +3,11 @@ extends Prop
 @export var item_id : String = "0"
 @export var detection_range : int = 64
 
-#func _ready() -> void:
-	#sprite.texture = load(ItemData.get_texture(item_id))
-	#sprite.scale = item_scale
-	#print(collision.shape)
-
-## override 拾取物品
+## override 拾取物品 → 进物品栏
 func handle_interact():
-	ClueManager.add_clue(ItemData.get_item_info(item_id))
+	if item_id == "":
+		push_warning("[item_template] item_id 为空")
+		queue_free()
+		return
+	ClueManager.add_clue(item_id)
 	queue_free()
-		

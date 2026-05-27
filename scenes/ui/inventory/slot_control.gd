@@ -24,8 +24,13 @@ func _on_slot_gui_input(event: InputEvent) -> void:
 
 func _on_use_btn_pressed() -> void:
 	action_menu.hide()
-	
+	# TODO: 消耗品/工具的"使用"逻辑
+
+## "放回书中"：把当前 slot 的 id 从物品栏转回线索书
 func _on_clue_book_btn_pressed() -> void:
 	action_menu.hide()
-	slot.clear_item()
-	ClueManager.add_clue(slot.item_info)
+	var id : String = slot.item_id
+	if id == "":
+		return
+	ClueManager.move_inventory_to_clues(id)
+	# 物品栏视图会通过 EventBus.inventory_update 自动刷新，无需手动 clear_item

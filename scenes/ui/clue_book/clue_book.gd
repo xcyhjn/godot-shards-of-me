@@ -18,7 +18,7 @@ func save_data() -> Dictionary:
 	return {
 		"cur_page": cur_page,
 	}
-	
+
 func load_data(data: Dictionary) -> void:
 	cur_page = data.get("cur_page", 0)
 
@@ -34,57 +34,36 @@ func _unhandled_input(event):
 	if event.is_action_pressed("打开线索"):
 		if not visible:
 			show()
+			refresh_page()
 			get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("pause"):
 		if visible:
 			hide()
 			get_viewport().set_input_as_handled()
 
-func on_clue_add_item(_clue)->void:
+func on_clue_add_item(_id : String) -> void:
 	return
 
-func on_clue_update_book()->void:
+func on_clue_update_book() -> void:
 	refresh_page()
-	return
 
-func refresh_page()->void:
-	var clues: Array[Dictionary] = ClueManager.get_collected_clues()
-	var total_pages: int = get_total_pages(clues.size())
-	print("刷新线索书页面")
-	print("当前线索数量：", clues.size())
+func refresh_page() -> void:
+	var ids : Array[String] = ClueManager.get_clues()
+	var total_pages : int = get_total_pages(ids.size())
 	cur_page = clampi(cur_page, 0, total_pages - 1)
-	print("======== 当前页线索 ========")
-	print("当前页：", cur_page + 1)
+	print("[ClueBook] 刷新 第%d/%d页 共%d条" % [cur_page + 1, total_pages, ids.size()])
 
-	
-	var start_index: int = cur_page * CLUES_PER_PAGE
-	for i: int in range(CLUES_PER_PAGE):
-		var clue_index: int = start_index + i
-
-		if clue_index < clues.size():
-			var clue: Dictionary = clues[clue_index]
-			print(
-				"槽位 ", i + 1,
-				" | 索引 ", clue_index,
-				" | 标题：", clue.get("title", "无标题"),
-				" | ID：", clue.get("id", "无ID")
-			)
-		else:
-			print("槽位 ", i + 1, " | 空")
-
-	for i: int in range(CLUES_PER_PAGE):
-		var clue_index: int = start_index + i
-
-		if clue_index < clues.size():
-			slots[i].set_clue(clues[clue_index])
+	var start_index : int = cur_page * CLUES_PER_PAGE
+	for i in range(CLUES_PER_PAGE):
+		var idx : int = start_index + i
+		if idx < ids.size():
+			slots[i].set_clue_id(ids[idx])
 		else:
 			slots[i].set_empty()
 
 	page_label.text = "%d / %d" % [cur_page + 1, total_pages]
-
 	prev_button.visible = cur_page > 0
 	next_button.visible = cur_page < total_pages - 1
-	return
 
 func get_total_pages(clue_count: int) -> int:
 	return max(1, ceili(clue_count / float(CLUES_PER_PAGE)))
@@ -94,21 +73,15 @@ func _on_prev_page_btn_pressed() -> void:
 	refresh_page()
 
 func _on_next_page_btn_pressed() -> void:
-	cur_page+=1
+	cur_page += 1
 	refresh_page()
-	
+
 func _on_exit_page_btn_pressed() -> void:
 	hide()
 
+## 测试按钮：用 items.json 里的 id 当作线索（如 "3" 是药）
 func _on_button_pressed() -> void:
-	# 添加clue时模板如下
-	ClueManager.add_clue({
-			"id": "test_clue_" + str(Time.get_ticks_msec()), # 内部id
-			"item_id": "3", # 关联到 ItemData 的物品 id（如 "3" 是可消耗的药）
-			"title": "测试线索", # 小标题
-			"description": "这是一条测试用线索，用来检查线索书是否能正常新增和翻页。", # 下方描述
-			"texture_path": "" # 图片资源路径，留空则不显示
-		})
+	ClueManager.add_clue("3")
 
 func _on_debug_pressed() -> void:
 	ClueManager.clear_clues()

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d4ll0113bcpd3" path="res://assets/images/items/desk_1.png" id="1_desk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_desk"]
-size = Vector2(100, 47)
+size = Vector2(100, 19)
 
 [node name="DeskProp" type="StaticBody2D"]
 
@@ -14,5 +14,5 @@ texture = ExtResource("1_desk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(-1, -79.5)
+position = Vector2(-1, -71.5)
 shape = SubResource("RectangleShape2D_desk")
