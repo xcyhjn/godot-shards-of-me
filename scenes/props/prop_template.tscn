@@ -12,11 +12,10 @@ script = ExtResource("1_cvxq6")
 
 [node name="Hint" parent="." instance=ExtResource("2_vo4tf")]
 visible = false
-offset_left = -10.0
+offset_left = -20.0
 offset_top = -75.0
-offset_right = 30.0
+offset_right = 20.0
 offset_bottom = -35.0
-scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_xkotg")

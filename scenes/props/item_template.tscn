@@ -7,8 +7,8 @@
 script = ExtResource("2_jvfsw")
 item_id = "0"
 detection_range = 64
+can_interact = true
 
 [node name="Hint" parent="." index="0"]
 physics_interpolation_mode = 0
-visible = true
-scale = Vector2(1, 1)
+visible = false

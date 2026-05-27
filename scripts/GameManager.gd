@@ -3,16 +3,23 @@ extends Node2D
 
 const ItemFilePath : String = "res://resources/items.json"
 const ItemTexurePath : String = "res://assets/images/items/"
-const ChapterFilePath : String = "res://resources/chapters.json"
+## 章节场景根目录。完整路径 = ChapterScenePath + Chapter.cur_scene + ".tscn"
+const ChapterScenePath : String = "res://scenes/gameplay/chapters/"
 
 func wait(seconds: float) -> Signal:
 	return get_tree().create_timer(seconds).timeout
 
+## 取当前玩家位置
+func get_player_pos() -> Vector2:
+	var players := get_tree().get_nodes_in_group("Player")
+	if players.is_empty():
+		return Vector2.ZERO
+	var p := players[0] as Node2D
+	return p.global_position if p else Vector2.ZERO
+
+## 通知玩家移动到指定位置
+func change_player_pos(pos : Vector2) -> void:
+	EventBus.player_change_pos.emit(pos)
+
 func lock_player_control(stat : bool = true) -> void:
 	EventBus.player_control_lock.emit(stat)
-
-func _ready() -> void:
-	if Chapter.load_chapter_data(ChapterFilePath):
-		print("章节数据加载成功！")
-	else:
-		print("章节数据加载失败！")

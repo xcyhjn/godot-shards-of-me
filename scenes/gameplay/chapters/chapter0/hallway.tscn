@@ -1,14 +1,29 @@
-[gd_scene load_steps=7 format=4 uid="uid://bemrhmrqosxbk"]
+[gd_scene load_steps=13 format=4 uid="uid://bemrhmrqosxbk"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_f0ptu"]
 [ext_resource type="Texture2D" uid="uid://bxe6l41mtwhpd" path="res://assets/images/backgrounds/bg_hallway_1.png" id="2_m24pk"]
 [ext_resource type="Texture2D" uid="uid://nk6168nayrp8" path="res://assets/images/backgrounds/wall_hallway_1.png" id="3_7q1g6"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="4_7q1g6"]
 [ext_resource type="Texture2D" uid="uid://blirxb7xn2luq" path="res://assets/images/backgrounds/bg_hallway_2_door.png" id="5_dumtl"]
+[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="6_v3xgt"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_chln8"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_ljmjk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0ptu"]
 atlas = ExtResource("2_m24pk")
 region = Rect2(300, 0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chln8"]
+size = Vector2(256, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljmjk"]
+size = Vector2(256, 512)
+
+[sub_resource type="Resource" id="Resource_qipcs"]
+script = ExtResource("8_ljmjk")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_f0ptu")]
 
@@ -38,11 +53,55 @@ visible = false
 [node name="FloorCollidor" parent="Background" index="6"]
 visible = false
 
-[node name="Door" parent="." index="2" instance=ExtResource("4_7q1g6")]
-position = Vector2(1776, 166)
-scale = Vector2(1.9, 1.9)
+[node name="DoorClassroom" parent="." index="2" instance=ExtResource("4_7q1g6")]
+position = Vector2(654, 205)
+next_scene = "chapter0/classroom"
+next_pos = Vector2(1079, 551)
 
-[node name="Sprite2D" parent="Door" index="1"]
+[node name="Hint" parent="DoorClassroom" index="0"]
+offset_left = -14.5
+offset_top = -68.6667
+offset_right = 25.5
+offset_bottom = -28.6667
+
+[node name="Sprite2D" parent="DoorClassroom" index="1"]
+scale = Vector2(0.4, 0.3)
+
+[node name="CollisionShape2D" parent="DoorClassroom/Detection" index="0"]
+shape = SubResource("RectangleShape2D_chln8")
+
+[node name="DoorWC" parent="." index="3" instance=ExtResource("4_7q1g6")]
+position = Vector2(1781, 156)
+next_scene = "chapter0/toilet"
+next_pos = Vector2(0, 0)
+
+[node name="Sprite2D" parent="DoorWC" index="1"]
+position = Vector2(0, 10)
+scale = Vector2(0.38, 0.38)
 texture = ExtResource("5_dumtl")
 
-[editable path="Door"]
+[node name="CollisionShape2D" parent="DoorWC" index="2"]
+rotation = 0.0
+skew = 0.0
+
+[node name="CollisionShape2D" parent="DoorWC/Detection" index="0"]
+shape = SubResource("RectangleShape2D_ljmjk")
+
+[node name="Player" parent="." index="4" instance=ExtResource("6_v3xgt")]
+position = Vector2(627, 497)
+scale = Vector2(2, 2)
+
+[node name="Camera2D" type="Camera2D" parent="." index="5"]
+
+[node name="PhantomCamera2D" type="Node2D" parent="Camera2D" index="0" node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(627, 497)
+script = ExtResource("7_chln8")
+follow_mode = 2
+follow_target = NodePath("../../Player")
+tween_resource = SubResource("Resource_qipcs")
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[editable path="DoorClassroom"]
+[editable path="DoorWC"]

@@ -12,6 +12,9 @@ func _ready() -> void:
 	EventBus.player_control_lock.connect(func(stat : bool):
 		set_control_locked(stat)
 	)
+	EventBus.player_change_pos.connect(func(pos : Vector2):
+		position = pos
+	)
 
 func lock_control() -> void:
 	set_control_locked(true)

@@ -24,6 +24,7 @@ label cut_in
 [wait time="0.8"]
 audio "res://assets/audios/mirror_shattered.mp3"
 （进入里世界）
+[clear time="1.0"]
 
 
 label diag1
