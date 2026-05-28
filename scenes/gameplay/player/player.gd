@@ -13,8 +13,10 @@ func _ready() -> void:
 		set_control_locked(stat)
 	)
 	EventBus.player_change_pos.connect(func(pos : Vector2):
-		position = pos
+		global_position = pos
 	)
+	if Chapter.player_pos != Vector2.ZERO:
+		global_position = Chapter.player_pos
 
 func lock_control() -> void:
 	set_control_locked(true)

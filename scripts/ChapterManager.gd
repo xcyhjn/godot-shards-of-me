@@ -6,6 +6,11 @@ extends Node
 ## 章节内的判定/分支由各章节脚本自己写，本管理器不再维护流程图。
 class_name ChapterManager
 
+## 默认章节数据
+const DEFAULT_CHAPTER_DATA : Dictionary = {
+	"chapter0": {}
+}
+
 ## 嵌套字典，存各章节内的运行时变量。
 ## e.g. chapter_data["chapter0"]["door_opened"] = true
 var chapter_data: Dictionary = {}
@@ -33,8 +38,22 @@ func _ready() -> void:
 func new_game() -> void:
 	chapter_data.clear()
 	cur_scene = "chapter0/classroom"
-	player_pos = Vector2.ZERO
+	player_pos = Vector2(246, 476)
 	san = 100
+	var params = {
+		"show_progress_bar": true,
+		"player_pos": player_pos
+	}
+	change_scene(cur_scene, 0, params)
+
+## 继续游戏
+## 注意要显示调用Data.load_persistent_data
+func continue_game() -> void:
+	var params = {
+		"show_progress_bar": true,
+		"player_pos": player_pos
+	}
+	change_scene(cur_scene, 0, params)
 
 # ============================================================
 # 场景切换
@@ -42,9 +61,9 @@ func new_game() -> void:
 ## 切到下一个章节场景。 [br]
 ## [param scene_name]: 相对 [member GameManager.ChapterScenePath] 的路径，
 ## 不带 .tscn 后缀。e.g. "chapter0/chapter0_hallway" [br]
-## [param san_cost]: 切场景的精神消耗（默认 10，传 0 跳过） [br]
+## [param san_cost]: 切场景的精神消耗（默认 0） [br]
 ## [param params]: 透传给 [method GGT.change_scene] 的参数字典
-func change_scene(scene_name: String, san_cost: int = 10, params: Dictionary = {}) -> void:
+func change_scene(scene_name: String, san_cost: int = 0, params: Dictionary = {}) -> void:
 	if scene_name == "":
 		push_error("[Chapter.change_scene] 场景名为空")
 		return

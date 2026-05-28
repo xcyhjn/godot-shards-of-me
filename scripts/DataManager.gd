@@ -29,7 +29,7 @@ func load_persistent_data() -> bool:
 
 	# slot 还不存在，视为首次启动，节点保留默认值
 	if not Dialogic.Save.has_slot(SLOT_NAME):
-		print("[DataManager] 未发现存档 slot \"", SLOT_NAME, "\"，使用默认值")
+		print("[DataManager] 未发现存档 slot \"", SLOT_NAME)
 		return true
 
 	# 加载 Dialogic 自身的对话进程（state.txt）
@@ -52,6 +52,7 @@ func load_persistent_data() -> bool:
 		if not (node.name in data_dict):
 			continue
 		if node.has_method("load_data"):
+			print(node.name)
 			node.call("load_data", data_dict[node.name])
 		else:
 			push_error("[DataManager] 节点缺少 load_data 方法: ", node.name)

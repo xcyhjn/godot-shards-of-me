@@ -1,126 +1,131 @@
-[gd_scene load_steps=19 format=4 uid="uid://c11aeo68c0pr3"]
+[gd_scene load_steps=20 format=4 uid="uid://ln4y7eqqcebe"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_34u5e"]
-[ext_resource type="Texture2D" uid="uid://bn0wy5ojpam33" path="res://assets/images/backgrounds/background_classroom.png" id="2_k2rcj"]
+[ext_resource type="Texture2D" uid="uid://dcv8yaqmftth1" path="res://assets/images/backgrounds/background_classroom_1.png" id="3_34u5e"]
 [ext_resource type="Texture2D" uid="uid://kuyi2mw37yq8" path="res://assets/images/backgrounds/background_classroom_pillar.png" id="3_klfhm"]
 [ext_resource type="Texture2D" uid="uid://c1yiew8064ds" path="res://assets/images/backgrounds/background_classroom_2.png" id="4_r61ga"]
 [ext_resource type="Texture2D" uid="uid://bi4rkujoycfl0" path="res://assets/images/backgrounds/wall_classroom_1.png" id="5_6wq8s"]
-[ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/props/item_template.tscn" id="6_n5wvi"]
-[ext_resource type="Texture2D" uid="uid://bor7oxd1135fu" path="res://assets/images/items/home_key.png" id="7_8e5ay"]
 [ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/prop_desk.tscn" id="8_glo2n"]
 [ext_resource type="Texture2D" uid="uid://ypj8qx7hgw7n" path="res://assets/images/items/desk_2.png" id="9_ob8sq"]
 [ext_resource type="PackedScene" uid="uid://caikehdgduskc" path="res://scenes/props/prop_paper.tscn" id="10_qirqm"]
+[ext_resource type="Texture2D" uid="uid://6w7a6mfm880v" path="res://assets/images/sprites/fullbody_man.png" id="11_k2rcj"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="11_yochd"]
 [ext_resource type="Texture2D" uid="uid://bq5ktpimfjos8" path="res://assets/images/standing/ouyang_ye.png" id="12_1ub1s"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="13_ois5l"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="14_djc3a"]
+[ext_resource type="Script" uid="uid://cjab30u2p8tyv" path="res://scenes/gameplay/chapters/chapter0/scene_director_classroom.gd" id="15_klfhm"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="15_s240p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymh7"]
 size = Vector2(50, 80)
 
-[sub_resource type="Resource" id="Resource_fqp1u"]
+[sub_resource type="Environment" id="Environment_umphd"]
+
+[sub_resource type="Resource" id="Resource_hcnid"]
 script = ExtResource("15_s240p")
-duration = 1.0
+duration = 0.0
 transition = 0
 ease = 2
 
-[sub_resource type="Environment" id="Environment_umphd"]
+[sub_resource type="Resource" id="Resource_2mytx"]
+script = ExtResource("15_s240p")
+duration = 0.5
+transition = 0
+ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_34u5e")]
 
 [node name="FloorTile" parent="Background" index="0"]
 position = Vector2(2, -3)
 tile_map_data = PackedByteArray("AAAEAA4AAwAAAAQAAAADAA0AAwAAAAQAAAACAAwAAwAAAAQAAAABAAsAAwAAAAQAAAAAAAoAAwAAAAQAAAD//wkAAwAAAAQAAAD+/wgAAwAAAAQAAAD9/wcAAwAAAAQAAAD8/wcAAwAAAAQAAAD9/wgAAwAAAAQAAAD+/wkAAwAAAAQAAAD//woAAwAAAAQAAAAAAAsAAwAAAAQAAAABAAwAAwAAAAQAAAACAA0AAwAAAAQAAAADAA4AAwAAAAQAAAACAA4AAwAAAAQAAAABAA0AAwAAAAQAAAAAAAwAAwAAAAQAAAD//wsAAwAAAAQAAAD+/woAAwAAAAQAAAD9/wkAAwAAAAQAAAD8/wgAAwAAAAQAAAD7/wcAAwAAAAQAAAD6/wcAAwAAAAQAAAD7/wgAAwAAAAQAAAD8/wkAAwAAAAQAAAD9/woAAwAAAAQAAAD+/wsAAwAAAAQAAAD//wwAAwAAAAQAAAAAAA0AAwAAAAQAAAABAA4AAwAAAAQAAAAAAA4AAwAAAAQAAAD//w0AAwAAAAQAAAD+/wwAAwAAAAQAAAD9/wsAAwAAAAQAAAD8/woAAwAAAAQAAAD7/wkAAwAAAAQAAAD6/wgAAwAAAAQAAAD5/wcAAwAAAAQAAAD4/wcAAwAAAAQAAAD5/wgAAwAAAAQAAAD6/wkAAwAAAAQAAAD7/woAAwAAAAQAAAD8/wsAAwAAAAQAAAD9/wwAAwAAAAQAAAD+/w0AAwAAAAQAAAD//w4AAwAAAAQAAAD+/w4AAwAAAAQAAAD9/w0AAwAAAAQAAAD8/wwAAwAAAAQAAAD7/wsAAwAAAAQAAAD6/woAAwAAAAQAAAD5/wkAAwAAAAQAAAD4/wgAAwAAAAQAAAD3/wcAAwAAAAQAAAD//w8AAwAAAAQAAAAAAA8AAwAAAAQAAAABAA8AAwAAAAQAAAACAA8AAwAAAAQAAAADAA8AAwAAAAQAAAAEAA8AAwAAAAQAAAAFAA8AAwAAAAQAAAAGABAAAwAAAAQAAAAFABAAAwAAAAQAAAAEABAAAwAAAAQAAAADABAAAwAAAAQAAAACABAAAwAAAAQAAAABABAAAwAAAAQAAAAAABAAAwAAAAQAAAAGABEAAwAAAAQAAAAFABEAAwAAAAQAAAAEABEAAwAAAAQAAAADABEAAwAAAAQAAAACABEAAwAAAAQAAAABABEAAwAAAAQAAAAHABEAAwAAAAQAAAACABIAAwAAAAQAAAADABIAAwAAAAQAAAAEABIAAwAAAAQAAAAFABIAAwAAAAQAAAAGABIAAwAAAAQAAAAHABIAAwAAAAQAAAAIABIAAwAAAAQAAAD4/wYAAwAAAAQAAAD3/wYAAwAAAAQAAAD2/wYAAwAAAAQAAAA=")
+metadata/_edit_lock_ = true
 
-[node name="WallBg" parent="Background" index="1"]
+[node name="WallLeft4" type="Sprite2D" parent="Background" index="1"]
+position = Vector2(1.52588e-05, 122)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_6wq8s")
+
+[node name="WallLeft3" type="Sprite2D" parent="Background" index="2"]
+position = Vector2(134, 114)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_6wq8s")
+
+[node name="WallBg" parent="Background" index="3"]
 position = Vector2(560, 233.6)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_k2rcj")
+texture = ExtResource("3_34u5e")
 
-[node name="WallBg2" type="Sprite2D" parent="Background" index="2"]
+[node name="WallBg2" type="Sprite2D" parent="Background" index="4"]
 position = Vector2(884, 233.6)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_klfhm")
 
-[node name="WallBg3" type="Sprite2D" parent="Background" index="3"]
+[node name="WallBg3" type="Sprite2D" parent="Background" index="5"]
 position = Vector2(1208, 233.6)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_k2rcj")
+texture = ExtResource("3_34u5e")
 
-[node name="WallBg4" type="Sprite2D" parent="Background" index="4"]
+[node name="WallBg4" type="Sprite2D" parent="Background" index="6"]
 position = Vector2(1748, 233.6)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_r61ga")
 
-[node name="WallLeft" parent="Background" index="5"]
+[node name="WallLeft" parent="Background" index="7"]
 position = Vector2(133, 323)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_6wq8s")
 
-[node name="WallLeft2" type="Sprite2D" parent="Background" index="6"]
+[node name="WallLeft2" type="Sprite2D" parent="Background" index="8"]
 position = Vector2(-1, 400)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_6wq8s")
 
-[node name="WallLeftCollidor" parent="Background" index="8"]
+[node name="WallLeftCollidor" parent="Background" index="10"]
 position = Vector2(21, 397)
 
 [node name="Sortables" type="Node2D" parent="." index="2"]
 y_sort_enabled = true
 
-[node name="ItemProp" parent="Sortables" index="0" instance=ExtResource("6_n5wvi")]
-position = Vector2(590, 494)
-item_id = "9"
-
-[node name="Hint" parent="Sortables/ItemProp" index="0"]
-visible = true
-
-[node name="Sprite2D" parent="Sortables/ItemProp" index="1"]
-rotation = -1.5708
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("7_8e5ay")
-
-[node name="Desks" type="Node2D" parent="Sortables" index="1"]
+[node name="Desks" type="Node2D" parent="Sortables" index="0"]
 y_sort_enabled = true
 position = Vector2(132, -29)
 
 [node name="Desk01" parent="Sortables/Desks" index="0" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(556, 539)
+position = Vector2(450, 500)
 
 [node name="Desk02" parent="Sortables/Desks" index="1" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(838, 659)
+position = Vector2(800, 650)
 
 [node name="Desk06" parent="Sortables/Desks" index="2" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(345, 537)
+position = Vector2(200, 500)
 
 [node name="Sprite2D" parent="Sortables/Desks/Desk06" index="0"]
 texture = ExtResource("9_ob8sq")
 
 [node name="Desk07" parent="Sortables/Desks" index="3" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(629, 660)
+position = Vector2(550, 650)
 
 [node name="Desk11" parent="Sortables/Desks" index="4" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(208, 663)
+position = Vector2(50, 650)
 
 [node name="Desk12" parent="Sortables/Desks" index="5" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(419, 662)
+position = Vector2(300, 650)
 
 [node name="Desk13" parent="Sortables/Desks" index="6" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(757, 541)
+position = Vector2(700, 500)
 
 [node name="Desk14" parent="Sortables/Desks" index="7" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
-position = Vector2(963, 540)
+position = Vector2(950, 500)
 
-[node name="Papers" type="Node2D" parent="Sortables" index="2"]
+[node name="Papers" type="Node2D" parent="Sortables" index="1"]
 
 [node name="PaperProp" parent="Sortables/Papers" index="0" instance=ExtResource("10_qirqm")]
 position = Vector2(561, 421)
@@ -131,11 +136,12 @@ position = Vector2(178, 575)
 [node name="PaperProp3" parent="Sortables/Papers" index="2" instance=ExtResource("10_qirqm")]
 position = Vector2(1330, 455)
 
-[node name="Player" parent="Sortables" index="3" instance=ExtResource("11_yochd")]
-position = Vector2(246, 476)
+[node name="Player" parent="Sortables" index="2" instance=ExtResource("11_yochd")]
+y_sort_enabled = true
+position = Vector2(317, 364)
 scale = Vector2(1.5, 1.5)
 
-[node name="NPC1" type="CharacterBody2D" parent="Sortables" index="4"]
+[node name="NPC1" type="CharacterBody2D" parent="Sortables" index="3"]
 position = Vector2(1244, 463)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sortables/NPC1" index="0"]
@@ -147,28 +153,108 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_cymh7")
 metadata/_edit_lock_ = true
 
+[node name="npc_group" type="Node2D" parent="Sortables" index="4"]
+
+[node name="FullbodyMan" type="Sprite2D" parent="Sortables/npc_group" index="0"]
+position = Vector2(1045, 547)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan10" type="Sprite2D" parent="Sortables/npc_group" index="1"]
+position = Vector2(317, 536)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan11" type="Sprite2D" parent="Sortables/npc_group" index="2"]
+position = Vector2(90, 544)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan2" type="Sprite2D" parent="Sortables/npc_group" index="3"]
+position = Vector2(853, 555)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan3" type="Sprite2D" parent="Sortables/npc_group" index="4"]
+position = Vector2(753, 552)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan4" type="Sprite2D" parent="Sortables/npc_group" index="5"]
+position = Vector2(1002, 416)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan5" type="Sprite2D" parent="Sortables/npc_group" index="6"]
+position = Vector2(925, 412)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan6" type="Sprite2D" parent="Sortables/npc_group" index="7"]
+position = Vector2(1299, 411)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan7" type="Sprite2D" parent="Sortables/npc_group" index="8"]
+position = Vector2(1180, 403)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan8" type="Sprite2D" parent="Sortables/npc_group" index="9"]
+position = Vector2(727, 409)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
+[node name="FullbodyMan9" type="Sprite2D" parent="Sortables/npc_group" index="10"]
+position = Vector2(516, 529)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("11_k2rcj")
+
 [node name="Door" parent="." index="3" instance=ExtResource("13_ois5l")]
-position = Vector2(1155, 538)
-next_scene = "chapter0/hallway"
-
-[node name="Sprite2D" parent="Door" index="1"]
 modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(1155, 538)
 
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="4"]
+environment = SubResource("Environment_umphd")
 
-[node name="PhantomCamera2D" type="Node2D" parent="Camera2D" index="0" node_paths=PackedStringArray("follow_target")]
+[node name="CameraTargets" type="Node2D" parent="." index="5"]
+
+[node name="Intro" type="Marker2D" parent="CameraTargets" index="0"]
+position = Vector2(1000, 450)
+
+[node name="windows" type="Marker2D" parent="CameraTargets" index="1"]
+position = Vector2(404, 294)
+
+[node name="Cameras" type="Node2D" parent="." index="6"]
+
+[node name="Intro" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true
-position = Vector2(246, 476)
+position = Vector2(1000, 450)
 script = ExtResource("14_djc3a")
+priority = 1
 follow_mode = 2
+follow_target = NodePath("../../CameraTargets/Intro")
+zoom = Vector2(1.7, 1.7)
+tween_resource = SubResource("Resource_hcnid")
+draw_limits = true
+limit_left = -115
+limit_top = 80
+limit_right = 1378
+limit_bottom = 648
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="Player" type="Node2D" parent="Cameras" index="1" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+top_level = true
+position = Vector2(317, 364)
+script = ExtResource("14_djc3a")
+follow_mode = 1
 follow_target = NodePath("../../Sortables/Player")
-tween_resource = SubResource("Resource_fqp1u")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_2mytx")
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="5"]
-environment = SubResource("Environment_umphd")
+[node name="SceneDirector" type="Node" parent="." index="7"]
+script = ExtResource("15_klfhm")
 
-[editable path="Sortables/ItemProp"]
 [editable path="Sortables/Desks/Desk06"]
-[editable path="Door"]

@@ -6,6 +6,8 @@ const ItemTexurePath : String = "res://assets/images/items/"
 ## 章节场景根目录。完整路径 = ChapterScenePath + Chapter.cur_scene + ".tscn"
 const ChapterScenePath : String = "res://scenes/gameplay/chapters/"
 
+var player_control_locked: bool = false
+
 func wait(seconds: float) -> Signal:
 	return get_tree().create_timer(seconds).timeout
 
@@ -23,3 +25,6 @@ func change_player_pos(pos : Vector2) -> void:
 
 func lock_player_control(stat : bool = true) -> void:
 	EventBus.player_control_lock.emit(stat)
+
+func is_player_control_locked() -> bool:
+	return player_control_locked

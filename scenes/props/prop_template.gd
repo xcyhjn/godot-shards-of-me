@@ -23,6 +23,9 @@ func _ready() -> void:
 		hint.hide()
 
 func _physics_process(delta: float) -> void:
+	if GameManager.is_player_control_locked():
+		return
+
 	if Input.is_action_pressed("互动") and can_interact:
 		handle_interact()
 		if oneshot:

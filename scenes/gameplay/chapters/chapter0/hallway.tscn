@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bemrhmrqosxbk"]
+[gd_scene load_steps=13 format=4 uid="uid://bsrx313k0d3uf"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_f0ptu"]
 [ext_resource type="Texture2D" uid="uid://bxe6l41mtwhpd" path="res://assets/images/backgrounds/bg_hallway_1.png" id="2_m24pk"]

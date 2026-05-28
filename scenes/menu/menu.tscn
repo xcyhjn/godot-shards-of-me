@@ -164,6 +164,19 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1ijkl")
 theme_override_styles/normal = SubResource("StyleBoxFlat_8abn2")
 text = "开始游戏"
 
+[node name="ContinueButton" type="Button" parent="MarginContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+focus_neighbor_top = NodePath("../PlayButton")
+focus_previous = NodePath("../PlayButton")
+theme_override_fonts/font = ExtResource("6_cnfont")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_0fgh4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_9cde3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ijkl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8abn2")
+text = "继续游戏"
+
 [node name="ExitButton" type="Button" parent="MarginContainer/Control/VBoxContainer"]
 custom_minimum_size = Vector2(200, 70)
 layout_mode = 2
@@ -235,4 +248,5 @@ theme_override_colors/font_color = Color(0.886275, 0.87451, 0.87451, 1)
 text = "Developer 3"
 
 [connection signal="pressed" from="MarginContainer/Control/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="MarginContainer/Control/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

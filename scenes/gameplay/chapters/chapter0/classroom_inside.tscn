@@ -1,0 +1,239 @@
+[gd_scene load_steps=20 format=4 uid="uid://pb528hd6vift"]
+
+[ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_0lwj5"]
+[ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="2_8cj6l"]
+[ext_resource type="Texture2D" uid="uid://bi4rkujoycfl0" path="res://assets/images/backgrounds/wall_classroom_1.png" id="3_h6pgd"]
+[ext_resource type="Texture2D" uid="uid://dcv8yaqmftth1" path="res://assets/images/backgrounds/background_classroom_1.png" id="4_gxyd4"]
+[ext_resource type="Texture2D" uid="uid://kuyi2mw37yq8" path="res://assets/images/backgrounds/background_classroom_pillar.png" id="5_fwcuo"]
+[ext_resource type="Texture2D" uid="uid://c7c3qf8j4ippy" path="res://assets/images/backgrounds/background_classroom_inside.png" id="6_0lwj5"]
+[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="7_x2fpg"]
+[ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="8_ik5kv"]
+[ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/prop_desk.tscn" id="9_afu07"]
+[ext_resource type="Texture2D" uid="uid://ypj8qx7hgw7n" path="res://assets/images/items/desk_2.png" id="10_lye0d"]
+[ext_resource type="PackedScene" uid="uid://caikehdgduskc" path="res://scenes/props/prop_paper.tscn" id="11_v3bl4"]
+[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="12_rct1g"]
+[ext_resource type="Texture2D" uid="uid://6w7a6mfm880v" path="res://assets/images/sprites/fullbody_man.png" id="14_s0prt"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_x7ebq"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_ajbyx"]
+[ext_resource type="Script" uid="uid://p88q6vuo8rj6" path="res://scenes/gameplay/chapters/chapter0/scene_director_in.gd" id="17_i1yuy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5hrs"]
+size = Vector2(2000, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5dru"]
+size = Vector2(29, 651)
+
+[sub_resource type="Resource" id="Resource_eon28"]
+script = ExtResource("16_ajbyx")
+duration = 0.0
+transition = 0
+ease = 2
+
+[node name="Gameplay2" instance=ExtResource("1_0lwj5")]
+
+[node name="Background" parent="." index="1"]
+visible = false
+
+[node name="Background2" type="StaticBody2D" parent="." index="2"]
+
+[node name="FloorTile" type="TileMapLayer" parent="Background2" index="0"]
+position = Vector2(2, -3)
+tile_map_data = PackedByteArray("AAAEAA4AAwAAAAEAAAADAA0AAwAAAAEAAAACAAwAAwAAAAEAAAABAAsAAwAAAAEAAAAAAAoAAwAAAAEAAAD//wkAAwAAAAEAAAD+/wgAAwAAAAEAAAD9/wcAAwAAAAEAAAD8/wcAAwAAAAEAAAD9/wgAAwAAAAEAAAD+/wkAAwAAAAEAAAD//woAAwAAAAEAAAAAAAsAAwAAAAEAAAABAAwAAwAAAAEAAAACAA0AAwAAAAEAAAADAA4AAwAAAAEAAAACAA4AAwAAAAEAAAABAA0AAwAAAAEAAAAAAAwAAwAAAAEAAAD//wsAAwAAAAEAAAD+/woAAwAAAAEAAAD9/wkAAwAAAAEAAAD8/wgAAwAAAAEAAAD7/wcAAwAAAAEAAAD6/wcAAwAAAAEAAAD7/wgAAwAAAAEAAAD8/wkAAwAAAAEAAAD9/woAAwAAAAEAAAD+/wsAAwAAAAEAAAD//wwAAwAAAAEAAAAAAA0AAwAAAAEAAAABAA4AAwAAAAEAAAAAAA4AAwAAAAEAAAD//w0AAwAAAAEAAAD+/wwAAwAAAAEAAAD9/wsAAwAAAAEAAAD8/woAAwAAAAEAAAD7/wkAAwAAAAEAAAD6/wgAAwAAAAEAAAD5/wcAAwAAAAEAAAD4/wcAAwAAAAEAAAD5/wgAAwAAAAEAAAD6/wkAAwAAAAEAAAD7/woAAwAAAAEAAAD8/wsAAwAAAAEAAAD9/wwAAwAAAAEAAAD+/w0AAwAAAAEAAAD//w4AAwAAAAEAAAD+/w4AAwAAAAEAAAD9/w0AAwAAAAEAAAD8/wwAAwAAAAEAAAD7/wsAAwAAAAEAAAD6/woAAwAAAAEAAAD5/wkAAwAAAAEAAAD4/wgAAwAAAAEAAAD3/wcAAwAAAAEAAAD//w8AAwAAAAEAAAAAAA8AAwAAAAEAAAABAA8AAwAAAAEAAAACAA8AAwAAAAEAAAADAA8AAwAAAAEAAAAEAA8AAwAAAAEAAAAFAA8AAwAAAAEAAAAGABAAAwAAAAEAAAAFABAAAwAAAAEAAAAEABAAAwAAAAEAAAADABAAAwAAAAEAAAACABAAAwAAAAEAAAABABAAAwAAAAEAAAAAABAAAwAAAAEAAAAGABEAAwAAAAEAAAAFABEAAwAAAAEAAAAEABEAAwAAAAEAAAADABEAAwAAAAEAAAACABEAAwAAAAEAAAABABEAAwAAAAEAAAAHABEAAwAAAAEAAAACABIAAwAAAAEAAAADABIAAwAAAAEAAAAEABIAAwAAAAEAAAAFABIAAwAAAAEAAAAGABIAAwAAAAEAAAAHABIAAwAAAAEAAAAIABIAAwAAAAEAAAD4/wYAAwAAAAQAAAD3/wYAAwAAAAQAAAD2/wYAAwAAAAQAAAD6/wYAAwAAAAEAAAD7/wYAAwAAAAEAAAD8/wYAAwAAAAEAAAACAAsAAwAAAAEAAAADAAwAAwAAAAEAAAA=")
+tile_set = ExtResource("2_8cj6l")
+metadata/_edit_lock_ = true
+
+[node name="WallLeft4" type="Sprite2D" parent="Background2" index="1"]
+position = Vector2(1.52588e-05, 122)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_h6pgd")
+
+[node name="WallLeft3" type="Sprite2D" parent="Background2" index="2"]
+position = Vector2(134, 114)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_h6pgd")
+
+[node name="WallBg" type="Sprite2D" parent="Background2" index="3"]
+position = Vector2(560, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_gxyd4")
+
+[node name="WallBg2" type="Sprite2D" parent="Background2" index="4"]
+position = Vector2(884, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_fwcuo")
+
+[node name="WallBg3" type="Sprite2D" parent="Background2" index="5"]
+position = Vector2(1208, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_gxyd4")
+
+[node name="WallBg4" type="Sprite2D" parent="Background2" index="6"]
+position = Vector2(1748, 233.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_0lwj5")
+
+[node name="WallLeft" type="Sprite2D" parent="Background2" index="7"]
+position = Vector2(133, 323)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_h6pgd")
+
+[node name="WallLeft2" type="Sprite2D" parent="Background2" index="8"]
+position = Vector2(-1, 400)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_h6pgd")
+
+[node name="WallBgCollidor" parent="Background2" index="9" instance=ExtResource("7_x2fpg")]
+position = Vector2(1288, 236)
+shape = SubResource("RectangleShape2D_h5hrs")
+
+[node name="WallLeftCollidor" parent="Background2" index="10" instance=ExtResource("7_x2fpg")]
+position = Vector2(21, 397)
+rotation = 1.02974
+shape = SubResource("RectangleShape2D_m5dru")
+
+[node name="FloorCollidor" parent="Background2" index="11" instance=ExtResource("7_x2fpg")]
+position = Vector2(849, 658)
+shape = SubResource("RectangleShape2D_h5hrs")
+
+[node name="Sortables" type="Node2D" parent="." index="3"]
+y_sort_enabled = true
+
+[node name="Desks" type="Node2D" parent="Sortables" index="0"]
+y_sort_enabled = true
+position = Vector2(132, -29)
+
+[node name="Desk01" parent="Sortables/Desks" index="0" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(450, 500)
+
+[node name="Desk02" parent="Sortables/Desks" index="1" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(800, 650)
+
+[node name="Desk06" parent="Sortables/Desks" index="2" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(200, 500)
+
+[node name="Sprite2D" parent="Sortables/Desks/Desk06" index="0"]
+texture = ExtResource("10_lye0d")
+
+[node name="Desk07" parent="Sortables/Desks" index="3" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(550, 650)
+
+[node name="Desk11" parent="Sortables/Desks" index="4" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(50, 650)
+
+[node name="Desk12" parent="Sortables/Desks" index="5" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(300, 650)
+
+[node name="Desk13" parent="Sortables/Desks" index="6" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(700, 500)
+
+[node name="Desk14" parent="Sortables/Desks" index="7" instance=ExtResource("9_afu07")]
+y_sort_enabled = true
+position = Vector2(950, 500)
+
+[node name="Papers" type="Node2D" parent="Sortables" index="1"]
+
+[node name="PaperProp" parent="Sortables/Papers" index="0" instance=ExtResource("11_v3bl4")]
+position = Vector2(561, 421)
+
+[node name="PaperProp2" parent="Sortables/Papers" index="1" instance=ExtResource("11_v3bl4")]
+position = Vector2(178, 575)
+
+[node name="PaperProp3" parent="Sortables/Papers" index="2" instance=ExtResource("11_v3bl4")]
+position = Vector2(1330, 455)
+
+[node name="Player" parent="Sortables" index="2" instance=ExtResource("12_rct1g")]
+y_sort_enabled = true
+position = Vector2(317, 364)
+scale = Vector2(1.5, 1.5)
+
+[node name="npc_group" type="Node2D" parent="Sortables" index="3"]
+visible = false
+
+[node name="FullbodyMan" type="Sprite2D" parent="Sortables/npc_group" index="0"]
+position = Vector2(1045, 547)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan10" type="Sprite2D" parent="Sortables/npc_group" index="1"]
+position = Vector2(317, 536)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan11" type="Sprite2D" parent="Sortables/npc_group" index="2"]
+position = Vector2(90, 544)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan2" type="Sprite2D" parent="Sortables/npc_group" index="3"]
+position = Vector2(853, 555)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan3" type="Sprite2D" parent="Sortables/npc_group" index="4"]
+position = Vector2(753, 552)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan4" type="Sprite2D" parent="Sortables/npc_group" index="5"]
+position = Vector2(1002, 416)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan5" type="Sprite2D" parent="Sortables/npc_group" index="6"]
+position = Vector2(925, 412)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan6" type="Sprite2D" parent="Sortables/npc_group" index="7"]
+position = Vector2(1299, 411)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan7" type="Sprite2D" parent="Sortables/npc_group" index="8"]
+position = Vector2(1180, 403)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan8" type="Sprite2D" parent="Sortables/npc_group" index="9"]
+position = Vector2(727, 409)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="FullbodyMan9" type="Sprite2D" parent="Sortables/npc_group" index="10"]
+position = Vector2(516, 529)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_s0prt")
+
+[node name="DoorProp" parent="." index="4" instance=ExtResource("8_ik5kv")]
+position = Vector2(1155, 538)
+next_scene = "chapter0/hallway_inside"
+next_pos = Vector2(1849, 381)
+
+[node name="Cameras" type="Node2D" parent="." index="5"]
+
+[node name="Player" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+top_level = true
+position = Vector2(317, 364)
+script = ExtResource("15_x7ebq")
+follow_mode = 1
+follow_target = NodePath("../../Sortables/Player")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_eon28")
+draw_limits = true
+limit_left = -115
+limit_top = 80
+limit_right = 1370
+limit_bottom = 640
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="SceneDirectorIn" type="Node" parent="." index="6"]
+script = ExtResource("17_i1yuy")
+
+[editable path="Sortables/Desks/Desk06"]
