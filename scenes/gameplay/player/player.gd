@@ -28,11 +28,17 @@ func set_control_locked(locked: bool) -> void:
 	can_move = not locked
 	if locked:
 		velocity = Vector2.ZERO
-		Sprite.play("idle")
+		if Chapter.cur_scene.contains("inside"):
+			Sprite.play("Ye_idle")
+		else:
+			Sprite.play("idle")
 
 func _physics_process(delta: float) -> void:
 	if not can_move:
-		Sprite.play("idle")
+		if Chapter.cur_scene.contains("inside"):
+			Sprite.play("Ye_idle")
+		else:
+			Sprite.play("idle")
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -43,10 +49,16 @@ func _physics_process(delta: float) -> void:
 	var dir := Input.get_vector("向左移动", "向右移动", "向内移动", "向外移动")
 	if dir:
 		Sprite.flip_h = true if dir.x < 0 else false
-		Sprite.play("move")
+		if Chapter.cur_scene.contains("inside"):
+			Sprite.play("Ye_walk")
+		else:
+			Sprite.play("move")
 		velocity = dir * SPEED
 	else:
-		Sprite.play("idle")
+		if Chapter.cur_scene.contains("inside"):
+			Sprite.play("Ye_idle")
+		else:
+			Sprite.play("idle")
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
 
 	move_and_slide()
