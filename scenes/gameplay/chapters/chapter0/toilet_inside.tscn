@@ -1,25 +1,16 @@
-[gd_scene load_steps=12 format=4 uid="uid://4ofs8dtr728e"]
+[gd_scene load_steps=8 format=4 uid="uid://4ofs8dtr728e"]
 
-[ext_resource type="PackedScene" uid="uid://dnri35hdjjolw" path="res://scenes/gameplay/chapters/chapter0/chapter0_toilet.tscn" id="1_hqhay"]
+[ext_resource type="PackedScene" uid="uid://0dofuqx88eef" path="res://scenes/gameplay/chapters/chapter0/toilet.tscn" id="1_hqhay"]
 [ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="2_4isnv"]
-[ext_resource type="Texture2D" uid="uid://dsv4wpr4uj3ac" path="res://assets/images/backgrounds/bg_toilet.png" id="3_ibmp7"]
+[ext_resource type="Texture2D" uid="uid://dk4ir7cregfvg" path="res://assets/images/backgrounds/bg_toilet_inside.png" id="3_88ihn"]
 [ext_resource type="Texture2D" uid="uid://jeawsikhq468" path="res://assets/images/backgrounds/wall_2.png" id="4_v6x4d"]
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_v6x4d"]
-[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="6_m1d20"]
-[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_7bg35"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_mi2um"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1d20"]
 size = Vector2(2000, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7bg35"]
 size = Vector2(29, 651)
-
-[sub_resource type="Resource" id="Resource_d10qb"]
-script = ExtResource("8_mi2um")
-duration = 0.0
-transition = 0
-ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_hqhay")]
 
@@ -30,13 +21,13 @@ visible = false
 
 [node name="FloorTile" type="TileMapLayer" parent="Background2" index="0"]
 position = Vector2(0, -1)
-tile_map_data = PackedByteArray("AAAEAA4AAwAAAAMAAAADAA0AAwAAAAMAAAACAAwAAwAAAAMAAAABAAsAAwAAAAMAAAAAAAoAAwAAAAMAAAD//wkAAwAAAAMAAAD+/wgAAwAAAAMAAAD9/wcAAwAAAAMAAAD8/wcAAwAAAAMAAAD9/wgAAwAAAAMAAAD+/wkAAwAAAAMAAAD//woAAwAAAAMAAAAAAAsAAwAAAAMAAAABAAwAAwAAAAMAAAACAA0AAwAAAAMAAAADAA4AAwAAAAMAAAACAA4AAwAAAAMAAAABAA0AAwAAAAMAAAAAAAwAAwAAAAMAAAD//wsAAwAAAAMAAAD+/woAAwAAAAMAAAD9/wkAAwAAAAMAAAD8/wgAAwAAAAMAAAD7/wcAAwAAAAMAAAD6/wcAAwAAAAMAAAD7/wgAAwAAAAMAAAD8/wkAAwAAAAMAAAD9/woAAwAAAAMAAAD+/wsAAwAAAAMAAAD//wwAAwAAAAMAAAAAAA0AAwAAAAMAAAABAA4AAwAAAAMAAAAAAA4AAwAAAAMAAAD//w0AAwAAAAMAAAD+/wwAAwAAAAMAAAD9/wsAAwAAAAMAAAD8/woAAwAAAAMAAAD7/wkAAwAAAAMAAAD6/wgAAwAAAAMAAAD5/wcAAwAAAAMAAAD4/wcAAwAAAAMAAAD5/wgAAwAAAAMAAAD6/wkAAwAAAAMAAAD7/woAAwAAAAMAAAD8/wsAAwAAAAMAAAD9/wwAAwAAAAMAAAD+/w0AAwAAAAMAAAD//w4AAwAAAAMAAAD+/w4AAwAAAAMAAAD9/w0AAwAAAAMAAAD8/wwAAwAAAAMAAAD7/wsAAwAAAAMAAAD6/woAAwAAAAMAAAD5/wkAAwAAAAMAAAD4/wgAAwAAAAMAAAD3/wcAAwAAAAMAAAD//w8AAwAAAAMAAAAAAA8AAwAAAAMAAAABAA8AAwAAAAMAAAACAA8AAwAAAAMAAAADAA8AAwAAAAMAAAAEAA8AAwAAAAMAAAAFAA8AAwAAAAMAAAAGABAAAwAAAAMAAAAFABAAAwAAAAMAAAAEABAAAwAAAAMAAAADABAAAwAAAAMAAAACABAAAwAAAAMAAAABABAAAwAAAAMAAAAAABAAAwAAAAMAAAA=")
+tile_map_data = PackedByteArray("AAAEAA4AAwAAAAEAAAADAA0AAwAAAAEAAAACAAwAAwAAAAEAAAABAAsAAwAAAAEAAAAAAAoAAwAAAAEAAAD//wkAAwAAAAEAAAD+/wgAAwAAAAEAAAD9/wcAAwAAAAEAAAD8/wcAAwAAAAEAAAD9/wgAAwAAAAEAAAD+/wkAAwAAAAEAAAD//woAAwAAAAEAAAAAAAsAAwAAAAEAAAABAAwAAwAAAAEAAAACAA0AAwAAAAEAAAADAA4AAwAAAAEAAAACAA4AAwAAAAEAAAABAA0AAwAAAAEAAAAAAAwAAwAAAAEAAAD//wsAAwAAAAEAAAD+/woAAwAAAAEAAAD9/wkAAwAAAAEAAAD8/wgAAwAAAAEAAAD7/wcAAwAAAAEAAAD6/wcAAwAAAAEAAAD7/wgAAwAAAAEAAAD8/wkAAwAAAAEAAAD9/woAAwAAAAEAAAD+/wsAAwAAAAEAAAD//wwAAwAAAAEAAAAAAA0AAwAAAAEAAAABAA4AAwAAAAEAAAAAAA4AAwAAAAEAAAD//w0AAwAAAAEAAAD+/wwAAwAAAAEAAAD9/wsAAwAAAAEAAAD8/woAAwAAAAEAAAD7/wkAAwAAAAEAAAD6/wgAAwAAAAEAAAD5/wcAAwAAAAEAAAD4/wcAAwAAAAEAAAD5/wgAAwAAAAEAAAD6/wkAAwAAAAEAAAD7/woAAwAAAAEAAAD8/wsAAwAAAAEAAAD9/wwAAwAAAAEAAAD+/w0AAwAAAAEAAAD//w4AAwAAAAEAAAD+/w4AAwAAAAEAAAD9/w0AAwAAAAEAAAD8/wwAAwAAAAEAAAD7/wsAAwAAAAEAAAD6/woAAwAAAAEAAAD5/wkAAwAAAAEAAAD4/wgAAwAAAAEAAAD3/wcAAwAAAAEAAAD//w8AAwAAAAEAAAAAAA8AAwAAAAEAAAABAA8AAwAAAAEAAAACAA8AAwAAAAEAAAADAA8AAwAAAAEAAAAEAA8AAwAAAAEAAAAFAA8AAwAAAAEAAAAGABAAAwAAAAEAAAAFABAAAwAAAAEAAAAEABAAAwAAAAEAAAADABAAAwAAAAEAAAACABAAAwAAAAEAAAABABAAAwAAAAEAAAAAABAAAwAAAAEAAAA=")
 tile_set = ExtResource("2_4isnv")
 
 [node name="WallBg" type="Sprite2D" parent="Background2" index="1"]
 position = Vector2(776, 110)
-scale = Vector2(0.345, 0.345)
-texture = ExtResource("3_ibmp7")
+scale = Vector2(0.69, 0.69)
+texture = ExtResource("3_88ihn")
 
 [node name="WallLeft" type="Sprite2D" parent="Background2" index="2"]
 position = Vector2(71, 281)
@@ -56,23 +47,4 @@ shape = SubResource("RectangleShape2D_7bg35")
 position = Vector2(849, 658)
 shape = SubResource("RectangleShape2D_m1d20")
 
-[node name="Player" parent="." index="3" instance=ExtResource("6_m1d20")]
-position = Vector2(177, 464)
-scale = Vector2(2, 2)
-
-[node name="Cameras" type="Node2D" parent="." index="4"]
-
-[node name="Player" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target")]
-top_level = true
-position = Vector2(177, 464)
-script = ExtResource("7_7bg35")
-follow_mode = 1
-follow_target = NodePath("../../Player")
-zoom = Vector2(1.5, 1.5)
-tween_resource = SubResource("Resource_d10qb")
-draw_limits = true
-limit_left = -158
-limit_top = 0
-limit_right = 1244
-limit_bottom = 648
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+[editable path="DoorHw"]

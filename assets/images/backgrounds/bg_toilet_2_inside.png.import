@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p7jqlkbw2wm2"
-path="res://.godot/imported/chara_50.png-b7fed5cd4966d2a678ba78c691eec3dc.ctex"
+uid="uid://djjvfgffalvah"
+path="res://.godot/imported/bg_toilet_2_inside.png-2d6cf3aa34a6d8064b26f5b00941bebf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/sprites/chara_50.png"
-dest_files=["res://.godot/imported/chara_50.png-b7fed5cd4966d2a678ba78c691eec3dc.ctex"]
+source_file="res://assets/images/backgrounds/bg_toilet_2_inside.png"
+dest_files=["res://.godot/imported/bg_toilet_2_inside.png-2d6cf3aa34a6d8064b26f5b00941bebf.ctex"]
 
 [params]
 

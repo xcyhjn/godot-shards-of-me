@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ln4y7eqqcebe"]
+[gd_scene load_steps=17 format=4 uid="uid://ln4y7eqqcebe"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_34u5e"]
 [ext_resource type="Texture2D" uid="uid://dcv8yaqmftth1" path="res://assets/images/backgrounds/background_classroom_1.png" id="3_34u5e"]
@@ -6,10 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c1yiew8064ds" path="res://assets/images/backgrounds/background_classroom_2.png" id="4_r61ga"]
 [ext_resource type="Texture2D" uid="uid://bi4rkujoycfl0" path="res://assets/images/backgrounds/wall_classroom_1.png" id="5_6wq8s"]
 [ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/prop_desk.tscn" id="8_glo2n"]
-[ext_resource type="Texture2D" uid="uid://ypj8qx7hgw7n" path="res://assets/images/items/desk_2.png" id="9_ob8sq"]
 [ext_resource type="PackedScene" uid="uid://caikehdgduskc" path="res://scenes/props/prop_paper.tscn" id="10_qirqm"]
 [ext_resource type="Texture2D" uid="uid://6w7a6mfm880v" path="res://assets/images/sprites/fullbody_man.png" id="11_k2rcj"]
-[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="11_yochd"]
 [ext_resource type="Texture2D" uid="uid://bq5ktpimfjos8" path="res://assets/images/standing/ouyang_ye.png" id="12_1ub1s"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="13_ois5l"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="14_djc3a"]
@@ -19,21 +17,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymh7"]
 size = Vector2(50, 80)
 
-[sub_resource type="Environment" id="Environment_umphd"]
-
 [sub_resource type="Resource" id="Resource_hcnid"]
 script = ExtResource("15_s240p")
 duration = 0.0
 transition = 0
 ease = 2
 
-[sub_resource type="Resource" id="Resource_2mytx"]
-script = ExtResource("15_s240p")
-duration = 0.5
-transition = 0
-ease = 2
+[sub_resource type="Environment" id="Environment_umphd"]
 
 [node name="Gameplay" instance=ExtResource("1_34u5e")]
+
+[node name="SceneDirector" type="Node" parent="." index="0"]
+script = ExtResource("15_klfhm")
 
 [node name="FloorTile" parent="Background" index="0"]
 position = Vector2(2, -3)
@@ -83,10 +78,15 @@ texture = ExtResource("5_6wq8s")
 [node name="WallLeftCollidor" parent="Background" index="10"]
 position = Vector2(21, 397)
 
-[node name="Sortables" type="Node2D" parent="." index="2"]
-y_sort_enabled = true
+[node name="CameraTargets" type="Node2D" parent="." index="3"]
 
-[node name="Desks" type="Node2D" parent="Sortables" index="0"]
+[node name="Intro" type="Marker2D" parent="CameraTargets" index="0"]
+position = Vector2(1000, 450)
+
+[node name="windows" type="Marker2D" parent="CameraTargets" index="1"]
+position = Vector2(404, 294)
+
+[node name="Desks" type="Node2D" parent="Sortables" index="1"]
 y_sort_enabled = true
 position = Vector2(132, -29)
 
@@ -101,9 +101,6 @@ position = Vector2(800, 650)
 [node name="Desk06" parent="Sortables/Desks" index="2" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
 position = Vector2(200, 500)
-
-[node name="Sprite2D" parent="Sortables/Desks/Desk06" index="0"]
-texture = ExtResource("9_ob8sq")
 
 [node name="Desk07" parent="Sortables/Desks" index="3" instance=ExtResource("8_glo2n")]
 y_sort_enabled = true
@@ -125,7 +122,7 @@ position = Vector2(700, 500)
 y_sort_enabled = true
 position = Vector2(950, 500)
 
-[node name="Papers" type="Node2D" parent="Sortables" index="1"]
+[node name="Papers" type="Node2D" parent="Sortables" index="2"]
 
 [node name="PaperProp" parent="Sortables/Papers" index="0" instance=ExtResource("10_qirqm")]
 position = Vector2(561, 421)
@@ -135,11 +132,6 @@ position = Vector2(178, 575)
 
 [node name="PaperProp3" parent="Sortables/Papers" index="2" instance=ExtResource("10_qirqm")]
 position = Vector2(1330, 455)
-
-[node name="Player" parent="Sortables" index="2" instance=ExtResource("11_yochd")]
-y_sort_enabled = true
-position = Vector2(317, 364)
-scale = Vector2(1.5, 1.5)
 
 [node name="NPC1" type="CharacterBody2D" parent="Sortables" index="3"]
 position = Vector2(1244, 463)
@@ -210,22 +202,9 @@ position = Vector2(516, 529)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("11_k2rcj")
 
-[node name="Door" parent="." index="3" instance=ExtResource("13_ois5l")]
+[node name="Door" parent="." index="5" instance=ExtResource("13_ois5l")]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(1155, 538)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="4"]
-environment = SubResource("Environment_umphd")
-
-[node name="CameraTargets" type="Node2D" parent="." index="5"]
-
-[node name="Intro" type="Marker2D" parent="CameraTargets" index="0"]
-position = Vector2(1000, 450)
-
-[node name="windows" type="Marker2D" parent="CameraTargets" index="1"]
-position = Vector2(404, 294)
-
-[node name="Cameras" type="Node2D" parent="." index="6"]
 
 [node name="Intro" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true
@@ -243,18 +222,5 @@ limit_right = 1378
 limit_bottom = 648
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="Player" type="Node2D" parent="Cameras" index="1" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
-top_level = true
-position = Vector2(317, 364)
-script = ExtResource("14_djc3a")
-follow_mode = 1
-follow_target = NodePath("../../Sortables/Player")
-zoom = Vector2(1.5, 1.5)
-tween_resource = SubResource("Resource_2mytx")
-draw_limits = true
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="SceneDirector" type="Node" parent="." index="7"]
-script = ExtResource("15_klfhm")
-
-[editable path="Sortables/Desks/Desk06"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="7"]
+environment = SubResource("Environment_umphd")

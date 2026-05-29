@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba1wj7ryo4kdj"
-path="res://.godot/imported/chara_99.png-2909acf918748fc6c43076146dba3d30.ctex"
+uid="uid://dv55bvnf2ak8t"
+path="res://.godot/imported/Yeli_walk_25.png-b52b72ee5dd765048a76c7a7d94b96c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/sprites/chara_99.png"
-dest_files=["res://.godot/imported/chara_99.png-2909acf918748fc6c43076146dba3d30.ctex"]
+source_file="res://assets/images/sprites/ye_li/Yeli_walk_25.png"
+dest_files=["res://.godot/imported/Yeli_walk_25.png-b52b72ee5dd765048a76c7a7d94b96c3.ctex"]
 
 [params]
 

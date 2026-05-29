@@ -10,6 +10,7 @@ radius = 16.0
 height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_qgw2i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -21,15 +22,13 @@ autoplay = "idle"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, 4)
 shape = SubResource("CapsuleShape2D_jawt3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 process_callback = 0
-limit_left = -115
-limit_top = 80
-limit_right = 1378
+limit_left = -160
+limit_top = 0
 limit_bottom = 648
 editor_draw_limits = true
 script = ExtResource("3_77456")

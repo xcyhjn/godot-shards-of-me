@@ -1,36 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://0dofuqx88eef"]
+[gd_scene load_steps=4 format=3 uid="uid://0dofuqx88eef"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_avv4q"]
-[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="2_krt5d"]
-[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_di770"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_ekcvj"]
+[ext_resource type="Texture2D" uid="uid://qdrkdqengp66" path="res://assets/images/backgrounds/bg_toilet_2.png" id="2_my34f"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="5_di770"]
-
-[sub_resource type="Resource" id="Resource_80haw"]
-script = ExtResource("4_ekcvj")
-duration = 1.0
-transition = 0
-ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_avv4q")]
 
-[node name="Player" parent="." index="2" instance=ExtResource("2_krt5d")]
-position = Vector2(190, 473)
-scale = Vector2(2, 2)
+[node name="WallBg2" type="Sprite2D" parent="Background" index="2"]
+position = Vector2(1712, 110)
+scale = Vector2(0.345, 0.345)
+texture = ExtResource("2_my34f")
 
-[node name="Camera2D" type="Camera2D" parent="." index="3"]
-
-[node name="PhantomCamera2D" type="Node2D" parent="Camera2D" index="0" node_paths=PackedStringArray("follow_target")]
-top_level = true
-position = Vector2(190, 473)
-script = ExtResource("3_di770")
-follow_mode = 2
-follow_target = NodePath("../../Player")
-tween_resource = SubResource("Resource_80haw")
-draw_limits = true
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="DoorHw" parent="." index="4" instance=ExtResource("5_di770")]
+[node name="DoorHw" parent="." index="2" instance=ExtResource("5_di770")]
 position = Vector2(66, 366)
 next_scene = "chapter0/hallway"
 next_pos = Vector2(1754, 464)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bt8a1pyy0anck"]
+[gd_scene load_steps=13 format=4 uid="uid://bt8a1pyy0anck"]
 
 [ext_resource type="Script" uid="uid://b83omkj4aqsph" path="res://scenes/gameplay/start.gd" id="1_3j2p0"]
 [ext_resource type="PackedScene" uid="uid://cqeutlmjsnb1y" path="res://scenes/ui/ui_layer.tscn" id="2_ta6fi"]
@@ -6,12 +6,21 @@
 [ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="4_lrrqo"]
 [ext_resource type="Texture2D" uid="uid://ce0dgmgs6dgrv" path="res://assets/images/backgrounds/wall_toilet_1.png" id="4_qmd80"]
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_dusiu"]
+[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="7_dusiu"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_0dbcj"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_ygp1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hv1rg"]
 size = Vector2(2000, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrrqo"]
 size = Vector2(29, 651)
+
+[sub_resource type="Resource" id="Resource_a8o0b"]
+script = ExtResource("9_ygp1v")
+duration = 0.0
+transition = 0
+ease = 2
 
 [node name="Gameplay" type="Node"]
 script = ExtResource("1_3j2p0")
@@ -48,3 +57,26 @@ shape = SubResource("RectangleShape2D_lrrqo")
 [node name="FloorCollidor" parent="Background" instance=ExtResource("5_dusiu")]
 position = Vector2(849, 658)
 shape = SubResource("RectangleShape2D_hv1rg")
+
+[node name="Sortables" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Sortables" instance=ExtResource("7_dusiu")]
+position = Vector2(185, 471)
+scale = Vector2(2, 2)
+
+[node name="Cameras" type="Node2D" parent="."]
+
+[node name="Player" type="Node2D" parent="Cameras" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+top_level = true
+position = Vector2(185, 471)
+script = ExtResource("8_0dbcj")
+follow_mode = 1
+follow_target = NodePath("../../Sortables/Player")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_a8o0b")
+draw_limits = true
+limit_left = -160
+limit_top = 0
+limit_bottom = 648
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
