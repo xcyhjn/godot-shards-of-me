@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dsv4wpr4uj3ac" path="res://assets/images/backgrounds/bg_toilet.png" id="3_0dbcj"]
 [ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="4_lrrqo"]
 [ext_resource type="Texture2D" uid="uid://ce0dgmgs6dgrv" path="res://assets/images/backgrounds/wall_toilet_1.png" id="4_qmd80"]
-[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_dusiu"]
+[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collidor.tscn" id="5_dusiu"]
 [ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="7_dusiu"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_0dbcj"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_ygp1v"]

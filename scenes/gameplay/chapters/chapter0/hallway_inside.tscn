@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="2_epe8v"]
 [ext_resource type="Texture2D" uid="uid://dbkvbqfuk8n3f" path="res://assets/images/backgrounds/bg_hallway_inside.png" id="3_0krup"]
 [ext_resource type="Texture2D" uid="uid://dvt4gdpa7vl3v" path="res://assets/images/backgrounds/wall_hl_3.png" id="4_u7uwt"]
-[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_bxwv0"]
+[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collidor.tscn" id="5_bxwv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx8r0"]
 size = Vector2(2000, 30)
@@ -65,9 +65,6 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(652, 156)
 next_scene = "chapter0/toilet_inside"
 next_pos = Vector2(177, 464)
-
-[node name="Player" parent="Cameras" index="0"]
-position = Vector2(185, 471)
 
 [editable path="DoorClassroom"]
 [editable path="DoorWC"]

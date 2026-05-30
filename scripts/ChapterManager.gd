@@ -55,6 +55,98 @@ func continue_game() -> void:
 	}
 	change_scene(cur_scene, 0, params)
 
+
+# ============================================================
+# 章节数据
+# ============================================================
+## 全局游戏数据管理
+## 使用示例：
+## - set_data("is_key_get", true)              # 设置标志
+## - set_data("wash_face_cnt", 3)              # 设置数字
+## - set_data("collected_clues", "钥匙")       # 追加到数组
+## - set_data("collected_clues", ["钥匙", "笔记"]) # 替换数组
+## - set_data("collected_clues", "药水", true) # 追加模式
+
+## 设置游戏数据
+func set_data(arg_name: String, value, append_mode: bool = false) -> bool:
+	# 参数校验
+	if arg_name.is_empty():
+		push_error("set_data: arg_name 不能为空")
+		return false
+	
+	# 获取当前值
+	var current = chapter_data.get(arg_name)
+	
+	# 根据类型和模式处理
+	match typeof(current):
+		TYPE_NIL:
+			# 不存在，直接赋值。append_mode 下视为「追加进新数组」
+			if append_mode:
+				if typeof(value) == TYPE_ARRAY:
+					chapter_data[arg_name] = value.duplicate()
+				else:
+					chapter_data[arg_name] = [value]
+			else:
+				chapter_data[arg_name] = value
+		
+		TYPE_ARRAY:
+			# 当前是数组
+			if append_mode:
+				if typeof(value) == TYPE_ARRAY:
+					chapter_data[arg_name].append_array(value)
+				else:
+					chapter_data[arg_name].append(value)
+			else:
+				# 替换模式
+				if typeof(value) == TYPE_ARRAY:
+					chapter_data[arg_name] = value.duplicate()
+				else:
+					chapter_data[arg_name] = [value]
+		
+		TYPE_BOOL:
+			# 布尔值
+			if typeof(value) == TYPE_BOOL:
+				chapter_data[arg_name] = value
+			elif typeof(value) in [TYPE_INT, TYPE_FLOAT]:
+				chapter_data[arg_name] = value != 0
+			else:
+				chapter_data[arg_name] = bool(value)
+		
+		TYPE_INT, TYPE_FLOAT:
+			# 数字类型
+			if typeof(value) in [TYPE_INT, TYPE_FLOAT]:
+				if append_mode:
+					chapter_data[arg_name] = current + value
+				else:
+					chapter_data[arg_name] = value
+			else:
+				chapter_data[arg_name] = int(value) if typeof(value) == TYPE_STRING else value
+		
+		TYPE_STRING:
+			if append_mode:
+				chapter_data[arg_name] = current + str(value)
+			else:
+				chapter_data[arg_name] = str(value)
+		
+		_:
+			chapter_data[arg_name] = value
+	return true
+	
+## 读取游戏数据
+## @param arg_name: 数据键名
+## @param default: 默认值（当键不存在时返回）
+## @return: 对应的数据值，不存在时返回 default
+func get_data(arg_name: String, default = null):
+	if arg_name.is_empty():
+		push_error("get_data: arg_name 不能为空")
+		return default
+	
+	if chapter_data.has(arg_name):
+		return chapter_data[arg_name]
+	
+	return default
+		
+
 # ============================================================
 # 场景切换
 # ============================================================

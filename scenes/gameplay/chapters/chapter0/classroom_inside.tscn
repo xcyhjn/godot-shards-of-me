@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c15yslj8h4g7v" path="res://assets/images/backgrounds/background_classroom_1_inside.png" id="5_it5ba"]
 [ext_resource type="Texture2D" uid="uid://bdm115coqfto8" path="res://assets/images/backgrounds/background_classroom_pillar_inside.png" id="6_hpvyx"]
 [ext_resource type="Texture2D" uid="uid://bfob63jecwpw8" path="res://assets/images/backgrounds/background_classroom_2_inside.png" id="7_h5xll"]
-[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="7_x2fpg"]
+[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collidor.tscn" id="7_x2fpg"]
 [ext_resource type="Texture2D" uid="uid://df5sokk1la2rl" path="res://assets/images/backgrounds/wall_classroom_1_inside.png" id="8_4w7ui"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="8_ik5kv"]
 [ext_resource type="PackedScene" uid="uid://c0t1ykhh1p1ir" path="res://scenes/props/prop_desk.tscn" id="9_afu07"]

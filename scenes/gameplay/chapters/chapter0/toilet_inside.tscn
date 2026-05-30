@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="2_4isnv"]
 [ext_resource type="Texture2D" uid="uid://dk4ir7cregfvg" path="res://assets/images/backgrounds/bg_toilet_inside.png" id="3_88ihn"]
 [ext_resource type="Texture2D" uid="uid://jeawsikhq468" path="res://assets/images/backgrounds/wall_2.png" id="4_v6x4d"]
-[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_v6x4d"]
+[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collidor.tscn" id="5_v6x4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1d20"]
 size = Vector2(2000, 30)
@@ -47,4 +47,9 @@ shape = SubResource("RectangleShape2D_7bg35")
 position = Vector2(849, 658)
 shape = SubResource("RectangleShape2D_m1d20")
 
+[node name="DoorHw" parent="." index="3"]
+next_scene = "chapter0/hallway_inside"
+next_pos = Vector2(657, 439)
+
 [editable path="DoorHw"]
+[editable path="Sortables/Item"]

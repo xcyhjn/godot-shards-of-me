@@ -39,6 +39,7 @@ func add_clue(new_clue : String) -> void:
 	if new_clue == "" or clues.has(new_clue):
 		return
 	clues.append(new_clue)
+	Chapter.set_data("collected_clues", new_clue, true)
 	EventBus.clue_add_item.emit(new_clue)
 	EventBus.clue_update_book.emit()
 

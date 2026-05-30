@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://0dofuqx88eef"]
+[gd_scene load_steps=7 format=3 uid="uid://0dofuqx88eef"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_avv4q"]
 [ext_resource type="Texture2D" uid="uid://qdrkdqengp66" path="res://assets/images/backgrounds/bg_toilet_2.png" id="2_my34f"]
+[ext_resource type="Texture2D" uid="uid://cgnwrkllt1gsu" path="res://assets/images/items/note_0.png" id="5_80haw"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="5_di770"]
+[ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/items/item_template.tscn" id="5_ekcvj"]
+
+[sub_resource type="GDScript" id="GDScript_krt5d"]
 
 [node name="Gameplay" instance=ExtResource("1_avv4q")]
+script = SubResource("GDScript_krt5d")
 
 [node name="WallBg2" type="Sprite2D" parent="Background" index="2"]
 position = Vector2(1712, 110)
@@ -22,4 +27,27 @@ texture = null
 [node name="CollisionShape2D" parent="DoorHw/Detection" index="0"]
 position = Vector2(14.5, -49.5)
 
+[node name="Item" parent="Sortables" index="0" instance=ExtResource("5_ekcvj")]
+position = Vector2(376, 507)
+oneshot = true
+
+[node name="Sprite2D" parent="Sortables/Item" index="1"]
+position = Vector2(0, 17)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("5_80haw")
+
+[node name="Item2" parent="Sortables" index="1" instance=ExtResource("5_ekcvj")]
+position = Vector2(935, 478)
+item_id = "1"
+oneshot = true
+
+[node name="Item3" parent="Sortables" index="2" instance=ExtResource("5_ekcvj")]
+position = Vector2(662, 487)
+item_id = "2"
+
+[node name="Item4" parent="Sortables" index="3" instance=ExtResource("5_ekcvj")]
+position = Vector2(794, 588)
+item_id = "4"
+
 [editable path="DoorHw"]
+[editable path="Sortables/Item"]

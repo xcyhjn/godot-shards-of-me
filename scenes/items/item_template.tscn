@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs6ahl02s1hmu"]
 
 [ext_resource type="PackedScene" uid="uid://csycuuybc442e" path="res://scenes/props/prop_template.tscn" id="1_k28in"]
-[ext_resource type="Script" uid="uid://ccetu2wru2csx" path="res://scenes/props/item_template.gd" id="2_jvfsw"]
+[ext_resource type="Script" uid="uid://ccetu2wru2csx" path="res://scenes/items/item_template.gd" id="2_jvfsw"]
 
-[node name="ItemProp" instance=ExtResource("1_k28in")]
+[node name="Item" instance=ExtResource("1_k28in")]
 script = ExtResource("2_jvfsw")
 item_id = "0"
 detection_range = 64
+oneshot = false
 can_interact = true
 
 [node name="Hint" parent="." index="0"]
 physics_interpolation_mode = 0
-visible = false

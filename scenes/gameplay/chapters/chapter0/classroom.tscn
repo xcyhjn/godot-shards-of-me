@@ -205,6 +205,8 @@ texture = ExtResource("11_k2rcj")
 [node name="Door" parent="." index="5" instance=ExtResource("13_ois5l")]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(1155, 538)
+next_scene = "chapter0/hallway"
+next_pos = Vector2(642, 431)
 
 [node name="Intro" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
 top_level = true

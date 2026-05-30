@@ -53,10 +53,8 @@ func _ready():
 		#_start_breathing_animation()
 		btn_play.disabled = false
 		btn_exit.disabled = false
-		if Chapter.chapter_data.is_empty():
+		if not Chapter.chapter_data.is_empty():
 			btn_continue.disabled = false
-		else:
-			btn_continue.disabled = true
 		btn_play.grab_focus()
 		# 最后始放bgm
 		Audio.set_volume(0, 0.1)
