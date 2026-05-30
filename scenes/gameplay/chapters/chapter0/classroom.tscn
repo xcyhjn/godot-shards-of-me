@@ -14,14 +14,14 @@
 [ext_resource type="Script" uid="uid://cjab30u2p8tyv" path="res://scenes/gameplay/chapters/chapter0/scene_director_classroom.gd" id="15_klfhm"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="15_s240p"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cymh7"]
-size = Vector2(50, 80)
-
 [sub_resource type="Resource" id="Resource_hcnid"]
 script = ExtResource("15_s240p")
 duration = 0.0
 transition = 0
 ease = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cymh7"]
+size = Vector2(50, 80)
 
 [sub_resource type="Environment" id="Environment_umphd"]
 
@@ -88,6 +88,28 @@ position = Vector2(1000, 450)
 
 [node name="windows" type="Marker2D" parent="CameraTargets" index="1"]
 position = Vector2(404, 294)
+
+[node name="Intro" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+top_level = true
+position = Vector2(1000, 450)
+script = ExtResource("14_djc3a")
+priority = 1
+follow_mode = 2
+follow_target = NodePath("../../CameraTargets/Intro")
+zoom = Vector2(1.7, 1.7)
+tween_resource = SubResource("Resource_hcnid")
+draw_limits = true
+limit_left = -115
+limit_top = 80
+limit_right = 1378
+limit_bottom = 648
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="Door" parent="." index="5" instance=ExtResource("13_ois5l")]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(1155, 538)
+next_scene = "chapter0/hallway"
+next_pos = Vector2(642, 431)
 
 [node name="Player" parent="Sortables" index="0"]
 position = Vector2(296, 435)
@@ -208,31 +230,6 @@ texture = ExtResource("11_k2rcj")
 position = Vector2(516, 529)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("11_k2rcj")
-
-[node name="Door" parent="." index="5" instance=ExtResource("13_ois5l")]
-modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(1155, 538)
-next_scene = "chapter0/hallway"
-next_pos = Vector2(642, 431)
-
-[node name="Intro" type="Node2D" parent="Cameras" index="0" node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
-top_level = true
-position = Vector2(1000, 450)
-script = ExtResource("14_djc3a")
-priority = 1
-follow_mode = 2
-follow_target = NodePath("../../CameraTargets/Intro")
-zoom = Vector2(1.7, 1.7)
-tween_resource = SubResource("Resource_hcnid")
-draw_limits = true
-limit_left = -115
-limit_top = 80
-limit_right = 1378
-limit_bottom = 648
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="Player" parent="Cameras" index="1"]
-position = Vector2(296, 435)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="7"]
 environment = SubResource("Environment_umphd")

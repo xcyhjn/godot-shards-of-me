@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b1il2v3a1shf5"]
+[gd_scene load_steps=9 format=4 uid="uid://b1il2v3a1shf5"]
 
 [ext_resource type="PackedScene" uid="uid://bsrx313k0d3uf" path="res://scenes/gameplay/chapters/chapter0/hallway.tscn" id="1_oe8q4"]
 [ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="2_epe8v"]
@@ -7,15 +7,27 @@
 [ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collidor.tscn" id="5_bxwv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx8r0"]
-size = Vector2(2000, 30)
+size = Vector2(2416, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmaws"]
 size = Vector2(29, 651)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tvm1"]
+size = Vector2(41.5, 369)
 
 [node name="Gameplay" instance=ExtResource("1_oe8q4")]
 
 [node name="Background" parent="." index="1"]
 visible = false
+
+[node name="WallBgCollidor" parent="Background" index="4"]
+visible = true
+
+[node name="WallLeftCollidor" parent="Background" index="5"]
+visible = true
+
+[node name="FloorCollidor" parent="Background" index="6"]
+visible = true
 
 [node name="Background2" type="StaticBody2D" parent="." index="2"]
 
@@ -40,20 +52,21 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_u7uwt")
 
 [node name="WallBgCollidor" parent="Background2" index="4" instance=ExtResource("5_bxwv0")]
-visible = false
-position = Vector2(1288, 236)
+position = Vector2(1288, 268)
 shape = SubResource("RectangleShape2D_dx8r0")
 
 [node name="WallLeftCollidor" parent="Background2" index="5" instance=ExtResource("5_bxwv0")]
-visible = false
-position = Vector2(21, 398)
+position = Vector2(21, 433)
 rotation = 1.02974
 shape = SubResource("RectangleShape2D_wmaws")
 
 [node name="FloorCollidor" parent="Background2" index="6" instance=ExtResource("5_bxwv0")]
-visible = false
-position = Vector2(849, 658)
+position = Vector2(1057, 658)
 shape = SubResource("RectangleShape2D_dx8r0")
+
+[node name="WallRightCollidor" parent="Background2" index="7" instance=ExtResource("5_bxwv0")]
+position = Vector2(2277.25, 467.5)
+shape = SubResource("RectangleShape2D_8tvm1")
 
 [node name="DoorClassroom" parent="." index="3"]
 modulate = Color(1, 1, 1, 0)
@@ -66,5 +79,16 @@ position = Vector2(652, 156)
 next_scene = "chapter0/toilet_inside"
 next_pos = Vector2(177, 464)
 
+[node name="AnimatedSprite2D" parent="Sortables/Player" index="0"]
+animation = &"Ye_idle"
+autoplay = "Ye_idle"
+
+[node name="PlayerPhantomCamera2D" parent="Sortables/Player" index="3"]
+zoom = Vector2(1.5, 1.5)
+limit_left = -10000000
+limit_top = -10000000
+limit_bottom = 10000000
+
 [editable path="DoorClassroom"]
 [editable path="DoorWC"]
+[editable path="Sortables/Player"]

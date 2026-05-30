@@ -81,13 +81,13 @@ func _has_required_nodes() -> bool:
 
 func _resolve_nodes() -> void:
 	if not is_instance_valid(pcam_player):
-		pcam_player = get_node_or_null("../Cameras/PCam_Player") as PhantomCamera2D
+		pcam_player = get_node_or_null("../Sortables/Player/PlayerPhantomCamera2D") as PhantomCamera2D
 	if not is_instance_valid(pcam_intro_pan):
 		pcam_intro_pan = get_node_or_null("../Cameras/PCam_IntroPan") as PhantomCamera2D
 	if not is_instance_valid(pcam_player_zoom):
 		pcam_player_zoom = get_node_or_null("../Cameras/PCam_PlayerZoom") as PhantomCamera2D
 	if not is_instance_valid(native_camera):
-		native_camera = get_node_or_null("../Sortables/Player/Camera2D") as Camera2D
+		native_camera = get_node_or_null("../Camera2D") as Camera2D
 	if not is_instance_valid(npc1):
 		npc1 = get_node_or_null("../CameraTargets/NPC1") as Node2D
 	if not is_instance_valid(player):

@@ -1,23 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://byr8pun5xyhsv"]
+[gd_scene load_steps=7 format=3 uid="uid://byr8pun5xyhsv"]
 
 [ext_resource type="SpriteFrames" uid="uid://ddmxlhrthm30n" path="res://assets/images/sprites/baka/baka_sprite.tres" id="1_jawt3"]
 [ext_resource type="Script" uid="uid://bq7881nofy2rb" path="res://scenes/gameplay/player/player.gd" id="1_qgw2i"]
-[ext_resource type="Script" uid="uid://3mi2wpja60r7" path="res://scenes/gameplay/player/player_camera.gd" id="3_77456"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_fbmmh"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_pcam2d"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_fbmmh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jawt3"]
 radius = 16.0
 height = 52.0
+
+[sub_resource type="Resource" id="Resource_stmte"]
+script = ExtResource("4_fbmmh")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_qgw2i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, 21)
 sprite_frames = ExtResource("1_jawt3")
 animation = &"idle"
 autoplay = "idle"
+offset = Vector2(0, -25)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -25,18 +32,18 @@ autoplay = "idle"
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_jawt3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerPhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target") groups=["Pcam"]]
+unique_name_in_owner = true
 top_level = true
-process_callback = 0
-limit_left = -115
-limit_top = 80
-limit_right = 1378
+script = ExtResource("3_pcam2d")
+priority = 10
+follow_mode = 1
+follow_target = NodePath("..")
+zoom = Vector2(1.2, 1.2)
+tween_resource = SubResource("Resource_stmte")
+tween_on_load = false
+draw_limits = true
+limit_left = -160
+limit_top = 0
 limit_bottom = 648
-editor_draw_limits = true
-script = ExtResource("3_77456")
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("4_fbmmh")
-metadata/_custom_type_script = "uid://bd046eokvcnu2"
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"

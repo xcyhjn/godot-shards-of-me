@@ -3,8 +3,8 @@ extends Node
 # 里世界场景只有玩家镜头，因此这里做一件事：
 # 在场景刚创建时就把真实 Camera2D 强制对齐到玩家 PhantomCamera 的输出，
 # 避免第一可见帧先落到 0,0，再飞回玩家身上。
-@onready var player_camera: PhantomCamera2D = $"../Cameras/Player"
-@onready var native_camera: Camera2D = $"../Sortables/Player/Camera2D"
+@onready var player_camera: PhantomCamera2D = $"../Sortables/Player/PlayerPhantomCamera2D"
+@onready var native_camera: Camera2D = $"../Camera2D"
 
 
 func _ready() -> void:

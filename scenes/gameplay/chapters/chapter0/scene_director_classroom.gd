@@ -33,7 +33,7 @@ const CINEMATIC_LIMIT := 10000000
 
 # 真实渲染画面的 Camera2D，由 PhantomCameraHost 每帧驱动。
 # 这里只用它来临时放开/恢复 limit，不再手动同步位置和 zoom。
-@onready var native_camera: Camera2D = $"../Sortables/Player/Camera2D"
+@onready var native_camera: Camera2D = $"../Camera2D"
 
 @onready var player: PlayerCharacter = $"../Sortables/Player"
 @onready var intro_target: Node2D = $"../CameraTargets/Intro"
@@ -58,7 +58,9 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
-	await play_intro_to_windows()
+	if Chapter.get_data("is_intro_played", false):
+		Chapter.set_data("is_intro_played", true)
+		await play_intro_to_windows()
 
 
 func play_intro_to_windows() -> void:

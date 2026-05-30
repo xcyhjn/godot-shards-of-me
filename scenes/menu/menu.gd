@@ -53,7 +53,7 @@ func _ready():
 		#_start_breathing_animation()
 		btn_play.disabled = false
 		btn_exit.disabled = false
-		if not Chapter.chapter_data.is_empty():
+		if not Chapter.cur_scene.is_empty():
 			btn_continue.disabled = false
 		btn_play.grab_focus()
 		# 最后始放bgm

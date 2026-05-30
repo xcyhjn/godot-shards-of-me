@@ -206,10 +206,11 @@ position = Vector2(516, 529)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("14_s0prt")
 
-[node name="DoorProp" parent="." index="5" instance=ExtResource("8_ik5kv")]
+[node name="DoorProp" parent="." index="6" instance=ExtResource("8_ik5kv")]
 position = Vector2(1155, 538)
 next_scene = "chapter0/hallway_inside"
 next_pos = Vector2(1849, 381)
 
-[node name="Player" parent="Cameras" index="0"]
-position = Vector2(416, 385)
+[node name="Camera2D" parent="." index="7"]
+position = Vector2(416, 378)
+zoom = Vector2(1.21081, 1.21081)

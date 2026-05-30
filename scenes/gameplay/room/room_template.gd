@@ -2,17 +2,20 @@ class_name Room
 extends Node
 
 @onready var Player : CharacterBody2D = _find_player()
-@onready var main_camera: Camera2D = _find_player_camera()
+@onready var main_camera: Camera2D = _find_main_camera()
 
 @export var bgm : AudioStream
 
 func _ready() -> void:
+	## @todo 以后存fullpath得了，别用太直观的思路写场景控制。。。
+	var cur_scene : String = scene_file_path
+	cur_scene = cur_scene.trim_prefix("res://scenes/gameplay/chapters/").trim_suffix(".tscn")
+	Chapter.cur_scene = cur_scene
 	var params = GGT.get_current_scene_data().params
 	var _pos : Vector2 = params.get("player_pos", Vector2.ZERO)
 	if _pos != Vector2.ZERO:
 		GameManager.change_player_pos(_pos)
-	
-	_stabilize_camera()
+		%Camera2D.position = _pos
 
 	if GGT.is_changing_scene():
 		await GGT.scene_transition_finished
@@ -38,28 +41,8 @@ func _find_player() -> CharacterBody2D:
 	return null
 
 
-func _find_player_camera() -> Camera2D:
-	if not Player:
-		return null
-	var camera := Player.get_node_or_null("Camera2D")
+## 真实渲染相机由 PhantomCameraHost 驱动，挂在 room 根节点 "Camera2D"。
+## 跟早期版本不同，它已经不挂在玩家身上，玩家移动不会带着相机跑。
+func _find_main_camera() -> Camera2D:
+	var camera := get_node_or_null("Camera2D")
 	return camera as Camera2D if camera is Camera2D else null
-
-
-## 在渲染前把原生相机对齐到优先级最高的 PhantomCamera2D，消除第 0 帧的默认值跳变。
-func _stabilize_camera() -> void:
-	if not is_instance_valid(main_camera):
-		return
-
-	var active_pcam: PhantomCamera2D = null
-	var max_priority: int = -1
-	for pcam in get_tree().get_nodes_in_group("PCam"):
-		if pcam is PhantomCamera2D and pcam.priority > max_priority:
-			max_priority = pcam.priority
-			active_pcam = pcam
-
-	if active_pcam and active_pcam.tween_resource:
-		var original_duration: float = active_pcam.tween_resource.duration
-		active_pcam.tween_resource.duration = 0.0
-		main_camera.global_position = active_pcam.global_position
-		await get_tree().process_frame
-		active_pcam.tween_resource.duration = original_duration

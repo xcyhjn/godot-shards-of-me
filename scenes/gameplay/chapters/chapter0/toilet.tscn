@@ -1,20 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://0dofuqx88eef"]
+[gd_scene load_steps=8 format=3 uid="uid://0dofuqx88eef"]
 
 [ext_resource type="PackedScene" uid="uid://bt8a1pyy0anck" path="res://scenes/gameplay/room/room_template.tscn" id="1_avv4q"]
 [ext_resource type="Texture2D" uid="uid://qdrkdqengp66" path="res://assets/images/backgrounds/bg_toilet_2.png" id="2_my34f"]
 [ext_resource type="Texture2D" uid="uid://cgnwrkllt1gsu" path="res://assets/images/items/note_0.png" id="5_80haw"]
 [ext_resource type="PackedScene" uid="uid://cqmfwv43yen7j" path="res://scenes/props/prop_door.tscn" id="5_di770"]
 [ext_resource type="PackedScene" uid="uid://bs6ahl02s1hmu" path="res://scenes/items/item_template.tscn" id="5_ekcvj"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_ekcvj"]
 
-[sub_resource type="GDScript" id="GDScript_krt5d"]
+[sub_resource type="Resource" id="Resource_80haw"]
+script = ExtResource("6_ekcvj")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Gameplay" instance=ExtResource("1_avv4q")]
-script = SubResource("GDScript_krt5d")
 
 [node name="WallBg2" type="Sprite2D" parent="Background" index="2"]
 position = Vector2(1712, 110)
 scale = Vector2(0.345, 0.345)
 texture = ExtResource("2_my34f")
+
+[node name="WallBgCollidor" parent="Background" index="4"]
+position = Vector2(1288, 266)
+
+[node name="WallLeftCollidor" parent="Background" index="5"]
+position = Vector2(21, 443)
 
 [node name="DoorHw" parent="." index="2" instance=ExtResource("5_di770")]
 position = Vector2(66, 366)
@@ -49,5 +59,13 @@ item_id = "2"
 position = Vector2(794, 588)
 item_id = "4"
 
+[node name="CollisionShape2D" parent="Sortables/Player" index="2"]
+position = Vector2(0, 0)
+
+[node name="PlayerPhantomCamera2D" parent="Sortables/Player" index="3"]
+position = Vector2(185, 471)
+tween_resource = SubResource("Resource_80haw")
+
 [editable path="DoorHw"]
 [editable path="Sortables/Item"]
+[editable path="Sortables/Player"]

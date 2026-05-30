@@ -36,13 +36,10 @@ texture = SubResource("AtlasTexture_f0ptu")
 texture = ExtResource("3_7q1g6")
 
 [node name="WallBgCollidor" parent="Background" index="4"]
-visible = false
+position = Vector2(1288, 276)
 
 [node name="WallLeftCollidor" parent="Background" index="5"]
-visible = false
-
-[node name="FloorCollidor" parent="Background" index="6"]
-visible = false
+position = Vector2(21, 438)
 
 [node name="DoorClassroom" parent="." index="2" instance=ExtResource("4_7q1g6")]
 position = Vector2(654, 205)
