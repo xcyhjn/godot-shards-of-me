@@ -3,28 +3,20 @@ extends Node2D
 
 const ItemFilePath : String = "res://resources/items.json"
 const ItemTexurePath : String = "res://assets/images/items/"
-## 章节场景根目录。完整路径 = ChapterScenePath + Chapter.cur_scene + ".tscn"
-const ChapterScenePath : String = "res://scenes/gameplay/chapters/"
-
-var player_control_locked: bool = false
+const ChapterFilePath : String = "res://resources/chapters.json"
+const PersistentDataPath : String = "user:/" # 少一个/，因为DataManager里会加上
+const PersistentDataFileName : String = "persistent_data.json"
 
 func wait(seconds: float) -> Signal:
 	return get_tree().create_timer(seconds).timeout
 
-## 取当前玩家位置
-func get_player_pos() -> Vector2:
-	var players := get_tree().get_nodes_in_group("Player")
-	if players.is_empty():
-		return Vector2.ZERO
-	var p := players[0] as Node2D
-	return p.global_position if p else Vector2.ZERO
+func _ready() -> void:
+	if Data.load_persistent_data(PersistentDataPath, PersistentDataFileName):
+		print("持久化数据加载成功！")
+	else:
+		print("持久化数据加载失败！")
 
-## 通知玩家移动到指定位置
-func change_player_pos(pos : Vector2) -> void:
-	EventBus.player_change_pos.emit(pos)
-
-func lock_player_control(stat : bool = true) -> void:
-	EventBus.player_control_lock.emit(stat)
-
-func is_player_control_locked() -> bool:
-	return player_control_locked
+	if Chapter.load_chapter_data(ChapterFilePath):
+		print("章节数据加载成功！")
+	else:
+		print("章节数据加载失败！")

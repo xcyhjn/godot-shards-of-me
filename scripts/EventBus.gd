@@ -13,16 +13,30 @@
 """
 extends Node
 
-# 控制信号
-signal player_control_lock(stat : bool)
-signal player_change_pos(pos : Vector2)
+# 效果信号
+## 视觉特效播放完成
+signal game_vfx_over(effect_name : String)
+
+# 快捷栏信号
+signal slot_add_item(id : String)
+
+# 储存信号
+signal storage_load_data(data: Dictionary)
+signal storage_save_data(data: Dictionary)
+signal storage_clear_data(data: Dictionary)
 
 # 线索信号
-signal clue_add_item(item_id : String)
+signal clue_add_item(clue: Dictionary)
 signal clue_update_book()
 signal clue_inspect_item(id : String)
-signal inventory_update()
-signal slot_add_item()
 
 # 章节管理信号
+signal chapter_enter(chapter_id: String, chapter_name: String, data: Dictionary, is_ending: bool)
+# 兼容旧命名，避免历史代码断掉
+signal enter_chapter(chapter_id: String, chapter_name: String, data: Dictionary, is_ending: bool)
+
+# Light board puzzle signals
+signal puzzle_light_solved(puzzle_id: String)
+
+# SAN 信号
 signal san_update(val : int)

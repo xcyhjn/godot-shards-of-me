@@ -1,80 +1,50 @@
-[gd_scene load_steps=12 format=4 uid="uid://bt8a1pyy0anck"]
+[gd_scene load_steps=8 format=3 uid="uid://bt8a1pyy0anck"]
 
 [ext_resource type="Script" uid="uid://b83omkj4aqsph" path="res://scenes/gameplay/start.gd" id="1_3j2p0"]
-[ext_resource type="PackedScene" uid="uid://cqeutlmjsnb1y" path="res://scenes/ui/ui_layer.tscn" id="2_ta6fi"]
-[ext_resource type="Texture2D" uid="uid://dsv4wpr4uj3ac" path="res://assets/images/backgrounds/bg_toilet.png" id="3_0dbcj"]
-[ext_resource type="TileSet" uid="uid://bnw2ml60fum5q" path="res://resources/floor_tile.tres" id="4_lrrqo"]
-[ext_resource type="Texture2D" uid="uid://ce0dgmgs6dgrv" path="res://assets/images/backgrounds/wall_toilet_1.png" id="4_qmd80"]
-[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collidor.tscn" id="5_dusiu"]
-[ext_resource type="PackedScene" uid="uid://byr8pun5xyhsv" path="res://scenes/gameplay/player/player.tscn" id="7_dusiu"]
-[ext_resource type="Script" uid="uid://3mi2wpja60r7" path="res://scenes/gameplay/player/player_camera.gd" id="8_camscript"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="9_pcamhost"]
+[ext_resource type="PackedScene" uid="uid://barl4q1kugrmm" path="res://scenes/ui/pause-layer/pause_layer.tscn" id="2_qmd80"]
+[ext_resource type="Script" uid="uid://pvcyl8rk2ier" path="res://scenes/gameplay/start_ui.gd" id="3_3j2p0"]
+[ext_resource type="PackedScene" uid="uid://g0q7uumyl35r" path="res://scenes/props/collider.tscn" id="5_dusiu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hv1rg"]
-size = Vector2(2000, 30)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrrqo"]
+bg_color = Color(0.284861, 0.602192, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrrqo"]
 size = Vector2(29, 651)
 
-[node name="Gameplay" type="Node"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q64rj"]
+size = Vector2(32, 652.5)
+
+[node name="Gameplay3" type="Node"]
 script = ExtResource("1_3j2p0")
 
-[node name="UILayer" parent="." instance=ExtResource("2_ta6fi")]
-visible = false
+[node name="PauseLayer" parent="." instance=ExtResource("2_qmd80")]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_3j2p0")
+
+[node name="Label" type="Label" parent="UILayer"]
+offset_left = 15.0
+offset_right = 115.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrrqo")
+text = "SAN: 100"
 
 [node name="Background" type="StaticBody2D" parent="."]
 
-[node name="FloorTile" type="TileMapLayer" parent="Background"]
-position = Vector2(0, -1)
-tile_map_data = PackedByteArray("AAAEAA4AAwAAAAMAAAADAA0AAwAAAAMAAAACAAwAAwAAAAMAAAABAAsAAwAAAAMAAAAAAAoAAwAAAAMAAAD//wkAAwAAAAMAAAD+/wgAAwAAAAMAAAD9/wcAAwAAAAMAAAD8/wcAAwAAAAMAAAD9/wgAAwAAAAMAAAD+/wkAAwAAAAMAAAD//woAAwAAAAMAAAAAAAsAAwAAAAMAAAABAAwAAwAAAAMAAAACAA0AAwAAAAMAAAADAA4AAwAAAAMAAAACAA4AAwAAAAMAAAABAA0AAwAAAAMAAAAAAAwAAwAAAAMAAAD//wsAAwAAAAMAAAD+/woAAwAAAAMAAAD9/wkAAwAAAAMAAAD8/wgAAwAAAAMAAAD7/wcAAwAAAAMAAAD6/wcAAwAAAAMAAAD7/wgAAwAAAAMAAAD8/wkAAwAAAAMAAAD9/woAAwAAAAMAAAD+/wsAAwAAAAMAAAD//wwAAwAAAAMAAAAAAA0AAwAAAAMAAAABAA4AAwAAAAMAAAAAAA4AAwAAAAMAAAD//w0AAwAAAAMAAAD+/wwAAwAAAAMAAAD9/wsAAwAAAAMAAAD8/woAAwAAAAMAAAD7/wkAAwAAAAMAAAD6/wgAAwAAAAMAAAD5/wcAAwAAAAMAAAD4/wcAAwAAAAMAAAD5/wgAAwAAAAMAAAD6/wkAAwAAAAMAAAD7/woAAwAAAAMAAAD8/wsAAwAAAAMAAAD9/wwAAwAAAAMAAAD+/w0AAwAAAAMAAAD//w4AAwAAAAMAAAD+/w4AAwAAAAMAAAD9/w0AAwAAAAMAAAD8/wwAAwAAAAMAAAD7/wsAAwAAAAMAAAD6/woAAwAAAAMAAAD5/wkAAwAAAAMAAAD4/wgAAwAAAAMAAAD3/wcAAwAAAAMAAAD//w8AAwAAAAMAAAAAAA8AAwAAAAMAAAABAA8AAwAAAAMAAAACAA8AAwAAAAMAAAADAA8AAwAAAAMAAAAEAA8AAwAAAAMAAAAFAA8AAwAAAAMAAAAGABAAAwAAAAMAAAAFABAAAwAAAAMAAAAEABAAAwAAAAMAAAADABAAAwAAAAMAAAACABAAAwAAAAMAAAABABAAAwAAAAMAAAAAABAAAwAAAAMAAAA=")
-tile_set = ExtResource("4_lrrqo")
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(2008, 1058)
+scale = Vector2(0.6, 0.6)
+centered = false
+offset = Vector2(-3346.67, -1763.33)
 
-[node name="WallBg" type="Sprite2D" parent="Background"]
-position = Vector2(776, 110)
-scale = Vector2(0.345, 0.345)
-texture = ExtResource("3_0dbcj")
-
-[node name="WallLeft" type="Sprite2D" parent="Background"]
-position = Vector2(71, 281)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_qmd80")
-
-[node name="WallBgCollidor" parent="Background" instance=ExtResource("5_dusiu")]
-position = Vector2(1288, 236)
-shape = SubResource("RectangleShape2D_hv1rg")
-
-[node name="WallLeftCollidor" parent="Background" instance=ExtResource("5_dusiu")]
-position = Vector2(21, 398)
-rotation = 1.02974
+[node name="Wall" parent="Background" instance=ExtResource("5_dusiu")]
+position = Vector2(-0.5, 321.5)
 shape = SubResource("RectangleShape2D_lrrqo")
 
-[node name="FloorCollidor" parent="Background" instance=ExtResource("5_dusiu")]
-position = Vector2(849, 658)
-shape = SubResource("RectangleShape2D_hv1rg")
+[node name="Wall2" type="CollisionShape2D" parent="Background"]
+position = Vector2(1152, 323.25)
+shape = SubResource("RectangleShape2D_q64rj")
 
-[node name="Cameras" type="Node2D" parent="."]
-
-[node name="Sortables" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Player" parent="Sortables" instance=ExtResource("7_dusiu")]
-position = Vector2(185, 471)
-scale = Vector2(2, 2)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-unique_name_in_owner = true
-physics_interpolation_mode = 1
-top_level = true
-position = Vector2(320, 378)
-zoom = Vector2(1.2, 1.2)
-limit_left = -160
-limit_top = 0
-limit_bottom = 648
-editor_draw_limits = true
-script = ExtResource("8_camscript")
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("9_pcamhost")
-metadata/_custom_type_script = "uid://bd046eokvcnu2"
+[node name="Floor" parent="Background" instance=ExtResource("5_dusiu")]
+position = Vector2(575, 664)

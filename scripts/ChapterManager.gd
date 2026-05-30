@@ -1,192 +1,133 @@
 # ChapterManager.gd
 extends Node
 
-## 章节管理器：持久化"章节运行时变量 + 当前场景 + 玩家位置 + SAN"，
-## 并对外提供章节场景切换入口 [method change_scene]。
-## 章节内的判定/分支由各章节脚本自己写，本管理器不再维护流程图。
+## 章节管理器，负责控制游戏的章节流程、判定条件和结局
 class_name ChapterManager
 
-## 默认章节数据
-const DEFAULT_CHAPTER_DATA : Dictionary = {
-	"chapter0": {}
-}
+# 运行时状态
+## 一个Dictionary，key为章节ID，value为该章节的数据字典，包含 "name", "next" 和 "data" 字段
+var chapter_definition: Dictionary = {}
+## 当前章节的数据字典，包含 "name", "next" 和 "data" 字段 [br]
+## 此处的data是初始化时从章节数据加载的，可以在章节流程中修改并保存到持久化数据中
+var current_chapter_definition: Dictionary = {}
 
-## 嵌套字典，存各章节内的运行时变量。
-## e.g. chapter_data["chapter0"]["door_opened"] = true
-var chapter_data: Dictionary = {}
-
-## 当前玩家所在的章节场景（相对 [member GameManager.ChapterScenePath]，不带 .tscn 后缀）
-## e.g. "chapter0/chapter0_classroom"
-## 完整路径 = GameManager.ChapterScenePath + cur_scene + ".tscn"
-var cur_scene: String = ""
-
-## 玩家在 cur_scene 中的位置（保存时由 GameManager 实时收集，读档时回填给玩家）
-var player_pos: Vector2 = Vector2.ZERO
-
-## 角色精神值。与章节流程解耦，但仍由本管理器持久化
-## （ui_layer / screen_crack / change_scene 都在使用 Chapter.san）
+# 持久化数据
+## 当前章节ID
+var current_chapter_id: String = "prologue"
+## 当前章节的运行时数据（基于current_chapter_definition的data内容初始化），可以在章节流程中修改并保存到持久化数据中
+var active_chapter_data: Dictionary = {}
 var san: int = 100:
 	set(value):
-		san = clampi(value, 0, 100)
+		san = value
 		EventBus.san_update.emit(san)
 
-func _ready() -> void:
-	add_to_group("Persist") # 加入持久化分组，由 DataManager 统一调度 save/load
+func _ready():
+	add_to_group("Persist") # 加入持久化分组，GameManager会调用DataManager加载运行时数据
 
-## 重置为新游戏初始状态。仅清字段 + 设默认起点，不做场景跳转。
-## 跳转由调用方（如 menu.gd）使用 [method change_scene] 完成。
+func _physics_process(_delta: float) -> void:
+	if Input.is_action_just_pressed("chapter_debug_next_chapter"):
+		# add password_lock to UILayer node
+		var password_lock = preload("res://scenes/ui/password_lock/password_lock.tscn").instantiate()
+		var ui_layer = get_tree().get_root().get_node("Gameplay").get_node("UILayer")
+		ui_layer.add_child(password_lock)
+		password_lock.connect("unlocked", Callable(self, "advance_to_next_chapter"))
+
+## 三元运算符的表达式函数版本，供章节流程表达式调用
+static func next(flag: bool, true_chapter: String, false_chapter: String) -> String:
+	return true_chapter if flag else false_chapter
+
+## 开始新游戏，重置章节状态 [br]
 func new_game() -> void:
-	chapter_data.clear()
-	cur_scene = "chapter0/classroom"
-	player_pos = Vector2(246, 476)
-	san = 100
-	var params = {
-		"show_progress_bar": true,
-		"player_pos": player_pos
-	}
-	change_scene(cur_scene, 0, params)
+	current_chapter_id = "prologue"
+	if chapter_definition.has(current_chapter_id):
+		current_chapter_definition = chapter_definition[current_chapter_id]
+		active_chapter_data = current_chapter_definition["data"].duplicate(true) # 深拷贝
+		
+		EventBus.chapter_enter.emit(current_chapter_id, 
+		 current_chapter_definition["name"], active_chapter_data, false)
+	else:
+		push_error("章节数据缺失: ", current_chapter_id)
 
-## 继续游戏
-## 注意要显示调用Data.load_persistent_data
-func continue_game() -> void:
-	var params = {
-		"show_progress_bar": true,
-		"player_pos": player_pos
-	}
-	change_scene(cur_scene, 0, params)
+## 进入下一章节，基于当前章节定义中的 "next" 字段进行判定 [br]
+func advance_to_next_chapter() -> void:
+	if not current_chapter_definition.is_empty():
+		if "next" not in current_chapter_definition:
+			push_error("章节缺少下一章节信息，是否已达到结局？当前章节: ", current_chapter_id)
+			return
+		var next_info = current_chapter_definition["next"]
+		var expression_str = next_info.get("expression", "")
+		var arg_names = next_info.get("args", [])
+		var args = []
+		for arg_name in arg_names:
+			if arg_name in active_chapter_data:
+				args.append(active_chapter_data[arg_name])
+			else:
+				push_error("参数缺失: ", arg_name)
+		
+		if expression_str != "":
+			var expression = Expression.new()
+			var error = expression.parse(expression_str, PackedStringArray(arg_names))
+			if error != OK:
+				push_error("表达式解析失败: ", expression.get_error_message())
+				return
+			
+			var next_chapter_id = expression.execute(args, self)
+			if (expression.has_execute_failed()):
+				push_error("表达式执行失败: ", expression.get_execute_error_message())
+				return
+			
+			if next_chapter_id in chapter_definition:
+				current_chapter_id = next_chapter_id
+				current_chapter_definition = chapter_definition[current_chapter_id]
+				if "data" in current_chapter_definition:
+					active_chapter_data = current_chapter_definition["data"].duplicate(true) # 深拷贝
+				
+				EventBus.chapter_enter.emit(current_chapter_id, 
+				 current_chapter_definition["name"], 
+				 active_chapter_data,
+				 not current_chapter_definition.has("next"))
+				print("进入章节: ", current_chapter_definition)
+			else:
+				push_error("下一章节ID无效: ", next_chapter_id)
+		else:
+			push_error("下一章节表达式缺失: ", current_chapter_id)
+	else:
+		push_error("章节数据缺失: ", current_chapter_id)
 
-
-# ============================================================
-# 章节数据
-# ============================================================
-## 全局游戏数据管理
-## 使用示例：
-## - set_data("is_key_get", true)              # 设置标志
-## - set_data("wash_face_cnt", 3)              # 设置数字
-## - set_data("collected_clues", "钥匙")       # 追加到数组
-## - set_data("collected_clues", ["钥匙", "笔记"]) # 替换数组
-## - set_data("collected_clues", "药水", true) # 追加模式
-
-## 设置游戏数据
-func set_data(arg_name: String, value, append_mode: bool = false) -> bool:
-	# 参数校验
-	if arg_name.is_empty():
-		push_error("set_data: arg_name 不能为空")
+## 加载章节数据 [br]
+## [b][param path][/b]: JSON文件路径，例如 "res://resources/chapters.json" [br]
+## [b][return][/b]: 是否加载成功
+func load_chapter_data(path: String) -> bool:
+	if not FileAccess.file_exists(path):
 		return false
 	
-	# 获取当前值
-	var current = chapter_data.get(arg_name)
+	var chapter_file = FileAccess.open(path, FileAccess.READ)
+	var json_str = chapter_file.get_as_text()
+	var json = JSON.new()
+	var parse_err = json.parse(json_str)
+	if parse_err != OK:
+		push_error("JSON解析失败: ", json.get_error_message())
+		return false
 	
-	# 根据类型和模式处理
-	match typeof(current):
-		TYPE_NIL:
-			# 不存在，直接赋值。append_mode 下视为「追加进新数组」
-			if append_mode:
-				if typeof(value) == TYPE_ARRAY:
-					chapter_data[arg_name] = value.duplicate()
-				else:
-					chapter_data[arg_name] = [value]
-			else:
-				chapter_data[arg_name] = value
-		
-		TYPE_ARRAY:
-			# 当前是数组
-			if append_mode:
-				if typeof(value) == TYPE_ARRAY:
-					chapter_data[arg_name].append_array(value)
-				else:
-					chapter_data[arg_name].append(value)
-			else:
-				# 替换模式
-				if typeof(value) == TYPE_ARRAY:
-					chapter_data[arg_name] = value.duplicate()
-				else:
-					chapter_data[arg_name] = [value]
-		
-		TYPE_BOOL:
-			# 布尔值
-			if typeof(value) == TYPE_BOOL:
-				chapter_data[arg_name] = value
-			elif typeof(value) in [TYPE_INT, TYPE_FLOAT]:
-				chapter_data[arg_name] = value != 0
-			else:
-				chapter_data[arg_name] = bool(value)
-		
-		TYPE_INT, TYPE_FLOAT:
-			# 数字类型
-			if typeof(value) in [TYPE_INT, TYPE_FLOAT]:
-				if append_mode:
-					chapter_data[arg_name] = current + value
-				else:
-					chapter_data[arg_name] = value
-			else:
-				chapter_data[arg_name] = int(value) if typeof(value) == TYPE_STRING else value
-		
-		TYPE_STRING:
-			if append_mode:
-				chapter_data[arg_name] = current + str(value)
-			else:
-				chapter_data[arg_name] = str(value)
-		
-		_:
-			chapter_data[arg_name] = value
+	chapter_definition = json.data
+	# 设计上此方法应在DataManager.load_persistent_data()之后调用
+	# 因此可以直接使用current_chapter_id来初始化current_chapter_definition
+	if chapter_definition.has(current_chapter_id):
+		current_chapter_definition = chapter_definition[current_chapter_id]
+	else:
+		push_error("当前章节数据缺失: ", current_chapter_id)
+		return false
 	return true
-	
-## 读取游戏数据
-## @param arg_name: 数据键名
-## @param default: 默认值（当键不存在时返回）
-## @return: 对应的数据值，不存在时返回 default
-func get_data(arg_name: String, default = null):
-	if arg_name.is_empty():
-		push_error("get_data: arg_name 不能为空")
-		return default
-	
-	if chapter_data.has(arg_name):
-		return chapter_data[arg_name]
-	
-	return default
-		
 
-# ============================================================
-# 场景切换
-# ============================================================
-## 切到下一个章节场景。 [br]
-## [param scene_name]: 相对 [member GameManager.ChapterScenePath] 的路径，
-## 不带 .tscn 后缀。e.g. "chapter0/chapter0_hallway" [br]
-## [param san_cost]: 切场景的精神消耗（默认 0） [br]
-## [param params]: 透传给 [method GGT.change_scene] 的参数字典
-func change_scene(scene_name: String, san_cost: int = 0, params: Dictionary = {}) -> void:
-	if scene_name == "":
-		push_error("[Chapter.change_scene] 场景名为空")
-		return
-	var full_path : String = GameManager.ChapterScenePath + scene_name + ".tscn"
-	if not ResourceLoader.exists(full_path):
-		push_error("[Chapter.change_scene] 场景不存在: ", full_path)
-		return
-
-	Audio.stop_music()
-	if san_cost != 0:
-		san -= san_cost
-
-	cur_scene = scene_name
-	GGT.change_scene(full_path, params)
-
-# ============================================================
-# 持久化协议（DataManager）
-# ============================================================
+# DataManager 数据管理
 func save_data() -> Dictionary:
 	return {
-		"chapter_data": chapter_data,
-		"cur_scene": cur_scene,
-		"player_pos": GameManager.get_player_pos(),
-		"san": san,
+		"current_chapter": current_chapter_id,
+		"active_chapter_data": active_chapter_data,
+		"san": san
 	}
 
 func load_data(data: Dictionary) -> void:
-	chapter_data = data.get("chapter_data", {})
-	cur_scene = data.get("cur_scene", "")
-	player_pos = data.get("player_pos", Vector2.ZERO)
+	current_chapter_id = data.get("current_chapter", "prologue")
+	active_chapter_data = data.get("active_chapter_data", {})
 	san = data.get("san", 100)
-	# 玩家节点若已加载会立即瞬移；若未加载则信号 emit 落空，
-	# 玩家自己的 _ready 末尾应再从 Chapter.player_pos 拉一次以兜底
-	GameManager.change_player_pos(player_pos)
