@@ -75,8 +75,11 @@ position = Vector2(-1, 400)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_6wq8s")
 
+[node name="WallBgCollidor" parent="Background" index="9"]
+position = Vector2(1290, 289)
+
 [node name="WallLeftCollidor" parent="Background" index="10"]
-position = Vector2(21, 397)
+position = Vector2(20, 452)
 
 [node name="CameraTargets" type="Node2D" parent="." index="3"]
 
@@ -85,6 +88,10 @@ position = Vector2(1000, 450)
 
 [node name="windows" type="Marker2D" parent="CameraTargets" index="1"]
 position = Vector2(404, 294)
+
+[node name="Player" parent="Sortables" index="0"]
+position = Vector2(296, 435)
+scale = Vector2(1.4, 1.4)
 
 [node name="Desks" type="Node2D" parent="Sortables" index="1"]
 y_sort_enabled = true
@@ -223,6 +230,9 @@ limit_top = 80
 limit_right = 1378
 limit_bottom = 648
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="Player" parent="Cameras" index="1"]
+position = Vector2(296, 435)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="7"]
 environment = SubResource("Environment_umphd")
